@@ -1,0 +1,356 @@
+/* Black background */
+.black-bg {
+    position: absolute;
+    width: 1490px;
+    height: 1080px;
+    left: -141px;
+    top: -69px;
+    background: linear-gradient(180deg, rgba(2, 2, 2, 0) 0%, #0A0A0A 53%, #222222 98%);
+}
+
+/* Side _settings */
+.side-settings {
+    position: absolute;
+    width: 287px;
+    height: 962px;
+    left: 19px;
+    top: 29px;
+}
+
+/* Log Out */
+.log-out {
+    position: absolute;
+    width: 235px;
+    height: 38px;
+    left: 54px;
+    top: 610px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px; /* Updated font size */
+    line-height: 29px;
+    color: #EEEEEE;
+}
+
+/* Other styles go here */
+
+/* Subscriptions */
+.subscriptions {
+    position: absolute;
+    width: 235px;
+    height: 38px;
+    left: 54px;
+    top: 510px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px; /* Updated font size */
+    line-height: 29px;
+    color: #D9D9D9;
+}
+
+/* PREMIUM */
+.premium {
+    position: absolute;
+    width: 235px;
+    height: 38px;
+    left: 35px;
+    top: 485px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 18px;
+    color: #767676;
+}
+
+/* Made for you */
+.made-for-you {
+    position: absolute;
+    width: 235px;
+    height: 28px;
+    left: 54px;
+    top: 465px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px; /* Updated font size */
+    line-height: 29px;
+    color: #D9D9D9;
+}
+
+/* Albums */
+.albums {
+    position: absolute;
+    width: 235px;
+    height: 27px;
+    left: 54px;
+    top: 445px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px; /* Updated font size */
+    line-height: 29px;
+    color: #D9D9D9;
+}
+
+/* Liked */
+.liked {
+    position: absolute;
+    width: 235px;
+    height: 28px;
+    left: 54px;
+    top: 425px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px; /* Updated font size */
+    line-height: 29px;
+    color: #D9D9D9;
+}
+
+/* RECENTLY PLAYED */
+.recently-played {
+    position: absolute;
+    width: 235px;
+    height: 38px;
+    left: 35px;
+    top: 400px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 18px;
+    color: #767676;
+}
+
+/* Playlist#2 */
+.playlist-2 {
+    position: absolute;
+    width: 235px;
+    height: 38px;
+    left: 54px;
+    top: 375px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px; /* Updated font size */
+    line-height: 29px;
+    color: #D9D9D9;
+}
+
+/* Playlist#1 */
+.playlist-1 {
+    position: absolute;
+    width: 235px;
+    height: 38px;
+    left: 54px;
+    top: 355px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px; /* Updated font size */
+    line-height: 29px;
+    color: #D9D9D9;
+}
+
+/* LIBRARY */
+.library {
+    position: absolute;
+    width: 235px;
+    height: 38px;
+    left: 35px;
+    top: 330px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 18px;
+    color: #767676;
+}
+
+/* Podcasts */
+.podcasts {
+    position: absolute;
+    width: 120px;
+    height: 38px;
+    left: 54px;
+    top: 300px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px; /* Updated font size */
+    line-height: 29px;
+    color: #D9D9D9;
+}
+
+/* Videos */
+.videos {
+    position: absolute;
+    width: 83px;
+    height: 38px;
+    left: 54px;
+    top: 270px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px; /* Updated font size */
+    line-height: 29px;
+    color: #D9D9D9;
+}
+
+/* Songs */
+.songs {
+    position: absolute;
+    width: 83px;
+    height: 38px;
+    left: 54px;
+    top: 240px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px; /* Updated font size */
+    line-height: 29px;
+    color: #D9D9D9;
+}
+
+/* Settings */
+.settings {
+    position: absolute;
+    width: 129px;
+    height: 38px;
+    left: 54px;
+    top: 210px; /* Adjusted top position */
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px; /* Updated font size */
+    line-height: 29px;
+    color: #D9D9D9;
+
+}
+
+/* Browse */
+.browse {
+    position: absolute;
+    width: 123px;
+    height: 38px;
+    left: 54px;
+    top: 180px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px; /* Updated font size */
+    line-height: 29px;
+    color: #D9D9D9;
+}
+
+/* Rectangle 10 */
+.rectangle-10 {
+    position: absolute;
+    width: 287px;
+    height: 47px;
+    left: 19px;
+    top: 232px;
+    background: rgba(255, 255, 255, 0.14);
+}
+
+/* Home */
+.home {
+    position: absolute;
+    width: 83px;
+    height: 38px;
+    left: 54px;
+    top: 150px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px; /* Updated font size */
+    line-height: 29px;
+    color: #D9D9D9;
+}
+
+/* Artist */
+.artist {
+    position: absolute;
+    width: 130px;
+    height: 38px;
+    left: 159px;
+    top: 68px;
+    padding-left: 5px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 49px;
+    color: #FFFFFF; /* Change font color to white */
+}
+
+.admin-name,
+.side-settings li {
+    color: #FFFFFF; /* Change font color to white */
+}
+
+
+/* User profile 1 */
+.user-profile-1 {
+    box-sizing: border-box;
+    position: absolute;
+    width: 114px;
+    height: 120px;
+    left: 32px;
+    top: 29px;
+  
+    border-radius: 60px;
+}
+
+/* Avatar */
+.avatar {
+    position: absolute;
+    width: 114px;
+    height: 120px;
+    left: 32px;
+    top: 29px;
+    border-radius: 60px;
+}
+
+/* User profile */
+.user-profile {
+    position: absolute;
+    width: 114px;
+    height: 120px;
+    left: 32px;
+    top: 29px;
+ 
+    border-radius: 60px;
+}
+
+/* Rectangle 11 */
+.rectangle-11 {
+    position: absolute;
+    width: 287px;
+    height: 47px;
+    left: 19px;
+    top: 168px;
+    background: rgba(255, 255, 255, 0.14);
+}
+
+/* Rectangle 9 */
+.rectangle-9 {
+    position: absolute;
+    width: 287px;
+    height: 47px;
+    left: 19px;
+    top: 79px;
+    background: rgba(255, 255, 255, 0.14);
+}
+
+/* Layer 1 */
+.layer-1 {
+    position: absolute;
+    width: 287px;
+    height: 47px;
+    left: 19px;
+    top: 15px;
+    background: rgba(255, 255, 255, 0.14);
+}

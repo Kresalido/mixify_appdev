@@ -1,0 +1,195 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+/* Reset default padding and margin */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+/* Sidebar styles */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 260px;
+  background: linear-gradient(179.85deg, #790a0a -10.21%, #0c0c0c 54.63%);
+  padding: 24px;
+}
+
+.sidebar .logo {
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar .logo img {
+  width: 50px;
+}
+
+.sidebar .navigation a {
+  color: #d9d9d9;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.sidebar .navigation a:hover {
+  color: lightgray;
+  text-decoration: underline;
+}
+
+.sidebar .navigation ul {
+  list-style: none;
+}
+
+.sidebar .navigation ul li {
+  padding: 10px 0;
+  text-align: center;
+}
+
+.sidebar .navigation ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.sidebar .sidelogout ul li a {
+  color: #d9d9d9;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.sidebar .sidelogout ul li a:hover {
+  text-decoration: none;
+}
+
+/* Main container styles */
+.main-container {
+  margin-left: 250px;
+  margin-bottom: 50px;
+  overflow:hidden; 
+}
+
+/* Dashboard section styles */
+.dashboard-section-3 {
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/*TextBox 1*/
+.dashboard-section-3 h2 {
+  font-family: Montserrat;
+  font-weight: bold;
+  color: #D9D9D9;
+  padding-right: 155px;
+  font-size: 30px; /* Adjust font size as needed */
+  margin-bottom: 10px;
+  white-space: nowrap;
+}
+
+.dashboard-section-3 .list {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.dashboard-section-3 .list .item,
+.dashboard-section-3 .list .item-single {
+  height: 80px;
+  width: 280px;
+  padding: 15px;
+  background-color: #d9d9d9;
+  border-radius: 6px;
+  transition: all ease 0.4s;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-grow: 1;
+}
+
+/*Songs, Podcast, & Videocast*/
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; /* Adjust margin bottom as needed */
+  
+}
+
+.item img {
+  width: 65px; /* Set image width */
+  height: 65px; /* Set image height */
+  margin-right: 10px; /* Adjust margin right as needed */
+  border-radius: 50%; /* Make image circular */
+}
+
+.item-info {
+  flex-grow: 1; /* Expand to fill remaining space */
+}
+
+.item-info .number {
+  margin-bottom: 5px; /* Adjust margin bottom as needed */
+  font-size: 30px;
+  
+}
+
+.item-info h4 {
+  font-size: 30px; /* Adjust font size as needed */
+  color: #000000;
+  font-weight: bold; /* Set font weight to bold */
+
+}
+
+.item-info p {
+  font-size: 140px; /* Adjust font size as needed */
+  color: #000000; /* Example text color */
+
+}
+/* Texbox 2 */
+.dashboard-section-3 .item-merged {
+  background-color: #f0f0f0; /* Background color of the box */
+  border-radius: 10px; /* Rounded corners */
+  padding: 2px; /* Padding inside the box */
+  margin-bottom: 20px; /* Margin at the bottom to separate from other elements */
+
+}
+
+.dashboard-section-3 .item-merged .number h4 {
+  font-size: 30px; /* Adjust font size as needed */
+  color: #000000;
+  font-weight: bold; /* Set font weight to bold */
+}
+
+.dashboard-section-3 .list p {
+  color: #494949;
+  font-size: 24px;
+  line-height: 20px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.dashboard-section-3 .list .item .item-info .color-loc ul {
+  padding-left: 50px;
+  list-style-type: none;
+  width: 100px;
+}
+
+/* Custom class for adjusting container */
+.custom-item {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin-top: 20px;
+  margin-left: 500px !important;
+}
+.sidebar a {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit text color */
+  font-weight: bold; /* Bold font weight */
+  transition: color 0.3s; /* Smooth transition for color change */
+}
+
+.sidebar a:hover {
+  color: #c2bf26; /* Change color on hover */
+}
