@@ -26,12 +26,18 @@ class AuthController extends Controller
     public function login()
     {
         $credentials = request(['email', 'password']);
-
+    
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
-        return $this->respondWithToken($token);
+    
+        // Get the authenticated user
+        $user = auth()->user();
+    
+        // Check if the user is an admin or superadmin
+        $isAdmin = $user->role === 'admin' || $user->role === 'superadmin';
+    
+        return $this->respondWithToken($token, $isAdmin);
     }
 
     public function registerListener(Request $request)
@@ -159,12 +165,13 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithToken($token)
+    protected function respondWithToken($token, $isAdmin)
     {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'is_admin' => $isAdmin
         ]);
     }
 }

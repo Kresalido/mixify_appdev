@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -7,34 +7,25 @@ import { Form, Button, InputGroup, FormControl, Container, Row, Col, Stack } fro
 import Outernavbar from './outernavbar.component';
 
 class SignUp extends Component {
-  // componentDidMount() {
-  //   // Set background image on body tag
-  //   document.body.style.backgroundImage = `url(${bg})`;
-  //   document.body.style.backgroundSize = '600px 650px';
-  //   document.body.style.backgroundRepeat = 'no-repeat';
-  // }
-
-  // componentWillUnmount() {
-  //   // Reset background image on body tag when component unmounts
-  //   document.body.style.backgroundImage = 'none';
-  //   document.body.style.backgroundSize = 'auto';
-  // }
-
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      name: '',
       email: '',
       password: '',
-      password_confirmation: '',
+      confirmPassword: '',
       isButtonDisabled: false,
       showTermsModal: false,
       agreedToTerms: false,
     };
   }
 
+  navigateToLogin = () => {
+    this.props.history.push('/log-in');
+  };
+
   onChangeUsername = (e) => {
-    this.setState({ username: e.target.value });
+    this.setState({ name: e.target.value });
   };
 
   onChangeEmail = (e) => {
@@ -46,18 +37,18 @@ class SignUp extends Component {
   };
 
   onChangePasswordConfirmation = (e) => {
-    this.setState({ password_confirmation: e.target.value });
+    this.setState({ confirmPassword: e.target.value });
   };
 
   onSubmit = (e) => {
     e.preventDefault();
-
+    this.setState({ isButtonDisabled: true });
     // Check if any field is empty
     if (
-      !this.state.username.trim() ||
+      !this.state.name.trim() ||
       !this.state.email.trim() ||
       !this.state.password.trim() ||
-      !this.state.password_confirmation.trim()
+      !this.state.confirmPassword.trim()
     ) {
       toast.error("Please fill in all fields");
       return; // Prevent form submission
@@ -69,45 +60,45 @@ class SignUp extends Component {
     }
 
     const userObject = {
-      username: this.state.username,
+      name: this.state.name,
       email: this.state.email,
       password: this.state.password,
-      password_confirmation: this.state.password_confirmation
+      confirmPassword: this.state.confirmPassword
     };
 
-    const showToastMessage2 = () => {
-      toast.success("Registration successful!", {
-        autoClose: 3000
-      });
-    };
 
     axios
-      .post('http://127.0.0.1:8080/api/auth/register', userObject) // change to docker
+      .post('http://127.0.0.1:8000/api/register-listener', userObject) // change to docker
       .then((res) => {
         console.log(res);
-        if (res.data.message === "User successfully registered") {
-          showToastMessage2();// Display success notification
-          window.location = "/sign-in";
+        if (res.status === 201) {
+          toast.success("Registration successful");
+          this.navigateToLogin();
         } else {
           this.setState({ isButtonDisabled: false });
         }
       })
       .catch((error) => {
-        if (
-          error.response.data === "{\"email\":[\"The email has already been taken.\"]}"
-        ) {
-          toast.error("Registration failed. Please try again");
-          this.setState({ isButtonDisabled: false });
+        this.setState({ isButtonDisabled: false });
+        if (error.response && error.response.data.errors) {
+          const errors = error.response.data.errors;
+
+          for (let field in errors) {
+            errors[field].forEach((errorMessage) => {
+              toast.error(errorMessage);
+            });
+          }
         }
         console.log(error)
+        this.setState({ isButtonDisabled: false });
       });
 
     this.setState({
-      username: '',
+      name: '',
       email: '',
       password: '',
-      password_confirmation: '',
-      isButtonDisabled: true,
+      confirmPassword: '',
+      isButtonDisabled: false,
     });
   };
 
@@ -162,8 +153,8 @@ class SignUp extends Component {
                       <FormControl
                         type="text"
                         onChange={this.onChangeUsername}
-                        name="username"
-                        value={this.state.username}
+                        name="name"
+                        value={this.state.name}
                         placeholder="Username"
                         className='input'
                       />
@@ -198,8 +189,8 @@ class SignUp extends Component {
                       <FormControl
                         type="password"
                         onChange={this.onChangePasswordConfirmation}
-                        name="confirmpassword"
-                        value={this.state.password_confirmation}
+                        name="confirmPassword"
+                        value={this.state.confirmPassword}
                         placeholder="Confirm Password"
                         className='input'
                       />
@@ -217,8 +208,8 @@ class SignUp extends Component {
                             </p>
                           </div>
                         }
-                      // checked={termsChecked}
-                      // onChange={() => setTermsChecked(!termsChecked)}
+                        checked={this.state.agreedToTerms}
+                        onChange={this.handleCheckboxChange}
                       />
                     </Form.Group>
                   </Row>
@@ -256,7 +247,7 @@ class SignUp extends Component {
                             <div className='have-account'>
                               Already have an account?
                             </div>
-                            <Link to="/sign-in" className='p-2 pt-3' style={{ color: 'gray', width:'auto' }}>Log in here.</Link>
+                            <Link to="/sign-in" className='p-2 pt-3' style={{ color: 'gray', width: 'auto' }}>Log in here.</Link>
                           </div>
                         </span>
                       </Stack>
@@ -315,7 +306,7 @@ class SignUp extends Component {
       //                   type="password"
       //                   onChange={this.onChangePasswordConfirmation}
       //                   name="confirmpassword"
-      //                   value={this.state.password_confirmation}
+      //                   value={this.state.confirmPassword}
       //                   placeholder="Confirm Password"
       //                   style={{ color: '#9D9797', display: 'inline-block', fontFamily: 'Poppins', fontStyle: 'normal', fontWeight: 600, width: '100%', backgroundColor: 'transparent', border: 'none', borderBottom: '1px solid #000' }}
       //                 />

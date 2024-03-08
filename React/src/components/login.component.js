@@ -10,14 +10,14 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     const udata = localStorage.getItem('user');
-    let loggedIN = true;
-    if (udata == null) {
-      loggedIN = false;
-    }
+    // let loggedIN = true;
+    // if (udata == null) {
+    //   loggedIN = false;
+    // }
     this.state = {
       email: '',
       password: '',
-      loggedIN,
+      // loggedIN,
       isButtonDisabled: false
     };
   }
@@ -40,10 +40,12 @@ export default class Login extends Component {
       toast.error("Please fill in all fields");
       return;
     }
+
     // Check if the user is SuperAdmin
-    if (email === 'Mixify@gmail.com' && password === 'MixifyAdmin') {
+    // NOTE: MOVE THIS TO THE BACKEND
+    if (email === 'superadmin@mixify.com' && password === 'superadmin') {
       // Redirect to AdminDashboard
-      window.location.href = "/admin";
+      // window.location.href = "/admin";
       return; // Exit the function
     }
 
@@ -53,19 +55,28 @@ export default class Login extends Component {
     };
 
     axios
-      .post('http://127.0.0.1:8080/api/auth/login', userObject) // change to docker
+      .post('http://127.0.0.1:8000/api/login', userObject) // change to docker
       .then((res) => {
         if (res.status === 200) {
           localStorage.setItem('user', JSON.stringify(res.data));
-          this.setState({
-            loggedIN: true
-          });
+          // this.setState({
+          //   loggedIN: true
+          // });
           toast.success("Login successful!");
+          // Check if the user is an admin
+          if (res.data.is_admin) {
+            // Redirect to /admin
+            this.props.history.push('/admin');
+          } else {
+            // Redirect to /home
+            this.props.history.push('/home');
+          }
         }
       })
       .catch((error) => {
         console.log(error);
         toast.error('Wrong email or password');
+        this.setState({ isButtonDisabled: false });
       });
 
     this.setState({ email: '', password: '' });
@@ -82,9 +93,9 @@ export default class Login extends Component {
   }
 
   render() {
-    if (this.state.loggedIN) {
-      return <Navigate to="/dashboard" />;
-    }
+    // if (this.state.loggedIN) {
+    //   return <Navigate to="/dashboard" />;
+    // }
     return (
       <Container className='vh-100' fluid>
         <Row className='vh-100'>
@@ -108,7 +119,7 @@ export default class Login extends Component {
                     <InputGroup>
                       <FormControl
                         type="text"
-                        onChange={this.onChangeEmail}
+                        onChange={this.onChangeUserEmail}
                         name="email"
                         value={this.state.email}
                         placeholder="Email"
@@ -144,7 +155,7 @@ export default class Login extends Component {
                       </Form.Group>
                     </Col>
                     <Col className='d-flex justify-content-end'>
-                      <a className='d-flex justify-content-end forgot-password'> 
+                      <a className='d-flex justify-content-end forgot-password'>
                         Forgot Password?
                       </a>
                     </Col>
