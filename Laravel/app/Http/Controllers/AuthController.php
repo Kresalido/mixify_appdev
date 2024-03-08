@@ -2,93 +2,133 @@
 
 namespace App\Http\Controllers;
 
-use Validator;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-// use App\Mail\VerifyEmail;
-// use App\Mail\ResendVerificationEmail;
+use App\Models\ArtistRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Validation\Rules\Password;
+use App\Http\Controllers\Controller;
 
+use App\Mail\ContactFormMail;
 use App\Mail\VerificationEmail;
 
-
-class AuthController extends Controller
+class AuthController extends Controller 
 {
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
-    }
 
     /**
      * Get a JWT via given credentials.
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request)
+    public function login()
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required|string|min:6',
-        ]);
+        $credentials = request(['email', 'password']);
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-
-        if (!$token = auth()->attempt($validator->validated())) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return $this->createNewToken($token);
+        return $this->respondWithToken($token);
+    }
+
+    public function registerListener(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|min:4|unique:users,name',
+            'email' => 'required|email|unique:users,email',
+            'password' => [
+                'required',
+                Password::min(8)
+                    ->mixedCase() // allows both uppercase and lowercase
+                    ->letters() //accepts letter
+                    ->numbers() //accepts numbers
+                    // ->symbols() //accepts special character
+                    // ->uncompromised(), //check to be sure that there is no data leak
+            ],
+            'confirmPassword' => 'required|same:password'
+        ]);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = 'listener';
+        $user->save();
+
+        $verificationUrl = URL::temporarySignedRoute(
+            'verification.verify', now()->addMinutes(60), ['id' => $user->id]
+        );
+
+        Mail::to($user->email)->send(new VerificationEmail($verificationUrl,$user->name));
+
+        
+        return response()->json(['message' => 'User registered successfully'], 201);
+    }
+
+    public function registerArtist(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|min:4|unique:users,name',
+            'email' => 'required|email|unique:users,email',
+            'password' => [
+                'required',
+                Password::min(8)
+                    ->mixedCase() // allows both uppercase and lowercase
+                    ->letters() //accepts letter
+                    ->numbers() //accepts numbers
+                    // ->symbols() //accepts special character
+                    // ->uncompromised(), //check to be sure that there is no data leak
+            ],
+            'confirmPassword' => 'required|same:password'
+        ]);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = 'artist';
+        $user->save();
+
+        $verifyRequest = new ArtistRequest();
+        $verifyRequest->id = $user->id;
+        $verifyRequest->username = $user->name;
+        $verifyRequest->email = $user->email;
+        $verifyRequest->is_approved = false;
+        $verifyRequest->save(); 
+
+        $verificationUrl = URL::temporarySignedRoute(
+            'verification.verify', now()->addMinutes(60), ['id' => $user->id]
+        );
+
+        Mail::to($user->email)->send(new VerificationEmail($verificationUrl,$user->name)); 
+        
+        return response()->json(['message' => 'User registered successfully'], 201);
+    }
+    
+    public function sendVerificationEmail(Request $request) {
+        $user = auth()->user();
+            
+        $verificationUrl = URL::temporarySignedRoute(
+            'verification.verify', now()->addMinutes(60), ['id' => $user->id]
+        );
+
+        Mail::to($user->email)->send(new VerificationEmail($verificationUrl,$user->name));
+
+        return response()->json(['message' => 'Email sent successfully'], 201);
     }
 
     /**
-     * Register a User.
+     * Get the authenticated User.
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function register(Request $request)
+    public function me()
     {
-        $validator = Validator::make($request->all(), [
-            'username' => 'required|string|between:2,20',
-            'email' => 'required|string|email|max:30|unique:users',
-            'password' => 'required|string|confirmed|min:6',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
-        }
-
-        $user = User::create(
-            array_merge(
-                $validator->validated(),
-                ['password' => bcrypt($request->password)]
-            )
-        );
-
-        // creates verification email
-        $verificationUrl = URL::temporarySignedRoute(
-            'verification.verify',
-            now()->addMinutes(60),
-            ['id' => $user->id]
-        );
-
-        // sends email to mailhog
-        Mail::to($user->email)->send(new VerificationEmail($verificationUrl, $user->name));
-
-        return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $user
-        ], 201);
+        return response()->json(auth()->user());
     }
-
 
     /**
      * Log the user out (Invalidate the token).
@@ -99,7 +139,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'User successfully signed out']);
+        return response()->json(['message' => 'Successfully logged out']);
     }
 
     /**
@@ -109,17 +149,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->createNewToken(auth()->refresh());
-    }
-
-    /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function userProfile()
-    {
-        return response()->json(auth()->user());
+        return $this->respondWithToken(auth()->refresh());
     }
 
     /**
@@ -129,31 +159,12 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function createNewToken($token)
+    protected function respondWithToken($token)
     {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            // 'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()
+            'expires_in' => auth()->factory()->getTTL() * 60
         ]);
-
-
     }
-
-    public function sendVerificationEmail(Request $request)
-    {
-        $user = auth()->user();
-
-        $verificationUrl = URL::temporarySignedRoute(
-            'verification.verify',
-            now()->addMinutes(60),
-            ['id' => $user->id]
-        );
-
-        Mail::to($user->email)->send(new VerificationEmail($verificationUrl, $user->name));
-
-        return response()->json(['message' => 'Email sent successfully'], 201);
-    }
-
 }
