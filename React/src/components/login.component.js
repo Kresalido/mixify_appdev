@@ -70,7 +70,7 @@ export default class Login extends Component {
             window.location.href = "/admin";
           } else {
             // Find a better way to redirect to /home
-            // window.location.href = "/home";
+            window.location.href = "/home";
           }
         }
       })

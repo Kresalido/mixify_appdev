@@ -9,6 +9,7 @@ import SignUp from './components/signup.component'
 import Dashboard from './components/dashboard.component'
 import Logout from './components/logout.component'
 import Admin from './components/admin/AdminDashboard'
+import Home from './components/home'
 // import ArtistDashboard from './admincomponents/ArtistDashboard'
 import Artist from './components/artist'
 
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<RedirectToLogin />} />
           <Route exact path="/log-in" element={<Login />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/sign-in" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/dashboard" element={<Dashboard />} />

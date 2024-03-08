@@ -541,9 +541,10 @@ body {
   font-size: 20px;
 }
 
-.admin-dashboard-item-icon{
+.admin-dashboard-item-icon {
   width: 60px !important;
   height: 60px !important;
+  object-fit: contain;
 }
 
 .admin-dashboard-item-long-box {
@@ -556,6 +557,40 @@ body {
   padding: 30px;
 }
 
+/* USER */
+.bg-user-sidebar {
+  background: linear-gradient(to bottom, #521B1B, #0D0D0D);
+  width: 500px;
+  max-width: 500px;
+}
+
+.user-pfp {
+  width: 100px !important;
+  height: 100px !important;
+  border: 2px solid red;
+  object-fit: cover;
+}
+
+.user-name {
+  font-size: 40px;
+  color: #D9D9D9;
+}
+
+.user-sidebar-main a{
+  color: #D9D9D9;
+  text-decoration: none;
+  margin-bottom: 0;
+}
+
+.user-sidebar-item:hover {
+  background-color: #D9D9D9;
+  opacity: 0.2;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+}
 
 
 
