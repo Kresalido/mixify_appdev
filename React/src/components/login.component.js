@@ -7,6 +7,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Container, Row, Col, Form, InputGroup, FormControl, Button, Stack } from 'react-bootstrap';
 
 export default class Login extends Component {
+  componentDidMount() {
+    const justRegistered = localStorage.getItem('justRegistered');
+
+    if (justRegistered) {
+      toast.success("Registration successful! Please log in to continue");
+      localStorage.removeItem('justRegistered');
+    }
+  }
+
   constructor(props) {
     super(props);
     const udata = localStorage.getItem('user');
@@ -43,11 +52,6 @@ export default class Login extends Component {
 
     // Check if the user is SuperAdmin
     // NOTE: MOVE THIS TO THE BACKEND
-    if (email === 'superadmin@mixify.com' && password === 'superadmin') {
-      // Redirect to AdminDashboard
-      // window.location.href = "/admin";
-      return; // Exit the function
-    }
 
     const userObject = {
       email: email,
@@ -58,18 +62,15 @@ export default class Login extends Component {
       .post('http://127.0.0.1:8000/api/login', userObject) // change to docker
       .then((res) => {
         if (res.status === 200) {
-          localStorage.setItem('user', JSON.stringify(res.data));
-          // this.setState({
-          //   loggedIN: true
-          // });
+          console.log(res);
           toast.success("Login successful!");
           // Check if the user is an admin
           if (res.data.is_admin) {
-            // Redirect to /admin
-            this.props.history.push('/admin');
+            // Find a better way to redirect to /admin
+            window.location.href = "/admin";
           } else {
-            // Redirect to /home
-            this.props.history.push('/home');
+            // Find a better way to redirect to /home
+            // window.location.href = "/home";
           }
         }
       })

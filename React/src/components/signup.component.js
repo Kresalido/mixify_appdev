@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -7,6 +7,7 @@ import { Form, Button, InputGroup, FormControl, Container, Row, Col, Stack } fro
 import Outernavbar from './outernavbar.component';
 
 class SignUp extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -20,9 +21,6 @@ class SignUp extends Component {
     };
   }
 
-  navigateToLogin = () => {
-    this.props.history.push('/log-in');
-  };
 
   onChangeUsername = (e) => {
     this.setState({ name: e.target.value });
@@ -73,7 +71,9 @@ class SignUp extends Component {
         console.log(res);
         if (res.status === 201) {
           toast.success("Registration successful");
-          this.navigateToLogin();
+          // Find a better way to redirect to the login page
+          localStorage.setItem('justRegistered', true);
+          window.location.href = '/log-in';
         } else {
           this.setState({ isButtonDisabled: false });
         }
