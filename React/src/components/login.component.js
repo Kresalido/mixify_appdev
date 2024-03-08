@@ -94,14 +94,10 @@ export default class Login extends Component {
   }
 
   render() {
-    // if (this.state.loggedIN) {
-    //   return <Navigate to="/dashboard" />;
-    // }
     return (
       <Container className='vh-100' fluid>
         <Row className='vh-100'>
           <Col xs={5} className='singing-background'>
-            <p>okay</p>
           </Col>
           <Col xs={7} className='vh-100 sign-container'>
             <Col className='vh-100'>

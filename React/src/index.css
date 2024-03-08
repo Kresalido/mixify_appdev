@@ -8,7 +8,7 @@
 }
 
 body {
-  background-color: #000;
+  background-color: #111111;
   /* min-height: 100vh;
   display: flex;
   font-weight: 400;
@@ -376,13 +376,7 @@ body {
   white-space: nowrap;
 }
 
-.h-15 {
-  height: 15%;
-}
 
-.h-70 {
-  height: 70%;
-}
 
 .sign-form {
   color: #fff;
@@ -455,7 +449,7 @@ body {
   display: flex;
 }
 
-.forgot-password{
+.forgot-password {
   color: #a5a5a5;
   text-decoration: none;
   cursor: pointer;
@@ -463,10 +457,106 @@ body {
   font-style: italic;
 }
 
-.forgot-password:hover{
+.forgot-password:hover {
   color: #fff;
   text-decoration: none;
 }
+
+/* ADMIN */
+.bg-admin-sidebar {
+  background: linear-gradient(to bottom, #521B1B, #0D0D0D);
+}
+
+.admin-sidebar-text {
+  color: #D9D9D9;
+}
+
+.admin-name {
+  color: #D9D9D9;
+  font-size: 21px;
+  font-weight: 600;
+  overflow: hidden;
+}
+
+.bg-admin-sidebar .admin-pfp {
+  width: 100px;
+  height: 100px;
+  border: 2px solid red;
+}
+
+.admin-sidebar-main {
+  padding: 20px;
+}
+
+.admin-sidebar-main a {
+  color: #D9D9D9;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.admin-sidebar-main a:hover {
+  color: #ffffff;
+  font-weight: 600px;
+}
+
+.admin-white-text {
+  color: #D9D9D9;
+}
+
+.admin-white-text h1 {
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 35px;
+}
+
+.admin-dashboard-item-box {
+  background-color: #D9D9D9;
+  height: 150px;
+}
+
+.admin-dashboard-item {
+  background-color: #D9D9D9;
+  height: 150px;
+}
+
+.admin-dashboard-item h1 {
+  color: #000000;
+  font-weight: 800;
+  font-size: 35px;
+}
+
+.admin-dashboard-item h2 {
+  color: #494949;
+  font-size: 20px;
+}
+
+.admin-dashboard-item-text h1 {
+  color: #000000;
+  font-weight: 800;
+  font-size: 35px;
+}
+
+.admin-dashboard-item-text h2 {
+  color: #494949;
+  font-size: 20px;
+}
+
+.admin-dashboard-item-icon{
+  width: 60px !important;
+  height: 60px !important;
+}
+
+.admin-dashboard-item-long-box {
+  background-color: #D9D9D9;
+  border-radius: 10px;
+}
+
+.bg-admin-dashboard {
+  background: linear-gradient(to bottom, #453939, #202020);
+  padding: 30px;
+}
+
+
 
 
 /* RESPONSIVE */
@@ -475,3 +565,32 @@ body {
     display: none;
   }
 } */
+
+/* HEIGHTS */
+.h-10 {
+  height: 10%;
+}
+
+.h-15 {
+  height: 15%;
+}
+
+.h-20 {
+  height: 20%;
+}
+
+.h-30 {
+  height: 30%;
+}
+
+.h-40 {
+  height: 40%;
+}
+
+.h-60 {
+  height: 60%;
+}
+
+.h-70 {
+  height: 70%;
+}
