@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Outernavbar from './outernavbar.component';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { Form, Button, InputGroup, FormControl, Container, Row, Col, Stack } from 'react-bootstrap';
+import Outernavbar from './outernavbar.component';
 
 class SignUp extends Component {
   // componentDidMount() {
@@ -146,14 +146,7 @@ class SignUp extends Component {
           </Col>
           <Col xs={7} className='vh-100 sign-container'>
             <Col className='vh-100'>
-              <Row className='sign-navbar p-3'>
-                <Stack direction='horizontal' gap={4}>
-                  <Link to={'/home'}> Home</Link>
-                  <Link to={'/home'}> Premium</Link>
-                  <Link to={'/home'}> Sign up</Link>
-                  <Link to={'/home'}> Log in</Link>
-                </Stack>
-              </Row>
+              <Outernavbar />
               <Row className='h-15'>
                 <div className='sign d-flex justify-content-center text-center align-items-center'>
                   <div className='d-flex align-items-end'>
@@ -258,6 +251,14 @@ class SignUp extends Component {
                             Sign up as Artist
                           </div>
                         </Button>
+                        <span className='d-flex justify-content-center align-items-center'>
+                          <div className='d-flex justify-content-center align-items-center'>
+                            <div className='have-account'>
+                              Already have an account?
+                            </div>
+                            <Link to="/sign-in" className='p-2 pt-3' style={{ color: 'gray', width:'auto' }}>Log in here.</Link>
+                          </div>
+                        </span>
                       </Stack>
                     </Col>
                   </Row>
@@ -354,7 +355,6 @@ class SignUp extends Component {
       //             </p>
       //           </div>
       //         </div>
-
       //         {/* Modal for terms and conditions */}
       //         <div className="modal" tabIndex="-1" role="dialog" style={{ display: this.state.showTermsModal ? 'block' : 'none' }}>
       //           <div className="modal-dialog" role="document">

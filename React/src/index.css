@@ -426,12 +426,20 @@ body {
 
 .agree-to {
   color: #a5a5a5;
+  font-size: 20px;
+}
+
+.remember-me {
+  color: #a5a5a5;
+  font-size: 20px;
 }
 
 .terms-and-conditions {
   color: white;
   cursor: pointer;
   margin-left: 5px;
+  font-size: 20px;
+
 }
 
 .terms-and-conditions:hover {
@@ -439,7 +447,29 @@ body {
   text-decoration: underline;
 }
 
+.have-account {
+  text-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+}
 
+.forgot-password{
+  color: #a5a5a5;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.forgot-password:hover{
+  color: #fff;
+  text-decoration: none;
+}
+
+
+/* RESPONSIVE */
 /* @media only screen and (max-width: 1080px) {
   .singing-background {
     display: none;
