@@ -49,13 +49,18 @@ function Home() {
                     <Row className="position-relative flex-grow-1">
                         <div className='user-player position-absolute bottom-0'>
                             <Row className='h-100'>
-                                <Col xs={3} className='d-flex align-items-center bg-success'>
+                                <Col xs={3} className='d-flex align-items-center '>
                                     <Row className='h-100 p-4 flex-grow-1'>
-                                        <Col xs={4} className='h-100 d-flex align-items-center bg-warning h-100'>
-                                            Picture
+                                        <Col xs={4} className='h-100 d-flex align-items-center h-100'>
+                                            <Image src={pfp} className='song-cover-image' />
                                         </Col>
-                                        <Col xs={8} className='h-100 d-flex align-items-center bg-warning h-100'>
-                                            Name
+                                        <Col xs={8} className='p-3 h-100 align-items-center h-100 song-details'>
+                                            <Row className='h-60 align-items-end song-name'>
+                                                Song Name
+                                            </Row>
+                                            <Row className='h-40'>
+                                                Author Name
+                                            </Row>
                                         </Col>
                                     </Row>
                                 </Col>

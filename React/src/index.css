@@ -627,6 +627,21 @@ body {
   min-width: 1000px;
 }
 
+.song-name {
+  font-size: 23px;
+  font-weight: 800px;
+}
+
+.song-details {
+  color: #D9D9D9;
+}
+.song-cover-image {
+  width: 100px !important;
+  height: 100px !important;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
 .links {
   display: flex;
   align-items: center;
