@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Stack, Col, Image } from 'react-bootstrap';
 import pfp from '.././img/user-pfp.jpg';
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 
 function Home() {
 
@@ -10,6 +12,7 @@ function Home() {
             <div className='circle circle-left' />
             <div className='circle circle-right' />
             <Row className='vh-100'>
+                {/* SIDE BAR */}
                 <div className='bg-user-sidebar'>
                     <Row className='h-20 d-flex justify-content-center align-items-center'>
                         <div className='d-flex'>
@@ -45,32 +48,42 @@ function Home() {
                         <Link to={'/'}> Logout</Link>
                     </Row>
                 </div>
-                <Col className='d-flex flex-grow-1 bg-user bg-user-dashboard position-relative'>
-                    <Row className="position-relative flex-grow-1">
-                        <div className='user-player position-absolute bottom-0'>
-                            <Row className='h-100'>
-                                <Col xs={3} className='d-flex align-items-center '>
-                                    <Row className='h-100 p-4 flex-grow-1'>
-                                        <Col xs={4} className='h-100 d-flex align-items-center h-100'>
-                                            <Image src={pfp} className='song-cover-image' />
-                                        </Col>
-                                        <Col xs={8} className='p-3 h-100 align-items-center h-100 song-details'>
-                                            <Row className='h-60 align-items-end song-name'>
-                                                Song Name
-                                            </Row>
-                                            <Row className='h-40'>
-                                                Author Name
-                                            </Row>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                                <Col xs={6} className='bg-primary'>
-                                </Col>
-                                <Col xs={3} className='bg-warning'>
-                                </Col>
-                            </Row>
-                        </div>
+                <Col className='flex-grow-1 bg-user bg-user-dashboard position-relative'>
+                    {/* <Row className="">
+                        contentasdasdaskdhj
                     </Row>
+                    <Row className="">
+                        contentasdasdaskdhj
+                    </Row>
+                    <Row className="">
+                        contentasdasdaskdhj
+                    </Row>
+                    <Row className="">
+                        contentasdasdaskdhj
+                    </Row> */}
+                    <div className='user-player position-absolute bottom-0 d-flex'>
+                            <Col xs={3} className='d-flex align-items-center '>
+                                <Row className='h-100 p-4 flex-grow-1'>
+                                    <Col xs={4} className=' d-flex align-items-center'>
+                                        <Image src={pfp} className='song-cover-image' />
+                                    </Col>
+                                    <Col xs={8} className='p-3 h-100 align-items-center song-details'>
+                                        <Row className='h-60 align-items-end song-name'>
+                                            Song Name
+                                        </Row>
+                                        <Row className='h-40'>
+                                            Author Name
+                                        </Row>
+                                    </Col>
+                                </Row>
+                            </Col>
+                            <Col xs={6} className=''>
+                                <AudioPlayer autoPlay onPlay={e => console.log("onPlay")} className='mixify-player h-100' />
+                            </Col>
+                            <Col xs={3}>
+                                Extra options
+                            </Col>
+                    </div>
                 </Col>
             </Row>
         </Container>

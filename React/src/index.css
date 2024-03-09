@@ -562,19 +562,21 @@ body {
   background: linear-gradient(to bottom, #521B1B, #0D0D0D);
   width: 500px;
   max-width: 500px;
-  z-index: 2;
+  z-index: 4;
 }
 
 .bg-user {
   position: relative;
   background: #B02D2D;
   z-index: 1;
+  padding: 0 !important;
 }
 
 .bg-user-dashboard {
   position: relative;
   background: linear-gradient(to bottom, rgba(82, 27, 27, 0), rgba(13, 13, 13, 0.8), rgba(13, 13, 13, 1), rgba(13, 13, 13, 1), #0D0D0D);
   z-index: 3;
+
 }
 
 .circle {
@@ -640,6 +642,11 @@ body {
   height: 100px !important;
   border-radius: 10px;
   object-fit: cover;
+}
+
+/* PLAYER */
+.mixify-player {
+  background-color: #1b1b1b !important;
 }
 
 .links {
