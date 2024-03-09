@@ -143,7 +143,12 @@ function AdminDashboard() {
                             </Stack>
                     </Row>
                     <Row className='h-30 bg-warning'>
+                        <Col xs={4} className='bg-danger'>
 
+                        </Col>
+                        <Col className='bg-primary'>
+                            Map
+                        </Col>
                     </Row>
                 </Col>
             </Row>

@@ -59,6 +59,21 @@ function Home() {
                                     Home
                                     <a href='' className='h-100 user-clickable'>Notifications</a>
                                 </Row>
+                                <Row className='p-4 user-white-text'>
+                                    <p className='user-header-2'>
+                                    New Releases
+                                    </p>
+                                    <Stack direction='horizontal' gap={4} className='song-container'>
+                                        {/* ITEM 1 */}
+                                        <Col xs={2} className='d-flex h-100 bg-success align-items-center justify-content-center'>
+                                            Music 1
+                                        </Col>
+                                        {/* ITEM 2 */}
+                                        <Col xs={2} className='d-flex h-100 bg-primary align-items-center justify-content-center'>
+                                            Music 2
+                                        </Col>
+                                    </Stack>
+                                </Row>
                             </Stack>
                         </Col>
                     </Row>

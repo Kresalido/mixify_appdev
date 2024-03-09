@@ -509,9 +509,13 @@ body {
   font-size: 35px;
 }
 
-.admin-dashboard-item-box {
+/* .admin-dashboard-item-box {
   background-color: #D9D9D9;
   height: 150px;
+} */
+
+.admin-dashboard-item-container {
+  border-radius: 20px;
 }
 
 .admin-dashboard-item {
@@ -552,6 +556,7 @@ body {
   border-radius: 10px;
 }
 
+
 .bg-admin-dashboard {
   background: linear-gradient(to bottom, #453939, #202020);
   padding: 30px;
@@ -580,6 +585,11 @@ body {
 .user-header {
   font-size: 50px;
   font-weight: 600;
+}
+
+.user-header-2 {
+  font-size: 30px;
+  font-weight: 400;
 }
 
 .bg-user-sidebar {
@@ -645,6 +655,11 @@ body {
   background-color: rgba(255,255,255,0.14);
 }
 
+.song-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  height:150px;
+}
 
 
 .user-player {
@@ -688,7 +703,6 @@ body {
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: #88888893;
   border-radius: 25px;
-
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
