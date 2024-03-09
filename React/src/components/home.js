@@ -13,7 +13,7 @@ function Home() {
             <div className='circle circle-right' />
             <Row className='vh-100'>
                 {/* SIDE BAR */}
-                <div className='bg-user-sidebar'>
+                <div className='bg-user-sidebar position-fixed'>
                     <Row className='h-20 d-flex justify-content-center align-items-center'>
                         <div className='d-flex'>
                             <Image src={pfp} roundedCircle className='user-pfp' />
@@ -48,46 +48,42 @@ function Home() {
                         <Link to={'/'}> Logout</Link>
                     </Row>
                 </div>
-                <Col className='flex-grow-1 bg-user bg-user-dashboard position-relative'>
-                    {/* <Row className="">
-                        contentasdasdaskdhj
-                    </Row>
-                    <Row className="">
-                        contentasdasdaskdhj
-                    </Row>
-                    <Row className="">
-                        contentasdasdaskdhj
-                    </Row>
-                    <Row className="">
-                        contentasdasdaskdhj
-                    </Row> */}
-                    <div className='user-player position-absolute bottom-0 d-flex'>
-                            <Col xs={3} className='d-flex align-items-center '>
-                                <Row className='h-100 p-4 flex-grow-1'>
-                                    <Col xs={4} className=' d-flex align-items-center'>
-                                        <Image src={pfp} className='song-cover-image' />
-                                    </Col>
-                                    <Col xs={8} className='p-3 h-100 align-items-center song-details'>
-                                        <Row className='h-60 align-items-end song-name'>
-                                            Song Name
-                                        </Row>
-                                        <Row className='h-40'>
-                                            Author Name
-                                        </Row>
-                                    </Col>
-                                </Row>
-                            </Col>
-                            <Col xs={6} className=''>
-                                <AudioPlayer autoPlay onPlay={e => console.log("onPlay")} className='mixify-player h-100' />
-                            </Col>
-                            <Col xs={3}>
-                                Extra options
-                            </Col>
+
+                {/* MAIN */}
+                <Col className='bg-user bg-user-dashboard position-relative h-100'>
+                    <div className='d-flex flex-grow-1 h-100'>
+                        yes
                     </div>
                 </Col>
+                <div className='user-player position-sticky bottom-0 d-flex'>
+                    <Col xs={3} className='d-flex align-items-center '>
+                        <Row className='h-100 p-4 flex-grow-1'>
+                            <Col xs={4} className=' d-flex align-items-center'>
+                                <Image src={pfp} className='song-cover-image' />
+                            </Col>
+                            <Col xs={8} className='p-3 h-100 align-items-center song-details'>
+                                <Row className='h-60 align-items-end song-name'>
+                                    Song Name
+                                </Row>
+                                <Row className='h-40'>
+                                    Author Name
+                                </Row>
+                            </Col>
+                        </Row>
+                    </Col>
+                    <Col xs={6} className=''>
+                        <AudioPlayer autoPlay onPlay={e => console.log("onPlay")} className='mixify-player h-100' />
+                    </Col>
+                    <Col xs={3}>
+                        Extra options
+                    </Col>
+                </div>
             </Row>
         </Container>
     );
 }
+
+// MAKE SIDEBAR FIXED
+
 
 export default Home;

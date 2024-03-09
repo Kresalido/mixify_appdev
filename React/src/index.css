@@ -627,6 +627,7 @@ body {
   background: #1b1b1b;
   border-top: rgba(255, 255, 255, 0.13) 1px solid;
   min-width: 1000px;
+  z-index: 5;
 }
 
 .song-name {
