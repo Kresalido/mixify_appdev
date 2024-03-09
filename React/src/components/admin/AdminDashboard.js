@@ -43,7 +43,7 @@ function AdminDashboard() {
                     </Row>
                     <Row className='h-20'>
                         <Stack direction='horizontal' gap={5}>
-                            <div class="d-flex shadow-lg p-3 admin-dashboard-item rounded flex-grow-1">
+                            <div className="d-flex shadow-lg p-3 admin-dashboard-item rounded flex-grow-1">
                                 <Col className='d-flex justify-content-center align-items-center p-3'>
                                     <Image src={song} className='admin-dashboard-item-icon' />
                                 </Col>
@@ -60,7 +60,7 @@ function AdminDashboard() {
                                     </Row>
                                 </Col>
                             </div>
-                            <div class="d-flex shadow p-3 admin-dashboard-item rounded flex-grow-1">
+                            <div className="d-flex shadow p-3 admin-dashboard-item rounded flex-grow-1">
                                 <Col className='d-flex justify-content-center align-items-center p-3'>
                                     <Image src={podcast} className='admin-dashboard-item-icon' />
                                 </Col>
@@ -77,7 +77,7 @@ function AdminDashboard() {
                                     </Row>
                                 </Col>
                             </div>
-                            <div class="d-flex shadow p-3 admin-dashboard-item rounded flex-grow-1">
+                            <div className="d-flex shadow p-3 admin-dashboard-item rounded flex-grow-1">
                                 <Col className='d-flex justify-content-center align-items-center'>
                                     <Image src={videocast} className='admin-dashboard-item-icon' />
                                 </Col>

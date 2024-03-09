@@ -7,6 +7,8 @@ function Home() {
 
     return (
         <Container fluid>
+            <div className='circle circle-left' />
+            <div className='circle circle-right' />
             <Row className='vh-100'>
                 <div className='bg-user-sidebar'>
                     <Row className='h-20 d-flex justify-content-center align-items-center'>
@@ -28,16 +30,42 @@ function Home() {
                             <div className='px-4 user-sidebar-item d-flex'>
                                 <Link to={'/admin'} className='links'> Settings</Link>
                             </div>
+                            <div className='px-4 user-sidebar-item d-flex'>
+                                <Link to={'/admin'} className='links'> Songs</Link>
+                            </div>
+                            <div className='px-4 user-sidebar-item d-flex'>
+                                <Link to={'/admin'} className='links'> Videos</Link>
+                            </div>
+                            <div className='px-4 user-sidebar-item d-flex'>
+                                <Link to={'/admin'} className='links'> Podcasts</Link>
+                            </div>
                         </Stack>
                     </Row>
                     <Row className='h-20 d-flex align-items-end admin-sidebar-main'>
                         <Link to={'/'}> Logout</Link>
                     </Row>
                 </div>
-                {/* <div className='bg-'>
-
-                </div> */}
-                <Col className='bg-success d-flex flex-grow-1'>
+                <Col className='d-flex flex-grow-1 bg-user bg-user-dashboard position-relative'>
+                    <Row className="position-relative flex-grow-1">
+                        <div className='user-player position-absolute bottom-0'>
+                            <Row className='h-100'>
+                                <Col xs={3} className='d-flex align-items-center bg-success'>
+                                    <Row className='h-100 p-4 flex-grow-1'>
+                                        <Col xs={4} className='h-100 d-flex align-items-center bg-warning h-100'>
+                                            Picture
+                                        </Col>
+                                        <Col xs={8} className='h-100 d-flex align-items-center bg-warning h-100'>
+                                            Name
+                                        </Col>
+                                    </Row>
+                                </Col>
+                                <Col xs={6} className='bg-primary'>
+                                </Col>
+                                <Col xs={3} className='bg-warning'>
+                                </Col>
+                            </Row>
+                        </div>
+                    </Row>
                 </Col>
             </Row>
         </Container>
