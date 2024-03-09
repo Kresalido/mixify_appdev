@@ -13,6 +13,7 @@
     "boostrap": "^2.0.0",
     "bootstrap": "^5.3.3",
     "cdbreact": "^1.5.18",
+    "chart.js": "^4.4.2",
     "datatables.net": "^2.0.1",
     "datatables.net-dt": "^2.0.1",
     "font-awesome": "^4.7.0",

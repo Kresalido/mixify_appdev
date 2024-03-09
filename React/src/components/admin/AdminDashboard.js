@@ -1,18 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Stack, Col, Image } from 'react-bootstrap';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie } from 'react-chartjs-2';
 import pfp from '../.././img/pfp.jpg';
 import song from '../.././img/song.png';
 import podcast from '../.././img/podcast.png';
 import videocast from '../.././img/videocast.png';
 
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+export const dummyData = {
+    labels: ['Listeners', 'Artists'],
+    datasets: [{
+        data: [12, 19], // Replace with your actual data
+        backgroundColor: [
+            'rgba(193, 22, 22, 0.8)', // Red
+            'rgba(77, 77, 77, 0.8)' // Grey
+        ],
+        borderColor: [
+            'rgba(193, 22, 22, 1)', // Red
+            'rgba(77, 77, 77, 1)' // Grey
+        ],
+        borderWidth: 1,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    }]
+}
 
 function AdminDashboard() {
 
-
     return (
-        <Container fluid>
 
+        <Container fluid>
             <Row className='vh-100'>
                 <Col xs={12} sm={6} md={4} lg={3} xl={3} className='bg-admin-sidebar admin-sidebar-text'>
                     <Row className='h-20 d-flex justify-content-center align-items-center'>
@@ -96,55 +118,62 @@ function AdminDashboard() {
                             </div>
                         </Stack>
                     </Row>
-                    <Row className='h-20 admin-dashboard-item-long-box mb-5'>
-                            <Stack direction='horizontal' gap={3} className='d-flex flex-grow-1admin-dashboard-item-long-box'>
-                                <div className='flex-grow-1 '>
-                                    <Col className='justify-content-center admin-dashboard-item-text'>
-                                        <Row>
-                                            <h1 className='d-flex justify-content-center'>
-                                                182,092
-                                            </h1>
-                                        </Row>
-                                        <Row >
-                                            <h2 className='d-flex justify-content-center'>
-                                                Active Monthly Users
-                                            </h2>
-                                        </Row>
-                                    </Col>
-                                </div>
-                                <div className='flex-grow-1 '>
-                                    <Col className='justify-content-center admin-dashboard-item-text'>
-                                        <Row>
-                                            <h1 className='d-flex justify-content-center'>
-                                                182,092
-                                            </h1>
-                                        </Row>
-                                        <Row >
-                                            <h2 className='d-flex justify-content-center'>
-                                                Registered Users
-                                            </h2>
-                                        </Row>
-                                    </Col>
-                                </div>
-                                <div className='flex-grow-1 '>
-                                    <Col className='justify-content-center admin-dashboard-item-text'>
-                                        <Row>
-                                            <h1 className='d-flex justify-content-center'>
-                                                182,092
-                                            </h1>
-                                        </Row>
-                                        <Row >
-                                            <h2 className='d-flex justify-content-center'>
-                                                Monthly Users
-                                            </h2>
-                                        </Row>
-                                    </Col>
-                                </div>
-                            </Stack>
+                    <Row className='h-20 admin-dashboard-item-long-box mb-3'>
+                        <Stack direction='horizontal' gap={3} className='d-flex flex-grow-1admin-dashboard-item-long-box'>
+                            <div className='flex-grow-1 '>
+                                <Col className='justify-content-center admin-dashboard-item-text'>
+                                    <Row>
+                                        <h1 className='d-flex justify-content-center'>
+                                            182,092
+                                        </h1>
+                                    </Row>
+                                    <Row >
+                                        <h2 className='d-flex justify-content-center'>
+                                            Active Monthly Users
+                                        </h2>
+                                    </Row>
+                                </Col>
+                            </div>
+                            <div className='flex-grow-1 '>
+                                <Col className='justify-content-center admin-dashboard-item-text'>
+                                    <Row>
+                                        <h1 className='d-flex justify-content-center'>
+                                            182,092
+                                        </h1>
+                                    </Row>
+                                    <Row >
+                                        <h2 className='d-flex justify-content-center'>
+                                            Registered Users
+                                        </h2>
+                                    </Row>
+                                </Col>
+                            </div>
+                            <div className='flex-grow-1 '>
+                                <Col className='justify-content-center admin-dashboard-item-text'>
+                                    <Row>
+                                        <h1 className='d-flex justify-content-center'>
+                                            182,092
+                                        </h1>
+                                    </Row>
+                                    <Row >
+                                        <h2 className='d-flex justify-content-center'>
+                                            Monthly Users
+                                        </h2>
+                                    </Row>
+                                </Col>
+                            </div>
+                        </Stack>
                     </Row>
-                    <Row className='h-30 bg-warning'>
-                        <Col xs={4} className='bg-danger'>
-
+                    <Row className='h-30'>
+                        <Col xs={4} className='p-3'>
+                            <div className='admin-dashboard-item-container p-3 '>
+                                <h1 className='d-flex justify-content-center'>
+                                    User Composition
+                                </h1>
+                                <div className='justify-content-center d-flex' id='chart-wrapper'>
+                                    <Pie data={dummyData} />
+                                </div>
+                            </div>
                         </Col>
                         <Col className='bg-primary'>
                             Map
