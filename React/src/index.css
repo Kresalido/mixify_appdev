@@ -558,6 +558,30 @@ body {
 }
 
 /* USER */
+
+.user-white-text {
+  color: #D9D9D9;
+}
+
+.user-white-text a{
+  color: #D9D9D9;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.user-white-text a:hover{
+  font-weight: 600;
+}
+
+.user-clickable {
+  margin-bottom: 0 !important;
+}
+
+.user-header {
+  font-size: 50px;
+  font-weight: 600;
+}
+
 .bg-user-sidebar {
   background: linear-gradient(to bottom, #521B1B, #0D0D0D);
   width: 500px;
@@ -576,7 +600,7 @@ body {
   position: relative;
   background: linear-gradient(to bottom, rgba(82, 27, 27, 0), rgba(13, 13, 13, 0.8), rgba(13, 13, 13, 1), rgba(13, 13, 13, 1), #0D0D0D);
   z-index: 3;
-
+  overflow: hidden;
 }
 
 .circle {
@@ -621,6 +645,8 @@ body {
   background-color: rgba(255,255,255,0.14);
 }
 
+
+
 .user-player {
   height: 150px;
   width: 100%;
@@ -637,11 +663,37 @@ body {
 .song-details {
   color: #D9D9D9;
 }
+
 .song-cover-image {
   width: 100px !important;
   height: 100px !important;
   border-radius: 10px;
   object-fit: cover;
+}
+
+.custom-scrollbar {
+  overflow: auto;
+  height: 900px;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px; 
+  padding-right: 50px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  border-radius: 25px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #88888893;
+  border-radius: 25px;
+
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the handle when hovered */
+  border-radius: 25px;
 }
 
 /* PLAYER */
