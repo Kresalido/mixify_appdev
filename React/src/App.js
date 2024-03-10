@@ -9,7 +9,8 @@ import SignUp from './components/signup.component'
 import Dashboard from './components/dashboard.component'
 import Logout from './components/logout.component'
 import Admin from './components/admin/AdminDashboard'
-import Home from './components/home'
+import Home from './components/UserHomePage'
+import ArtistUploadMusic from './components/ArtistUploadMusic'
 // import ArtistDashboard from './admincomponents/ArtistDashboard'
 import Artist from './components/artist'
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/admin" element={<Admin/>} />
+          <Route path="/artist-upload" element={<ArtistUploadMusic/>} />
           {/* <Route path="/artistdashboard" element={<ArtistDashboard/>} /> */}
           <Route path="/artist" element={<Artist />} />
         </Routes>

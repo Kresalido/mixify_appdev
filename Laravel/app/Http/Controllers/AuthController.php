@@ -133,7 +133,13 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        $user = auth()->user();
+    
+        if (!$user) {
+            $user = ['name' => 'Guest'];
+        }
+    
+        return response()->json($user);
     }
 
     /**

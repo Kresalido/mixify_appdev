@@ -171,7 +171,7 @@ function AdminDashboard() {
                                     User Composition
                                 </h1>
                                 <div className='justify-content-center d-flex' id='chart-wrapper'>
-                                    <Pie data={dummyData} />
+                                    {/* <Pie data={dummyData} /> */}
                                 </div>
                             </div>
                         </Col>

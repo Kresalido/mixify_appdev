@@ -614,7 +614,7 @@ body {
 
 .bg-user-dashboard {
   position: relative;
-  background: linear-gradient(to bottom, rgba(82, 27, 27, 0), rgba(13, 13, 13, 0.8), rgba(13, 13, 13, 1), rgba(13, 13, 13, 1), #0D0D0D);
+  background: linear-gradient(to bottom, rgba(82, 27, 27, 0), rgba(13, 13, 13, 0.8), rgba(13, 13, 13, 1), rgba(13, 13, 13, 1), #110404);
   z-index: 3;
   overflow: hidden;
 }
@@ -690,7 +690,7 @@ body {
 
 .custom-scrollbar {
   overflow: auto;
-  height: 900px;
+  height: 1020px;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -801,11 +801,25 @@ body {
   background-color: #1b1b1b !important;
 }
 
+.rhap_time {
+  color: #D9D9D9 !important;
+}
+
 .links {
   display: flex;
   align-items: center;
 }
 
+/* ARTIST */
+
+.upload-file-container {
+  border: 1px solid #D9D9D9;
+}
+
+.user-sidebar-main .sub-header{
+  color: #535353;
+  font-size: 15px;
+}
 
 
 

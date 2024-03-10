@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtistRequestController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ArtistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,13 @@ Route::get('users/{id}', [UserController::class, 'getUser']);
 Route::put('users/{id}', [UserController::class, 'updateUser']);
 Route::delete('users/{id}', [UserController::class, 'deleteUser']);
 
+Route::get('albums', [ArtistController::class, 'getAlbums']);
+Route::get('songs', [ArtistController::class, 'getSongs']);
+Route::post('upload-song', [ArtistController::class, 'uploadSong']);
+Route::delete('songs/{id}', [ArtistController::class, 'deleteSong']);
+Route::put('albums/{id}', [ArtistController::class, 'editAlbum']);
+Route::put('songs/{id}', [ArtistController::class, 'editSong']);
+
 Route::group([
 
     'middleware' => 'api',
@@ -41,6 +49,10 @@ Route::group([
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::get('me', [AuthController::class, 'me']);
+
+    // Artist
+
+    
     Route::get('email/verify/{id}', function (Request $request, $id) { // $id is $token
         $user = App\Models\User::find($id);
         // $user = App\Models\User::where('verification_token', $token)->first();
@@ -54,3 +66,6 @@ Route::group([
         return redirect(env('FRONT_END_URL') . '/home');
     })->name('verification.verify');
 });
+
+
+

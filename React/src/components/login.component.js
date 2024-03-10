@@ -64,6 +64,7 @@ export default class Login extends Component {
         if (res.status === 200) {
           console.log(res);
           toast.success("Login successful!");
+          localStorage.setItem('jwt_token', res.data.access_token);
           // Check if the user is an admin
           if (res.data.is_admin) {
             // Find a better way to redirect to /admin
@@ -191,7 +192,7 @@ export default class Login extends Component {
                             <div className='have-account'>
                               Dont have an account?
                             </div>
-                            <Link to="/sign-up" className='p-2 pt-3' style={{ color: 'gray', width: 'auto' }}>Log in here.</Link>
+                            <Link to="/sign-up" className='p-2 pt-3' style={{ color: 'gray', width: 'auto' }}>Sign up here.</Link>
                           </div>
                         </span>
                       </Stack>
