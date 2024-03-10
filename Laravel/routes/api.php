@@ -34,7 +34,8 @@ Route::put('users/{id}', [UserController::class, 'updateUser']);
 Route::delete('users/{id}', [UserController::class, 'deleteUser']);
 
 Route::get('albums', [ArtistController::class, 'getAlbums']);
-Route::get('songs', [ArtistController::class, 'getSongs']);
+Route::get('artists', [ArtistController::class, 'getArtists']);
+Route::get('/songs/{id}', [ArtistController::class, 'getArtistSongs']);
 Route::post('upload-song', [ArtistController::class, 'uploadSong']);
 Route::delete('songs/{id}', [ArtistController::class, 'deleteSong']);
 Route::put('albums/{id}', [ArtistController::class, 'editAlbum']);
@@ -53,9 +54,8 @@ Route::group([
     // Artist
 
     
-    Route::get('email/verify/{id}', function (Request $request, $id) { // $id is $token
+    Route::get('email/verify/{id}', function (Request $request, $id) {
         $user = App\Models\User::find($id);
-        // $user = App\Models\User::where('verification_token', $token)->first();
 
         if (!$user) {
             abort(404);

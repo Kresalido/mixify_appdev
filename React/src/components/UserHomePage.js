@@ -8,26 +8,39 @@ import PlayButton from '.././play-solid.svg';
 import musicTest from '.././music/sameground.mp3';
 import kitchiePhoto from '.././img/Kitchie_album.jpg'
 import UserSideBar from './UserSideBar';
+import ArtistItem from './items/ArtistItem'
 
 function Home() {
+    const [artists, setArtists] = useState([]);
 
-
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/api/artists', { // Replace with your actual API endpoint
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                setArtists(data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }, []);
 
     // Player Related
     const [currentSong, setCurrentSong] = useState(null);
     const playerRef = useRef();
     const [songDetails, setSongDetails] = useState({ name: '', author: '', photo: '' });
 
-
-
-
     return (
         <Container fluid>
             <div className='circle circle-left' />
             <div className='circle circle-right' />
             <Row className='vh-100'>
-                {/* SIDE BAR */}
-                <UserSideBar/>
+                <UserSideBar />
                 <Col className='flex-grow-1 bg-user bg-user-dashboard'>
                     <Row className=" flex-grow-1 d-flex p-3">
                         <Col className='custom-scrollbar'>
@@ -38,6 +51,16 @@ function Home() {
                                 <Row className='d-flex justify-content-space-around align-items-center user-white-text p-5 user-header'>
                                     Home
                                     <a href='' className='h-100 user-clickable'>Notifications</a>
+                                </Row>
+                                <Row className='user-white-text'>
+                                    <p className='user-header-2'>
+                                        New Artists
+                                    </p>
+                                    <Stack direction='horizontal' gap={4} className='song-container'>
+                                        {artists.map(artist => (
+                                            <ArtistItem key={artist.id} picture={artist.profile_pic_name} name={artist.name} />
+                                        ))}
+                                    </Stack>
                                 </Row>
                                 <Row className='user-white-text'>
                                     <p className='user-header-2'>

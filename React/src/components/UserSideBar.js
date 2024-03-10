@@ -12,6 +12,8 @@ function UserSideBar() {
     const storedName = localStorage.getItem('name');
     const storedRole = localStorage.getItem('role');
 
+    const [profilePicUrl, setProfilePicUrl] = useState(null);
+
     fetch('http://127.0.0.1:8000/api/auth/me', {
         method: 'GET',
         headers: {
@@ -27,6 +29,11 @@ function UserSideBar() {
                 localStorage.setItem('name', data.name);
                 localStorage.setItem('role', data.role);
             }
+            
+            if (data.profile_pic_name) {
+                setProfilePicUrl(`http://127.0.0.1:8000/storage/profile_pics/${data.profile_pic_name}`);
+                console.log(profilePicUrl)
+            }
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -41,7 +48,7 @@ function UserSideBar() {
         <div className='bg-user-sidebar'>
             <Row className='h-20 d-flex justify-content-center align-items-center'>
                 <div className='d-flex'>
-                    <Image src={pfp} roundedCircle className='user-pfp' />
+                    <Image src={profilePicUrl} roundedCircle className='user-pfp' />
                     <div className='d-flex justify-content-center align-items-center p-3 user-name'>
                         {storedName}
                     </div>

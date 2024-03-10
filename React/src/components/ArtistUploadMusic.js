@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Stack, Col, Image, Form, Button } from 'react-bootstrap';
 import 'react-h5-audio-player/lib/styles.css';
 import UserSideBar from './UserSideBar';
-import axios from 'axios';
+import { toast } from 'react-toastify';
+
 
 
 function ArtistUploadPage() {
@@ -26,7 +27,15 @@ function ArtistUploadPage() {
     const [newAlbumPhoto, setNewAlbumPhoto] = useState(null);
     const [newAlbumPhotoUrl, setNewAlbumPhotoUrl] = useState(null);
 
+    // Toastify
+    const songUploadSuccess = localStorage.getItem('songUploadSuccess');
+
     useEffect(() => {
+        if (songUploadSuccess === 'true') {
+            toast.success('Song uploaded successfully!');
+            localStorage.removeItem('songUploadSuccess');
+        }
+
         fetch('http://127.0.0.1:8000/api/albums', {
             method: 'GET',
             headers: {
@@ -73,7 +82,20 @@ function ArtistUploadPage() {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                // handle success
+                // Form clearing
+                setSongName('');
+                setSelectedSong(null);
+                setSelectedImage(null);
+                setImageUrl(null);
+                setNewAlbumName('');
+                setNewAlbumDescription('');
+                setNewAlbumPhoto(null);
+                setNewAlbumPhotoUrl(null);
+                if (!createNewAlbum) {
+                    setSelectedAlbum(albums[0].id);
+                }
+                localStorage.setItem('songUploadSuccess', 'true');
+                window.location.reload();
             })
             .catch((error) => {
                 console.error('Error:', error);

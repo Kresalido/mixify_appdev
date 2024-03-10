@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import Outernavbar from './outernavbar.component';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Container, Row, Col, Form, InputGroup, FormControl, Button, Stack } from 'react-bootstrap';
 
@@ -19,14 +19,9 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     const udata = localStorage.getItem('user');
-    // let loggedIN = true;
-    // if (udata == null) {
-    //   loggedIN = false;
-    // }
     this.state = {
       email: '',
       password: '',
-      // loggedIN,
       isButtonDisabled: false
     };
   }
@@ -49,9 +44,6 @@ export default class Login extends Component {
       toast.error("Please fill in all fields");
       return;
     }
-
-    // Check if the user is SuperAdmin
-    // NOTE: MOVE THIS TO THE BACKEND
 
     const userObject = {
       email: email,
@@ -147,8 +139,6 @@ export default class Login extends Component {
                               <p className='remember-me'>Remember me</p>
                             </div>
                           }
-                        // checked={termsChecked}
-                        // onChange={() => setTermsChecked(!termsChecked)}
                         />
                       </Form.Group>
                     </Col>

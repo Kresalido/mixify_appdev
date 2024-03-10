@@ -18,6 +18,7 @@ class SignUp extends Component {
       isButtonDisabled: false,
       showTermsModal: false,
       agreedToTerms: false,
+      profilePicture: null,
     };
   }
 
@@ -38,6 +39,12 @@ class SignUp extends Component {
     this.setState({ confirmPassword: e.target.value });
   };
 
+  onChangeProfilePicture = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      this.setState({ profilePicture: e.target.files[0] });
+    }
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
     this.setState({ isButtonDisabled: true });
@@ -46,27 +53,30 @@ class SignUp extends Component {
       !this.state.name.trim() ||
       !this.state.email.trim() ||
       !this.state.password.trim() ||
-      !this.state.confirmPassword.trim()
+      !this.state.confirmPassword.trim() ||
+      !this.state.profilePicture
     ) {
       toast.error("Please fill in all fields");
+      this.setState({ isButtonDisabled: false })
       return; // Prevent form submission
     }
 
     if (!this.state.agreedToTerms) {
+      this.setState({ isButtonDisabled: false })
       toast.error("Please agree to the Terms and Conditions");
       return;
     }
 
-    const userObject = {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-      confirmPassword: this.state.confirmPassword
-    };
+    const formData = new FormData();
+    formData.append('name', this.state.name);
+    formData.append('email', this.state.email);
+    formData.append('password', this.state.password);
+    formData.append('confirmPassword', this.state.confirmPassword);
+    formData.append('profilePicture', this.state.profilePicture);
 
 
     axios
-      .post('http://127.0.0.1:8000/api/register-listener', userObject) // change to docker
+      .post('http://127.0.0.1:8000/api/register-listener', formData) // change to docker
       .then((res) => {
         console.log(res);
         if (res.status === 201) {
@@ -193,6 +203,16 @@ class SignUp extends Component {
                         value={this.state.confirmPassword}
                         placeholder="Confirm Password"
                         className='input'
+                      />
+                    </InputGroup>
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <InputGroup>
+                      <FormControl
+                        type="file"
+                        onChange={this.onChangeProfilePicture}
+                        name="profilePicture"
+                        placeholder="Profile Picture"
                       />
                     </InputGroup>
                   </Form.Group>

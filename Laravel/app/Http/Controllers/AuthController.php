@@ -48,13 +48,12 @@ class AuthController extends Controller
             'password' => [
                 'required',
                 Password::min(8)
-                    ->mixedCase() // allows both uppercase and lowercase
-                    ->letters() //accepts letter
-                    ->numbers() //accepts numbers
-                    // ->symbols() //accepts special character
-                    // ->uncompromised(), //check to be sure that there is no data leak
+                    ->mixedCase() 
+                    ->letters() 
+                    ->numbers() 
             ],
-            'confirmPassword' => 'required|same:password'
+            'confirmPassword' => 'required|same:password',
+            'profilePicture' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $user = new User();
@@ -62,6 +61,16 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->role = 'listener';
+
+        if ($request->hasFile('profilePicture')) {
+            $currentTime = time();
+            $hashedTime = hash('sha256', $currentTime);
+            $extension = $request->file('profilePicture')->getClientOriginalExtension();
+            $request->file('profilePicture')->storeAs('profile_pics', $hashedTime . '.' . $extension, 'public');
+            $profilePicName = $hashedTime . '.' . $extension;
+            $user->profile_pic_name = $profilePicName;
+        }
+
         $user->save();
 
         $verificationUrl = URL::temporarySignedRoute(
@@ -82,11 +91,9 @@ class AuthController extends Controller
             'password' => [
                 'required',
                 Password::min(8)
-                    ->mixedCase() // allows both uppercase and lowercase
-                    ->letters() //accepts letter
-                    ->numbers() //accepts numbers
-                    // ->symbols() //accepts special character
-                    // ->uncompromised(), //check to be sure that there is no data leak
+                    ->mixedCase()
+                    ->letters() 
+                    ->numbers()
             ],
             'confirmPassword' => 'required|same:password'
         ]);

@@ -796,6 +796,12 @@ body {
   font-weight: 600;
 }
 
+.song-container .item .artist-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
 /* PLAYER */
 .mixify-player {
   background-color: #1b1b1b !important;
@@ -816,9 +822,22 @@ body {
   border: 1px solid #D9D9D9;
 }
 
-.user-sidebar-main .sub-header{
+.user-sidebar-main .sub-header {
   color: #535353;
   font-size: 15px;
+}
+
+.artist-follow {
+  position: absolute;
+}
+
+.invisible-text {
+  color: #d9d9d900;
+}
+
+.bg-artist {
+  background: linear-gradient(to bottom, #c44848, #935959);
+  border-bottom: 1px solid #f2f2f222;
 }
 
 

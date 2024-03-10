@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
 class ArtistController extends Controller
 {
 
+    public function getArtists(Request $request)
+    {
+        $artists = User::where('role', 'artist')->get();
+
+        return response()->json($artists);
+    }
+
     public function getAlbums(Request $request)
     {
         $user = auth()->user();
@@ -19,12 +26,15 @@ class ArtistController extends Controller
         return response()->json($albums);
     }
     
-    public function getSongs(Request $request)
+    public function getArtistSongs($id)
     {
-        $user = auth()->user();
-        $songs = $user->songs;
-
-        return response()->json($songs);
+        $user = User::find($id);
+        if ($user) {
+            $songs = $user->songs()->with('user')->get();
+            return response()->json($songs);
+        } else {
+            return response()->json(['error' => 'User not found'], 404);
+        }
     }
 
     public function uploadSong(Request $request)
@@ -39,22 +49,32 @@ class ArtistController extends Controller
 
         $request->validate([
             'display_name' => 'required',
-            // 'song' => 'required|file|mimes:mp3,wav,ogg',
+            'song' => 'required|file|mimes:mp3,wav,ogg',
             'image' => 'required|file|mimes:jpeg,png,jpg,gif', // validate the image file
             'new_album_name' => 'sometimes|required',
             'new_album_description' => 'sometimes|required',
             'new_album_photo' => 'sometimes|required|file|mimes:jpeg,png,jpg,gif',
         ]);
+
+        $currentTime = time();
+        $hashedTime = hash('sha256', $currentTime);
+    
+        $songExtension = $request->file('song')->getClientOriginalExtension();
+        $imageExtension = $request->file('image')->getClientOriginalExtension();
+    
+        $hashedSongName = $hashedTime . '.' . $songExtension;
+        $hashedImageName = $hashedTime . '.' . $imageExtension;
+    
+        $request->file('song')->storeAs('songs', $hashedSongName, 'public');
+        $request->file('image')->storeAs('images', $hashedImageName, 'public');
     
         $song = new Song;
         $song->display_name = $request->display_name;
-        $song->hashed_name = $request->file('song')->hashName();
-        $song->photo_hashed_name = $request->file('image')->hashName(); // get the hashed name of the image file
+        $song->hashed_name = $hashedSongName;
+        $song->photo_hashed_name = $hashedImageName;
         $song->user_id = auth()->id();
-    
-        $request->file('song')->storeAs('songs', $song->hashed_name); // store the song file with the hashed name
-        $request->file('image')->storeAs('images', $song->photo_hashed_name); // store the image file with the hashed name
-    
+        
+
         if ($request->has('new_album_name')) {
             $album = new Album;
             $album->album_name = $request->new_album_name;
