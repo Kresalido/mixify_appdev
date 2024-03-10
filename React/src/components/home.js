@@ -4,6 +4,7 @@ import { Container, Row, Stack, Col, Image, Form } from 'react-bootstrap';
 import pfp from '.././img/user-pfp.jpg';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import PlayButton from '.././play-solid.svg';
 
 function Home() {
 
@@ -59,18 +60,25 @@ function Home() {
                                     Home
                                     <a href='' className='h-100 user-clickable'>Notifications</a>
                                 </Row>
-                                <Row className='p-4 user-white-text'>
+                                <Row className='user-white-text'>
                                     <p className='user-header-2'>
-                                    New Releases
+                                        New Releases
                                     </p>
                                     <Stack direction='horizontal' gap={4} className='song-container'>
-                                        {/* ITEM 1 */}
-                                        <Col xs={2} className='d-flex h-100 bg-success align-items-center justify-content-center'>
-                                            Music 1
-                                        </Col>
-                                        {/* ITEM 2 */}
-                                        <Col xs={2} className='d-flex h-100 bg-primary align-items-center justify-content-center'>
-                                            Music 2
+                                        <Col xs={3} className='d-flex h-100 align-items-center justify-content-center item'>
+                                            <Row className='p-3'>
+                                                <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
+                                                <div className="play">
+                                                    <span className="fa">
+                                                        <Image src={PlayButton} className='icon'/>
+                                                    </span>
+
+                                                </div>
+                                            </Row>
+                                            <Row className='p-3'>
+                                                <h4>Song Name</h4>
+                                                <p>Song Description</p>
+                                            </Row>
                                         </Col>
                                     </Stack>
                                 </Row>
