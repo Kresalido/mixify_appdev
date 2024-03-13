@@ -195,10 +195,9 @@ function ArtistUploadPage() {
                                                         console.log(e.target.files[0]);
                                                     }} />
                                                 </Form.Group>
-
-                                                <Button variant="danger" type="submit">
-                                                    Submit
-                                                </Button>
+                                                <Button className="custom-danger-button" variant="danger" type="submit">
+                                                 Submit
+                                                    </Button>
                                             </Stack>
                                         </Form>
                                     </Col>

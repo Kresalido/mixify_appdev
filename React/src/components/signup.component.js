@@ -245,7 +245,7 @@ class SignUp extends Component {
                     <Col>
                       <Stack direction='vertical' className='d-flex flex-column align-items-center'>
                         <Button href="/signup/facebook" className="btn-dark sign-with-button">
-                          <img src="./google.png" alt="Sign up with Facebook" style={{ width: '30px', height: '30px', marginRight: '3px' }} />
+                          <img src="./google.png" alt="Sign up with Facebook" style={{ width: '20px', height: '20px', marginRight: '3px' }} />
                           <div className='p-2 d-flex align-items-center justify-content-center flex-grow-1'>
                             Sign up with Google
                           </div>

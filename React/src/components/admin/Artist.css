@@ -1,0 +1,70 @@
+.artist-dashboard {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  .input-search {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 300px;
+  }
+  
+  /* Additional styles for search bar */
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Style the search field */
+  form.example input[type=text] {
+    padding: 10px;
+    font-size: 12px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+  }
+  
+  /* Style the submit button */
+  form.example button {
+    float: left;
+    width: 13%;
+    padding: 10px;
+    background: #790a0a;
+    color: white;
+    font-size: 14px;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+  }
+  
+  form.example button:hover {
+    background: #790a0a;
+  }
+  
+  /* Clear floats */
+  form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .navigation-tabs {
+    margin-bottom: 20px;
+  }
+  
+  .nav-pills .nav-item .nav-link {
+    padding: 10px 15px;
+    margin-right: 10px;
+    color: #790a0a !important; /* Font color changed to #790a0a */
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Transition added here */
+  }
+  
+  .nav-pills .nav-item .nav-link.active {
+    background-color: #0c0c0c;
+    border-color: #0c0c0c;
+  }
+  

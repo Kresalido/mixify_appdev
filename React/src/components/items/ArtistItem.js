@@ -1,15 +1,15 @@
 import { Container, Row, Stack, Col, Image, Form } from 'react-bootstrap';
 
 
-function ArtistItem({ picture, name }) {
+function ArtistItem({ picture, name, id }) {
     return (
         <Col xs={3} className='d-flex h-100 align-items-center justify-content-center item'
             onClick={() => {
-                window.location.href = '/artist';
+                window.location.href = `/artist/${id}`;
             }}
         >
             <Row className='p-3'>
-                <Image src={`http://127.0.0.1:8000/storage/profile_pics/${picture}`} className='artist-image d-flex justify-content-center flex-grow-1' roundedCircle/>
+                <Image src={`http://127.0.0.1:8000/storage/profile_pics/${picture}`} className='artist-image d-flex justify-content-center flex-grow-1' roundedCircle />
                 <div className="play">
                 </div>
             </Row>

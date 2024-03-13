@@ -26,7 +26,7 @@ body {
 }
 
 .auth-inner {
-  width: 500px;
+  width: px;
   height: 590px;
   background: #191414;
   padding: 40px 55px 45px 55px;
@@ -327,6 +327,9 @@ body {
 }
 
 
+
+
+
 /* NEW CSS */
 .singing-background {
   background-image: url('vocalist-bg.png');
@@ -353,11 +356,11 @@ body {
   color: #cacaca;
   text-decoration: none;
   justify-content: center;
-  font-size: 25px;
+  font-size: 15px;
 }
 
 .sign-navbar a:hover {
-  color: #fff;
+  color: #e31313;
   text-decoration: none;
 }
 
@@ -365,33 +368,35 @@ body {
 .sign h3 {
   color: #fff;
   white-space: nowrap;
-  font-size: 50px;
+  font-size: 20px;
 }
 
 .sign h1 {
   font-weight: 600;
-  font-size: 75px;
+  font-size: 50px;
   color: red;
   text-shadow: 1px 1px 0px #F3F3F3;
   white-space: nowrap;
+  margin-top: -80px;
 }
 
 
-
 .sign-form {
-  color: #fff;
+  color: #842828;
 }
 
 .sign-form .input {
   color: white;
   font-family: 'Poppins';
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #a5a5a5;
-  height: 50px;
-  font-size: 20px;
+  height: 30px;
+  font-size: 15px;
+  margin-top: -10px;
+  
 }
 
 .form-control::placeholder {
@@ -403,43 +408,57 @@ body {
   background-color: #3F0D06;
   font-family: 'Poppins';
   font-style: normal;
-  font-size: 24px;
+  font-size: 15px;
   border-radius: 30px;
-  width: 250px;
+  width: 100px;
   flex-wrap: nowrap;
   text-wrap: nowrap;
+  margin-top: -20px; 
 }
 
 .sign-form .sign-with-button {
-  font-size: 20px;
+  font-size: 17px;
   text-wrap: nowrap;
-  width: 400px;
+  width: 300px;
   height: 60px;
   border-radius: 50px;
 }
 
 .agree-to {
   color: #a5a5a5;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .remember-me {
   color: #a5a5a5;
-  font-size: 20px;
+  font-size: 10px;
 }
 
 .terms-and-conditions {
   color: white;
   cursor: pointer;
   margin-left: 5px;
-  font-size: 20px;
+  font-size: 15px;
+
+}
+.agree-to {
+  color: #a5a5a5;
+  font-size: 15px;
+}
+
+.remember-me {
+  color: #a5a5a5;
+  font-size: 15px;
+}
+
+.terms-and-conditions {
+  color: white;
+  cursor: pointer;
+  margin-left: 5px;
+  font-size: 15px;
 
 }
 
-.terms-and-conditions:hover {
-  font-weight: bold;
-  text-decoration: underline;
-}
 
 .have-account {
   text-wrap: nowrap;
@@ -453,18 +472,20 @@ body {
   color: #a5a5a5;
   text-decoration: none;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 15px;
   font-style: italic;
 }
 
 .forgot-password:hover {
-  color: #fff;
+  color: #ff0f0f;
   text-decoration: none;
 }
 
 /* ADMIN */
 .bg-admin-sidebar {
   background: linear-gradient(to bottom, #521B1B, #0D0D0D);
+  width: 250px;
+  max-width: 500px;
 }
 
 .admin-sidebar-text {
@@ -473,25 +494,25 @@ body {
 
 .admin-name {
   color: #D9D9D9;
-  font-size: 21px;
+  font-size: 16px;
   font-weight: 600;
   overflow: hidden;
 }
 
 .bg-admin-sidebar .admin-pfp {
-  width: 100px;
-  height: 100px;
+  width: 65px;
+  height: 65px;
   border: 2px solid red;
 }
 
 .admin-sidebar-main {
-  padding: 20px;
+  padding: 10px;
 }
 
 .admin-sidebar-main a {
   color: #D9D9D9;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .admin-sidebar-main a:hover {
@@ -506,7 +527,7 @@ body {
 .admin-white-text h1 {
   color: #ffffff;
   font-weight: 800;
-  font-size: 35px;
+  font-size: 28px;
 }
 
 .admin-dashboard-item-box {
@@ -521,13 +542,13 @@ body {
 
 .admin-dashboard-item {
   background-color: #D9D9D9;
-  height: 150px;
+  height: 80px;
 }
 
 .admin-dashboard-item h1 {
   color: #000000;
   font-weight: 800;
-  font-size: 35px;
+  font-size: 28px;
 }
 
 .admin-dashboard-item h2 {
@@ -538,7 +559,7 @@ body {
 .admin-dashboard-item-text h1 {
   color: #000000;
   font-weight: 800;
-  font-size: 35px;
+  font-size: 28px;
 }
 
 .admin-dashboard-item-text h2 {
@@ -569,15 +590,28 @@ body {
 }
 
 /* USER */
+.px-3{
+padding-right: 1em !important;
+padding-left: 2em !important;
+width:50%;
 
+}
 .user-white-text {
   color: #D9D9D9;
+  font-size: 20px;
+  /* justify-content: center;
+  margin-left: 0px;
+  margin-top: -110px;
+  height: 200px; */
 }
+
+
 
 .user-white-text a {
   color: #D9D9D9;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 24px;
+  
 }
 
 .user-white-text a:hover {
@@ -589,18 +623,21 @@ body {
 }
 
 .user-header {
-  font-size: 50px;
-  font-weight: 600;
+  font-size: 30px;
+  font-weight: 800;
+  /* justify-content: left; */
+  margin:0;
+  padding:0;
 }
 
 .user-header-2 {
-  font-size: 30px;
-  font-weight: 400;
+  font-size: 24px;
+  font-weight: 300;
 }
 
 .bg-user-sidebar {
   background: linear-gradient(to bottom, #521B1B, #0D0D0D);
-  width: 500px;
+  width: 250px;
   max-width: 500px;
   z-index: 4;
 }
@@ -624,7 +661,7 @@ body {
   position: absolute;
   width: 750px;
   height: 600px;
-  background-color: #B02D2D;
+  background-color: #5c1414;
   border-radius: 50%;
 }
 
@@ -640,29 +677,35 @@ body {
 }
 
 .user-pfp {
-  width: 100px !important;
-  height: 100px !important;
-  border: 2px solid red;
+  width: 65px !important;
+  height: 65px !important;
+  border: 1px solid red;
   object-fit: cover;
+  margin-top:-10px;
+  margin-left: 10px;
 }
 
 .user-name {
-  font-size: 40px;
+  font-size: 25px;
+  font-weight: 500;
   color: #D9D9D9;
+  margin-top:-10px;
+  margin-left: 10px;
 }
 
 .user-sidebar-main a {
   color: #D9D9D9;
   text-decoration: none;
-  margin-bottom: 0;
+  margin-bottom: 10px;
+  position: relative;
+  top: -10px; /* Adjust this value as needed */
+  margin-left: 10px;
+  font-size: 25px;
 }
 
-.user-sidebar-item:hover {
-  background-color: rgba(255, 255, 255, 0.14);
+.user-sidebar-main a:hover {
+color:#daf019;
 }
-
-
-
 
 .user-player {
   height: 150px;
@@ -679,6 +722,8 @@ body {
 
 .song-details {
   color: #D9D9D9;
+
+  
 }
 
 .song-cover-image {
@@ -690,7 +735,11 @@ body {
 
 .custom-scrollbar {
   overflow: auto;
-  height: 1020px;
+  height: 900px;
+  width:auto;
+  justify-content:start;
+  display: flex;
+  align-content: start;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -713,12 +762,13 @@ body {
   border-radius: 25px;
 }
 
-/* Song Items */
 .song-container {
-  /* overflow-x: auto; */
-  /* white-space: nowrap; */
-  height: 325px;
+  white-space: nowrap;
+  /* height: 250px; */
+  /* display: contents; */
+  line-height: 3; /* Adjust the line spacing as needed */
 }
+
 
 .list {
   display: flex;
@@ -728,7 +778,7 @@ body {
 
 .song-container .item {
   min-width: 140px;
-  width: 250px;
+  width: 200px;
   padding: 15px;
   background-color: #181818;
   border-radius: 6px;
@@ -736,15 +786,18 @@ body {
   transition: all ease 0.4s;
   flex-direction: column;
   height: 100%;
+  align-items: center;
 }
 
 .song-container .item:hover {
   background-color: #252525;
+  align-items: center;
 }
 
 .song-container .item img {
-  height: 100%;
-  width: 100%;
+  height: 200px; /* Fixed height */
+  width: 200px; /* Fixed width */
+  object-fit: cover; /* Fit the image inside the container, preserving its aspect ratio */
   border-radius: 6px;
   margin-bottom: 10px;
 }
@@ -787,6 +840,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellzipsis;
+  
 }
 
 .song-container .item p {
@@ -794,12 +848,26 @@ body {
   font-size: 12px;
   line-height: 20px;
   font-weight: 600;
+  
 }
 
 .song-container .item .artist-image {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
+  width: 100px;
+  height: 100px;
+  object-fit:cover;
+}
+.p-3{
+  padding: 0 !important;
+}
+.custom-danger-button {
+  background-color: #6e0606; /* Red background color */
+  color: #ffffff; /* White text color */
+  padding: 10px 20px; /* Padding */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Add border radius */
+  font-size: 20px; /* Font size */
+  margin: 30px auto ; /* Center horizontally and add space at top and bottom */
+  display:block;
 }
 
 /* PLAYER */
@@ -820,6 +888,7 @@ body {
 
 .upload-file-container {
   border: 1px solid #D9D9D9;
+  align-items: center;
 }
 
 .user-sidebar-main .sub-header {
@@ -836,8 +905,9 @@ body {
 }
 
 .bg-artist {
-  background: linear-gradient(to bottom, #c44848, #935959);
-  border-bottom: 1px solid #f2f2f222;
+  background: linear-gradient(to bottom, #740909, #000000);
+  margin-top: -10px;
+
 }
 
 

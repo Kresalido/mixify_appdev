@@ -47,10 +47,13 @@ function AdminDashboard() {
                     </Row>
                     <Row className='h-60 admin-sidebar-main'>
                         <Stack direction='vertical' gap={4}>
-                            <Link to={'/admin'} className='links'> Dashboard</Link>
-                            <Link to={'/admin/manage-users'}> Manage Users</Link>
-                            <Link to={'/tickets'}> Subscription Settings</Link>
-                            <Link to={'/revenue'}> Revenue</Link>
+                            <Link to={'/admin'} className='links'> Category</Link>
+                            <li><a href="/artist-dashboard">Artist Dashboard</a></li>
+                            <Link to={'/admin'} className='links'> Listener's Page</Link>
+                            <Link to={'/tickets'}> Subscription</Link>
+                            <Link to={'/tickets'}> Disabled Accounts</Link>
+                            <Link to={'/tickets'}> Help</Link>
+                       
                         </Stack>
                     </Row>
                     <Row className='h-20 d-flex align-items-end admin-sidebar-main'>
