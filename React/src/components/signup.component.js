@@ -18,7 +18,6 @@ class SignUp extends Component {
       isButtonDisabled: false,
       showTermsModal: false,
       agreedToTerms: false,
-      profilePicture: null,
     };
   }
 
@@ -53,8 +52,7 @@ class SignUp extends Component {
       !this.state.name.trim() ||
       !this.state.email.trim() ||
       !this.state.password.trim() ||
-      !this.state.confirmPassword.trim() ||
-      !this.state.profilePicture
+      !this.state.confirmPassword.trim() 
     ) {
       toast.error("Please fill in all fields");
       this.setState({ isButtonDisabled: false })
@@ -72,7 +70,7 @@ class SignUp extends Component {
     formData.append('email', this.state.email);
     formData.append('password', this.state.password);
     formData.append('confirmPassword', this.state.confirmPassword);
-    formData.append('profilePicture', this.state.profilePicture);
+    // formData.append('profilePicture', this.state.profilePicture);
 
 
     axios
@@ -143,7 +141,6 @@ class SignUp extends Component {
       <Container className='vh-100' fluid>
         <Row className='vh-100'>
           <Col xs={5} className='singing-background'>
-            <p>okay</p>
           </Col>
           <Col xs={7} className='vh-100 sign-container'>
             <Col className='vh-100'>
@@ -206,7 +203,7 @@ class SignUp extends Component {
                       />
                     </InputGroup>
                   </Form.Group>
-                  <Form.Group className="mb-3">
+                  {/* <Form.Group className="mb-3">
                     <InputGroup>
                       <FormControl
                         type="file"
@@ -215,8 +212,8 @@ class SignUp extends Component {
                         placeholder="Profile Picture"
                       />
                     </InputGroup>
-                  </Form.Group>
-                  <Row className='d-flex justify-content-center'>
+                  </Form.Group> */}
+                  <Row className='d-flex justify-content-center flex-grow-1'>
                     <Form.Group className="mb-3">
                       <Form.Check className='d-flex'
                         type="checkbox"

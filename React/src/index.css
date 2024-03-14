@@ -342,8 +342,8 @@ body {
 
 .sign-container {
   background-color: #101011;
-  padding-left: 200px;
-  padding-right: 200px;
+  padding-left: 7%;
+  padding-right: 100px;
 }
 
 .sign-navbar {
@@ -396,7 +396,7 @@ body {
   height: 30px;
   font-size: 15px;
   margin-top: -10px;
-  
+
 }
 
 .form-control::placeholder {
@@ -413,25 +413,27 @@ body {
   width: 100px;
   flex-wrap: nowrap;
   text-wrap: nowrap;
-  margin-top: -20px; 
+  margin-top: -20px;
 }
 
 .sign-form .sign-with-button {
   font-size: 17px;
   text-wrap: nowrap;
   width: 300px;
-  height: 60px;
+  height: 40px;
   border-radius: 50px;
 }
 
 .agree-to {
   color: #a5a5a5;
   font-size: 15px;
+  text-wrap: nowrap;
 }
 
 .remember-me {
   color: #a5a5a5;
   font-size: 10px;
+  text-wrap: nowrap;
 }
 
 .terms-and-conditions {
@@ -439,8 +441,10 @@ body {
   cursor: pointer;
   margin-left: 5px;
   font-size: 15px;
+  text-wrap: nowrap;
 
 }
+
 .agree-to {
   color: #a5a5a5;
   font-size: 15px;
@@ -590,12 +594,13 @@ body {
 }
 
 /* USER */
-.px-3{
-padding-right: 1em !important;
-padding-left: 2em !important;
-width:50%;
+.px-3 {
+  padding-right: 1em !important;
+  padding-left: 2em !important;
+  width: 50%;
 
 }
+
 .user-white-text {
   color: #D9D9D9;
   font-size: 20px;
@@ -611,7 +616,7 @@ width:50%;
   color: #D9D9D9;
   text-decoration: none;
   font-size: 24px;
-  
+
 }
 
 .user-white-text a:hover {
@@ -626,8 +631,8 @@ width:50%;
   font-size: 30px;
   font-weight: 800;
   /* justify-content: left; */
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
 }
 
 .user-header-2 {
@@ -663,17 +668,20 @@ width:50%;
   height: 600px;
   background-color: #5c1414;
   border-radius: 50%;
+  overflow: hidden;
 }
 
 .circle-left {
   top: 150px;
   left: 400px;
+  overflow: hidden;
 }
 
 .circle-right {
   position: fixed;
   top: 250px;
   right: -80px;
+  overflow: hidden;
 }
 
 .user-pfp {
@@ -681,7 +689,7 @@ width:50%;
   height: 65px !important;
   border: 1px solid red;
   object-fit: cover;
-  margin-top:-10px;
+  margin-top: -10px;
   margin-left: 10px;
 }
 
@@ -689,7 +697,7 @@ width:50%;
   font-size: 25px;
   font-weight: 500;
   color: #D9D9D9;
-  margin-top:-10px;
+  margin-top: -10px;
   margin-left: 10px;
 }
 
@@ -698,46 +706,66 @@ width:50%;
   text-decoration: none;
   margin-bottom: 10px;
   position: relative;
-  top: -10px; /* Adjust this value as needed */
+  top: -10px;
+  /* Adjust this value as needed */
   margin-left: 10px;
   font-size: 25px;
 }
 
 .user-sidebar-main a:hover {
-color:#daf019;
+  color: #daf019;
 }
 
 .user-player {
-  height: 150px;
+  height: 15%;
   width: 100%;
   background: #1b1b1b;
   border-top: rgba(255, 255, 255, 0.13) 1px solid;
   min-width: 1000px;
 }
 
+.user-search-row {
+  /* background: #1b1b1b; */
+  background: linear-gradient(to bottom, #430707, #430707dd,  #4307077d, #43070700);
+  /* border-bottom: rgba(255, 255, 255, 0.13) 1px solid; */
+  height: 10vh;
+  width: 100%;
+  top: 0px;
+  right: 10px;
+}
+
+.user-search-bar {
+  width: 50%;
+  /* background-color: #ffffff55; */
+}
+
+.user-search-bar::placeholder {
+  width: 50%;
+  color: rgb(188, 188, 188);
+}
+
 .song-name {
-  font-size: 23px;
+  font-size: 16px;
   font-weight: 800px;
 }
 
 .song-details {
   color: #D9D9D9;
-
-  
+  font-size: 12px;
 }
 
 .song-cover-image {
-  width: 100px !important;
-  height: 100px !important;
+  width: 10vh !important;
+  height: 10vh !important;
   border-radius: 10px;
   object-fit: cover;
 }
 
 .custom-scrollbar {
   overflow: auto;
-  height: 900px;
-  width:auto;
-  justify-content:start;
+  height: 100vh;
+  width: auto;
+  justify-content: start;
   display: flex;
   align-content: start;
 }
@@ -766,7 +794,8 @@ color:#daf019;
   white-space: nowrap;
   /* height: 250px; */
   /* display: contents; */
-  line-height: 3; /* Adjust the line spacing as needed */
+  line-height: 3;
+  /* Adjust the line spacing as needed */
 }
 
 
@@ -778,14 +807,13 @@ color:#daf019;
 
 .song-container .item {
   min-width: 140px;
-  width: 200px;
+  width: 25%;
   padding: 15px;
   background-color: #181818;
   border-radius: 6px;
   cursor: pointer;
   transition: all ease 0.4s;
   flex-direction: column;
-  height: 100%;
   align-items: center;
 }
 
@@ -795,23 +823,27 @@ color:#daf019;
 }
 
 .song-container .item img {
-  height: 200px; /* Fixed height */
-  width: 200px; /* Fixed width */
-  object-fit: cover; /* Fit the image inside the container, preserving its aspect ratio */
-  border-radius: 6px;
+  height: 20vh;
+  /* Fixed height */
+  width: 25vh;
+  /* Fixed width */
+  object-fit: cover;
+  /* Fit the image inside the container, preserving its aspect ratio */
+  border-radius: 10%;
   margin-bottom: 10px;
 }
 
 .song-container .item .play {
   position: relative;
+  display:none;
 }
 
 .song-container .item .play .fa {
   position: absolute;
   right: 10px;
   top: 40px;
-  height: 50px;
-  width: 50px;
+  height: 5px;
+  width: 10px;
   padding: 25px;
   background-color: #1db954;
   border-radius: 100%;
@@ -825,11 +857,11 @@ color:#daf019;
 }
 
 .song-container .item .play .fa .icon {
-  width: 25px;
-  height: 25px;
+  width: 15px;
+  height: 20px;
   position: absolute;
-  top: 12px;
-  right: 5px;
+  top: 15px;
+  right: 10px;
 }
 
 
@@ -840,7 +872,7 @@ color:#daf019;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellzipsis;
-  
+
 }
 
 .song-container .item p {
@@ -848,26 +880,36 @@ color:#daf019;
   font-size: 12px;
   line-height: 20px;
   font-weight: 600;
-  
+
 }
 
 .song-container .item .artist-image {
-  width: 100px;
+  width: 120px;
   height: 100px;
-  object-fit:cover;
+  /* aspect-ratio: 1/1; */
+  object-fit: cover;
 }
-.p-3{
+
+.p-3 {
   padding: 0 !important;
 }
+
 .custom-danger-button {
-  background-color: #6e0606; /* Red background color */
-  color: #ffffff; /* White text color */
-  padding: 10px 20px; /* Padding */
-  border: none; /* Remove border */
-  border-radius: 5px; /* Add border radius */
-  font-size: 20px; /* Font size */
-  margin: 30px auto ; /* Center horizontally and add space at top and bottom */
-  display:block;
+  background-color: #6e0606;
+  /* Red background color */
+  color: #ffffff;
+  /* White text color */
+  padding: 10px 20px;
+  /* Padding */
+  border: none;
+  /* Remove border */
+  border-radius: 5px;
+  /* Add border radius */
+  font-size: 20px;
+  /* Font size */
+  margin: 30px auto;
+  /* Center horizontally and add space at top and bottom */
+  display: block;
 }
 
 /* PLAYER */

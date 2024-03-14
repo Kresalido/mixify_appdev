@@ -9,7 +9,9 @@ import axios from 'axios';
 
 function ArtistPage() {
     const [songs, setSongs] = useState([]);
+    const [artist, setArtist] = useState(null);
     const { id } = useParams();
+
 
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api/songs/${id}`) // This checks for user_id
@@ -20,6 +22,16 @@ function ArtistPage() {
             .catch(error => {
                 console.error('There was an error!', error);
             });
+
+        axios.get(`http://127.0.0.1:8000/api/artist/${id}`) // This checks for user_id
+            .then(response => {
+                setArtist(response.data.name);
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+
     }, []);
 
     // Player Related
@@ -29,8 +41,8 @@ function ArtistPage() {
 
     return (
         <Container fluid>
-            <div className='circle circle-left' />
-            <div className='circle circle-right' />
+            {/* <div className='circle circle-left' />
+            <div className='circle circle-right' /> */}
             <Row className='vh-100'>
                 <UserSideBar />
                 <Col className='flex-grow-1 bg-user bg-user-dashboard'>
@@ -38,9 +50,15 @@ function ArtistPage() {
                         <Col className='custom-scrollbar d-block'>
                             <Row className='flex-grow-1 align-items-center user-white-text p-5 user-header bg-artist'>
                                 <Col>
-                                    <Row className='h-90'>
-                                        ARTIST NAME
-                                    </Row>
+                                    {artist === null ? (
+                                        <p>
+                                            Loading...
+                                        </p>
+                                    ) : (
+                                        <>
+                                            {artist}
+                                        </>
+                                    )}
                                     <Row className='h-10'>
                                         <Col xs={1}>
                                             <Button variant='danger' className='absolute'>Follow</Button>
@@ -48,12 +66,12 @@ function ArtistPage() {
                                     </Row>
                                 </Col>
                             </Row>
-                            <Row className=' p-4 user-white-text'>
+                            <Row className='px-3 mt-2 user-white-text'>
                                 <p className='user-header-2'>
                                     Latest Release
                                 </p>
                             </Row>
-                            <Row className='p-4 user-white-text justify-content-start'>
+                            <Row className='user-white-text justify-content-start p-4'>
                                 {songs.map(song => (
                                     <Col xs={2} className='song-container'>
                                         <SongItem key={song.id} song={song} currentSong={currentSong} setCurrentSong={setCurrentSong} setSongDetails={setSongDetails} playerRef={playerRef} />

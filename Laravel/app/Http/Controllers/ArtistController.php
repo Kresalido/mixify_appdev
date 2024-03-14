@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
 class ArtistController extends Controller
 {
 
+    public function getArtist($id)
+    {
+        $artist = User::find($id);
+
+        return response()->json($artist);
+    }
+    
     public function getArtists(Request $request)
     {
         $artists = User::where('role', 'artist')->get();

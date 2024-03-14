@@ -78,9 +78,9 @@ export default class Login extends Component {
 
   createLineBreaker() {
     return (
-      <div className="line-breaker" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', height: '1px', width: '380px' }}>
+      <div className="line-breaker d-flex justify-content-start" style={{ alignItems: 'center', marginBottom: '10px', height: '1px', width: '380px' }}>
         <span className="line" style={{ flex: '1', height: '1px', border: '1px solid #808080', marginBottom: '30px', backgroundColor: '#808080' }}></span>
-        <span style={{ padding: '0 10px', color: '#A9A9A9', fontSize: '16px', marginBottom: '30px' }}>or</span>
+        <span style={{ color: '#A9A9A9', fontSize: '16px', marginBottom: '30px' }}>or</span>
         <span className="line" style={{ flex: '1', height: '1px', border: '1px solid #808080', marginBottom: '30px', backgroundColor: '#808080' }}></span>
       </div>
     );
@@ -130,12 +130,12 @@ export default class Login extends Component {
                     </InputGroup>
                   </Form.Group>
                   <Row className='d-flex justify-content-center'>
-                    <Col>
+                    <Col className='p-2'>
                       <Form.Group className="mb-3">
                         <Form.Check className='d-flex'
                           type="checkbox"
                           label={
-                            <div className='d-flex px-3'>
+                            <div className='d-flex px-2'>
                               <p className='remember-me'>Remember me</p>
                             </div>
                           }
@@ -143,7 +143,7 @@ export default class Login extends Component {
                       </Form.Group>
                     </Col>
                     <Col className='d-flex justify-content-end'>
-                      <a className='d-flex justify-content-end forgot-password'>
+                      <a className='d-flex justify-content-end align-items-start forgot-password'>
                         Forgot Password?
                       </a>
                     </Col>

@@ -37,15 +37,17 @@ function Home() {
 
     return (
         <Container fluid>
-            <div className='circle circle-left' />
-            <div className='circle circle-right' />
+            {/* <div className='circle circle-left' />
+            <div className='circle circle-right' /> */}
             <Row className='vh-100'>
                 <UserSideBar />
                 <Col className='d-flexflex-grow-1 bg-user bg-user-dashboard'>
-                    <Row className=" flex-grow-1 d-flex p-3">
+                    <Row className=" flex-grow-1 d-flex p-3 custom-scrollbar">
                         <Col className='p-5'>
-                            <Row className='px-3 d-flex'>
-                                <Form.Control type="text" placeholder="What do you want to listen to?" />
+                            <Row className='px-3 d-flex position-absolute user-search-row align-items-center'>
+                                <div className=''>
+                                    <Form.Control className='d-flex user-search-bar' type="text" placeholder="What do you want to listen to?" />
+                                </div>
                             </Row>
                             <Row className='d-flex justify-content-space-between align-items-center user-white-text p-5 user-header'>
                                 <Col>
@@ -67,7 +69,7 @@ function Home() {
                                     ))}
                                 </Row>
                             </Row>
-                            <Row className='d-flex justify-content-start'>
+                            <Row className='d-flex justify-content-start mb-5'>
                                 <p className='user-white-text'>
                                     New Uploads
                                 </p>
@@ -87,9 +89,9 @@ function Home() {
                                             <Row className='p-3'>
                                                 <img src={kitchiePhoto} />
                                                 <div className="play">
-                                                    <span className="fa">
+                                                    <div className="fa">
                                                         <Image src={PlayButton} className='icon' />
-                                                    </span>
+                                                    </div>
                                                 </div>
                                             </Row>
                                             <Row className='p-3'>
@@ -205,128 +207,6 @@ function Home() {
                                 </Row>
                             </Row>
                         </Col>
-
-                        {/* <Col className='custom-scrollbar p-5'>
-                            <Stack direction='vertical' gap={2}>
-                                <Row className='d-flex justify-content-space-around align-items-center user-white-text p-5 user-header'>
-                                    Home
-                                    <a href='' className='h-100 user-clickable'>Notifications</a>
-                                </Row>
-                                <Row className='user-white-text h-50'>
-                                    <p className='user-header-2'>
-                                        New Artists
-                                    </p>
-                                    <Stack direction='horizontal' gap={4} className='song-container'>
-                                        {artists.map(artist => (
-                                            <ArtistItem key={artist.id} picture={artist.profile_pic_name} name={artist.name} />
-                                        ))}
-                                    </Stack>
-                                </Row>
-                                {<Row className='user-white-text h-10'>
-                                    <p className='user-header-2'>
-                                        New Releases
-                                    </p>
-                                    <Stack direction='horizontal' gap={4} className='song-container'>
-                                        <Col xs={3} className='d-flex h-100 align-items-center justify-content-center item'
-                                            onClick={() => {
-                                                if (currentSong === musicTest) {
-                                                    playerRef.current.audio.current.currentTime = 0;
-                                                    playerRef.current.audio.current.play();
-                                                } else {
-                                                    setCurrentSong(musicTest);
-                                                    setSongDetails({ name: 'Same Ground', author: 'Kitchie Nadal', photo: kitchiePhoto });
-                                                }
-                                            }}
-                                        >
-                                            <Row className='p-3'>
-                                                <img src={kitchiePhoto} />
-                                                <div className="play">
-                                                    <span className="fa">
-                                                        <Image src={PlayButton} className='icon' />
-                                                    </span>
-                                                </div>
-                                            </Row>
-                                            <Row className='p-3'>
-                                                <h4>Same Ground</h4>
-                                                <p>Kitchie Nadal</p>
-                                            </Row>
-                                        </Col>
-                                        <Col xs={3} className='d-flex h-500 align-items-center justify-content-center item'
-                                            onClick={() => {
-                                                if (currentSong === musicTest) {
-                                                    playerRef.current.audio.current.currentTime = 0;
-                                                    playerRef.current.audio.current.play();
-                                                } else {
-                                                    setCurrentSong(musicTest);
-                                                    setSongDetails({ name: 'Same Ground', author: 'Kitchie Nadal', photo: kitchiePhoto });
-                                                }
-                                            }}
-                                        >
-                                            <Row className='p-3'>
-                                                <img src={kitchiePhoto} />
-                                                <div className="play">
-                                                    <span className="fa">
-                                                        <Image src={PlayButton} className='icon' />
-                                                    </span>
-                                                </div>
-                                            </Row>
-                                            <Row className='p-3'>
-                                                <h4>Same Ground</h4>
-                                                <p>Kitchie Nadal</p>
-                                            </Row>
-                                        </Col>
-                                        <Col xs={3} className='d-flex h-100 align-items-center justify-content-center item'
-                                            onClick={() => {
-                                                if (currentSong === musicTest) {
-                                                    playerRef.current.audio.current.currentTime = 0;
-                                                    playerRef.current.audio.current.play();
-                                                } else {
-                                                    setCurrentSong(musicTest);
-                                                    setSongDetails({ name: 'Same Ground', author: 'Kitchie Nadal', photo: kitchiePhoto });
-                                                }
-                                            }}
-                                        >
-                                            <Row className='p-3'>
-                                                <img src={kitchiePhoto} />
-                                                <div className="play">
-                                                    <span className="fa">
-                                                        <Image src={PlayButton} className='icon' />
-                                                    </span>
-                                                </div>
-                                            </Row>
-                                            <Row className='p-3'>
-                                                <h4>Same Ground</h4>
-                                                <p>Kitchie Nadal</p>
-                                            </Row>
-                                        </Col>
-                                        <Col xs={3} className='d-flex h-100 align-items-center justify-content-center item'
-                                            onClick={() => {
-                                                if (currentSong === musicTest) {
-                                                    playerRef.current.audio.current.currentTime = 0;
-                                                    playerRef.current.audio.current.play();
-                                                } else {
-                                                    setCurrentSong(musicTest);
-                                                    setSongDetails({ name: 'Same Ground', author: 'Kitchie Nadal', photo: kitchiePhoto });
-                                                }
-                                            }}
-                                        >
-                                            <Row className='p-3'>
-                                                <img src={kitchiePhoto} />
-                                                <div className="play">
-                                                    <span className="fa">
-                                                        <Image src={PlayButton} className='icon' />
-                                                    </span>
-                                                </div>
-                                            </Row>
-                                            <Row className='p-3'>
-                                                <h4>Same Ground</h4>
-                                                <p>Kitchie Nadal</p>
-                                            </Row>
-                                        </Col>
-                                    </Stack>
-                                </Row>}
-                            </Stack>
-                        </Col> */}
                     </Row>
                     <div className='user-player position-absolute bottom-0 d-flex'>
                         <Col xs={3} className='d-flex align-items-center '>
@@ -334,7 +214,7 @@ function Home() {
                                 <Col xs={4} className=' d-flex align-items-center'>
                                     {songDetails.photo && <Image src={songDetails.photo} className='song-cover-image' />}
                                 </Col>
-                                <Col xs={8} className='p-3 h-100 align-items-center song-details'>
+                                <Col xs={8} className='h-100 align-items-center song-details'>
                                     <Row className='h-60 align-items-end song-name'>
                                         {songDetails.name}
                                     </Row>
