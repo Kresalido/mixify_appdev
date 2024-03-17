@@ -52,7 +52,7 @@ class SignUp extends Component {
       !this.state.name.trim() ||
       !this.state.email.trim() ||
       !this.state.password.trim() ||
-      !this.state.confirmPassword.trim() 
+      !this.state.confirmPassword.trim()
     ) {
       toast.error("Please fill in all fields");
       this.setState({ isButtonDisabled: false })
@@ -128,10 +128,10 @@ class SignUp extends Component {
 
   createLineBreaker() {
     return (
-      <div className="line-breaker" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', height: '1px', width: '380px' }}>
-        <span className="line" style={{ flex: '1', height: '1px', border: '1px solid #808080', marginBottom: '30px', backgroundColor: '#808080' }}></span>
-        <span style={{ padding: '0 10px', color: '#A9A9A9', fontSize: '16px', marginBottom: '30px' }}>or</span>
-        <span className="line" style={{ flex: '1', height: '1px', border: '1px solid #808080', marginBottom: '30px', backgroundColor: '#808080' }}></span>
+      <div className="line-breaker">
+        <span className="line"></span>
+        <span>or</span>
+        <span className="line"></span>
       </div>
     );
   }
@@ -142,7 +142,7 @@ class SignUp extends Component {
         <Row className='vh-100'>
           <Col xs={5} className='singing-background'>
           </Col>
-          <Col xs={7} className='vh-100 sign-container'>
+          <Col xs={7} className='vh-100 sign-container px-5'>
             <Col className='vh-100'>
               <Outernavbar />
               <Row className='h-15'>
@@ -240,22 +240,22 @@ class SignUp extends Component {
                       {this.createLineBreaker()}
                     </Col>
                     <Col>
-                      <Stack direction='vertical' className='d-flex flex-column align-items-center'>
+                      <Stack direction='vertical' className='d-flex flex-column align-items-center' gap={2}>
                         <Button href="/signup/facebook" className="btn-dark sign-with-button">
-                          <img src="./google.png" alt="Sign up with Facebook" style={{ width: '20px', height: '20px', marginRight: '3px' }} />
-                          <div className='p-2 d-flex align-items-center justify-content-center flex-grow-1'>
+                          <img src="./google.png" alt="Sign up with Google" />
+                          <div>
                             Sign up with Google
                           </div>
                         </Button>
                         <Button href="/signup/facebook" className="btn-dark sign-with-button">
-                          <img src="./facebook.png" alt="Sign up with Facebook" style={{ width: '30px', height: '30px', marginRight: '3px' }} />
-                          <div className='p-2 d-flex align-items-center justify-content-center flex-grow-1'>
+                          <img src="./facebook.png" alt="Sign up with Facebook" />
+                          <div>
                             Sign up with Facebook
                           </div>
                         </Button>
-                        <Button href="/signup/artist" className="btn-dark sign-with-button">
-                          <img src="./user.png" alt="Sign up as an Artist" style={{ width: '30px', height: '30px', marginRight: '3px', marginTop: '3px' }} />
-                          <div className='p-2 d-flex align-items-center justify-content-center flex-grow-1'>
+                        <Button href="/sign-up/artist" className="btn-dark sign-with-button">
+                          <img src="./user.png" alt="Sign up as an Artist" className="artist" />
+                          <div>
                             Sign up as Artist
                           </div>
                         </Button>

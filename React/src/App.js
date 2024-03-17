@@ -11,6 +11,7 @@ import ArtistDashboard from './components/admin/ArtistDashboard'
 import Home from './components/UserHomePage'
 import ArtistUploadMusic from './components/ArtistUploadMusic'
 import Artist from './components/ArtistPage'
+import ArtistSignup from './components/artist.signup.component';
 
 function RedirectToLogin() {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/admin" element={<Admin/>} />
+          <Route path="/sign-up/artist" element={<ArtistSignup/>} />
           <Route path="/artist-upload" element={<ArtistUploadMusic/>} />
           <Route path="/artist/:id" element={<Artist />} />
           <Route path="/artist-dashboard" element={<ArtistDashboard/>} />

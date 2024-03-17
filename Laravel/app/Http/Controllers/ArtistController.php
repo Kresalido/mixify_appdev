@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class ArtistController extends Controller
 {
-
+    
     public function getArtist($id)
     {
         $artist = User::find($id);

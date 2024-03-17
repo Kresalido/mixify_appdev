@@ -185,7 +185,7 @@ body {
 }
 
 .row span {
-  margin-left: 30px;
+  /* margin-left: 30px; */
   color: #fff;
   font-family: 'Poppins';
   font-style: normal;
@@ -287,6 +287,7 @@ body {
   background-color: #808080;
 }
 
+/* 
 .row {
   display: flex;
   justify-content: space-between;
@@ -311,26 +312,43 @@ body {
   margin-right: 5px;
 }
 
-.row span {
-  margin-left: 30px;
-  color: #fff;
-  font-family: 'Poppins';
-  font-style: normal;
-  font-size: 16px;
-  font-weight: 400;
-}
-
 .terms-link {
   color: blue;
   cursor: pointer;
   text-decoration: underline;
 }
 
-
+ */
 
 
 
 /* NEW CSS */
+
+/* LINE */
+.line-breaker {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  height: 1px;
+  width: 380px;
+}
+
+.line-breaker .line {
+  flex: 1;
+  height: 1px;
+  border: 1px solid #808080;
+  margin-bottom: 30px;
+  background-color: #808080;
+}
+
+.line-breaker span {
+  padding: 0 10px;
+  color: #A9A9A9;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+/* REGISTER/LOGIN */
 .singing-background {
   background-image: url('vocalist-bg.png');
   background-repeat: no-repeat;
@@ -342,8 +360,6 @@ body {
 
 .sign-container {
   background-color: #101011;
-  padding-left: 7%;
-  padding-right: 100px;
 }
 
 .sign-navbar {
@@ -424,6 +440,24 @@ body {
   border-radius: 50px;
 }
 
+.btn-dark.sign-with-button img {
+  width: 30px;
+  height: 30px;
+  margin-right: 3px;
+}
+
+.btn-dark.sign-with-button img.artist {
+  margin-top: 3px;
+}
+
+.btn-dark.sign-with-button div {
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
 .agree-to {
   color: #a5a5a5;
   font-size: 15px;
@@ -484,6 +518,19 @@ body {
   color: #ff0f0f;
   text-decoration: none;
 }
+
+/* ARTIST REGISTRATION */
+.artist-registration {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.343), rgb(0, 0, 0)), url('artist_register.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.artist-registration h1 {
+  color: #D9D9D9;
+}
+
 
 /* ADMIN */
 .bg-admin-sidebar {
@@ -726,7 +773,7 @@ body {
 
 .user-search-row {
   /* background: #1b1b1b; */
-  background: linear-gradient(to bottom, #430707, #430707dd,  #4307077d, #43070700);
+  background: linear-gradient(to bottom, #430707, #430707dd, #4307077d, #43070700);
   /* border-bottom: rgba(255, 255, 255, 0.13) 1px solid; */
   height: 10vh;
   width: 100%;
@@ -835,7 +882,7 @@ body {
 
 .song-container .item .play {
   position: relative;
-  display:none;
+  display: none;
 }
 
 .song-container .item .play .fa {
