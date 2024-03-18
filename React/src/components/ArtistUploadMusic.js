@@ -5,7 +5,7 @@ import UserSideBar from './UserSideBar';
 import { toast } from 'react-toastify';
 import AlbumItem from './items/AlbumItem';
 import Modal from 'react-bootstrap/Modal';
-import MultiStep from "react-multistep";
+import SongDropzone from './dropzone/SongDropzone';
 
 function ArtistUploadPage() {
 
@@ -123,12 +123,12 @@ function ArtistUploadPage() {
                     <Modal.Title>Create Album</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="artist-upload-modal">
-                    <Row className='vh-50'>
+                    <Row className='mb-3'>
                         <Col className='d-flex'>
                             <div>
                                 <Image
                                     rounded
-                                    src={"https://via.placeholder.com/100"}
+                                    src={"https://via.placeholder.com/150"}
                                     style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '2%' }}
                                 />
                             </div>
@@ -143,8 +143,8 @@ function ArtistUploadPage() {
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
-                            Dropzone
+                        <Col className='vh-30 overflow-auto'>
+                            <SongDropzone uploadText='Upload or Drop Songs here' iconClass='fa fa-upload upload-icon' uploadTextClass='upload-text'/>
                         </Col>
                     </Row>
                 </Modal.Body>

@@ -1013,6 +1013,37 @@ body {
   color: #fff;
 }
 
+/* DROPZONE */
+.song-dropzone {
+  border-top: #fff 1px solid;
+  border-bottom: #fff 1px solid;
+  background: #232323;
+}
+
+.song-upload {
+  background: #2c2c2c;
+}
+
+.song-upload-player {
+  background-color: #2c2c2c !important;
+  box-shadow: none !important;
+}
+
+.upload-icon {
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.upload-text{
+  justify-content: center;
+  display: flex;
+}
+
+.round-btn {
+  border-radius: 100%;
+}
+
 
 
 
@@ -1051,6 +1082,14 @@ body {
 
 .h-70 {
   height: 70%;
+}
+
+.vh-25 {
+  height: 25vh;
+}
+
+.vh-30 {
+  height: 25vh;
 }
 
 .vh-50 {
