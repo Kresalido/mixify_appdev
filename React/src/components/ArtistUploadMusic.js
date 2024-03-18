@@ -121,8 +121,16 @@ function ArtistUploadPage() {
                             <Stack direction='vertical' gap={1}>
                                 <Row className='px-5 d-flex'>
                                 </Row>
-                                <Row className='d-flex justify-content-space-around align-items-center user-white-text p-5 user-header'>
-                                    Upload Music
+                                <Row className='d-flex justify-content-between flex-row align-items-center user-white-text p-5 user-header'>
+                                    <Col>
+                                        Artist Content
+                                    </Col>
+                                    <Col className='d-flex justify-content-end'>
+                                        <Button variant='danger' className='upload-button'>
+                                            <i class="fa fa-plus-square px-2" aria-hidden="true" />
+                                            CREATE
+                                        </Button>
+                                    </Col>
                                 </Row>
                                 <Row className='user-white-text'>
                                     <Col xs={5} className='p-5'>
@@ -196,8 +204,8 @@ function ArtistUploadPage() {
                                                     }} />
                                                 </Form.Group>
                                                 <Button className="custom-danger-button" variant="danger" type="submit">
-                                                 Submit
-                                                    </Button>
+                                                    Submit
+                                                </Button>
                                             </Stack>
                                         </Form>
                                     </Col>

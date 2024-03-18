@@ -119,15 +119,15 @@ function ArtistPage() {
                     </Row>
                     <div className='user-player position-absolute bottom-0 d-flex'>
                         <Col xs={3} className='d-flex align-items-center '>
-                            <Row className='h-100 p-4 flex-grow-1'>
-                                <Col xs={4} className=' d-flex align-items-center'>
+                            <Row className='h-100 px-4 flex-grow-1'>
+                                <Col className=' d-flex justify-content-end align-items-center'>
                                     {songDetails.photo && <Image src={songDetails.photo} className='song-cover-image' />}
                                 </Col>
-                                <Col xs={8} className='p-3 h-100 align-items-center song-details'>
-                                    <Row className='h-60 align-items-end song-name'>
+                                <Col className='h-100 align-items-center song-details'>
+                                    <Row className='h-50 align-items-end song-name'>
                                         {songDetails.name}
                                     </Row>
-                                    <Row className='h-40'>
+                                    <Row className='h-50'>
                                         {songDetails.author}
                                     </Row>
                                 </Col>
