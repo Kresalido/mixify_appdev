@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Song;
 use App\Models\User;
 use App\Models\Album;
+use App\Jobs\UploadSongJob;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -37,7 +38,7 @@ class ArtistController extends Controller
     {
         $user = User::find($id);
         if ($user) {
-            $songs = $user->songs()->with('user')->get();
+            $songs = $user->songs()->with(['user', 'album'])->get();
             return response()->json($songs);
         } else {
             return response()->json(['error' => 'User not found'], 404);
@@ -147,5 +148,49 @@ class ArtistController extends Controller
         }
 
         return response()->json($song);
+    }
+
+    public function createAlbumAndUploadSongs(Request $request)
+    {
+        $validatedData = $request->validate([
+            'album_name' => 'required',
+            'album_description' => 'required',
+            'album_photo' => 'required|file|mimes:jpeg,png,jpg,gif',
+            'songs' => 'required|array',
+            'songs.*' => 'file|mimes:mp3,wav,ogg|max:40000',
+            'displayNames' => 'required|array', // validate the displayNames
+            'displayNames.*' => 'required|string', // each displayName should be a string
+        ]);
+    
+        $currentTime = time();
+        $hashedTime = hash('sha256', $currentTime);
+        $photoExtension = $request->file('album_photo')->getClientOriginalExtension();
+        $hashedPhotoName = $hashedTime . '.' . $photoExtension;
+    
+        $request->file('album_photo')->storeAs('album_images', $hashedPhotoName, 'public');
+    
+        $album = new Album;
+        $album->album_name = $validatedData['album_name'];
+        $album->album_description = $validatedData['album_description'];
+        $album->cover_photo = $hashedPhotoName;
+        $album->user_id = auth()->id();
+        $album->save();
+    
+        $displayNames = $request->input('displayNames');
+
+        foreach ($request->file('songs') as $index => $song) {
+            $currentTime = time();
+            $hashedTime = hash('sha256', $song->getClientOriginalName() . $currentTime);
+            $songExtension = $song->getClientOriginalExtension();
+            $hashedSongName = $hashedTime . '.' . $songExtension;
+        
+            $songPath = $song->storeAs('songs', $hashedSongName, 'public');
+        
+            $displayName = $displayNames[$index];
+        
+            UploadSongJob::dispatch($songPath, $album->album_id, $displayName, $hashedSongName);
+        }
+    
+        return response()->json(['message' => 'Album created and songs upload requested'], 200);
     }
 }

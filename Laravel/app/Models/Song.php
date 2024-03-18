@@ -9,11 +9,11 @@ class Song extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['display_name', 'hashed_name', 'photo_hashed_name', 'album_id', 'user_id'];
+    protected $fillable = ['display_name', 'hashed_name', 'cover_photo', 'album_id', 'user_id'];
     
     public function album()
     {
-        return $this->belongsTo(Album::class, 'album_id', 'id');
+        return $this->belongsTo(Album::class, 'album_id', 'album_id');
     }
 
     public function user()

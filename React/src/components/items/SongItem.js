@@ -14,7 +14,7 @@ function SongItem({ song, currentSong, setCurrentSong, setSongDetails, playerRef
             setSongDetails({
                 name: song.display_name,
                 author: song.user.name,
-                photo: `http://127.0.0.1:8000/storage/images/${song.photo_hashed_name}`
+                photo: `http://127.0.0.1:8000/storage/album_images/${song.album.cover_photo}`
             });
         }
 
@@ -29,7 +29,7 @@ function SongItem({ song, currentSong, setCurrentSong, setSongDetails, playerRef
     return (
         <Col xs={3} className='d-flex h-100 align-items-center justify-content-center item' onClick={handleClick}>
             <Row className='p-3'>
-                <img src={`http://127.0.0.1:8000/storage/images/${song.photo_hashed_name}`} />
+                <img src={`http://127.0.0.1:8000/storage/album_images/${song.album.cover_photo}`} />
                 <div className="play">
                     <span className="fa">
                         <Image src={PlayButton} className='icon' />

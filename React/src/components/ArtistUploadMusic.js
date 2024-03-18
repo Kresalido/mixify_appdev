@@ -3,11 +3,20 @@ import { Container, Row, Stack, Col, Image, Form, Button } from 'react-bootstrap
 import 'react-h5-audio-player/lib/styles.css';
 import UserSideBar from './UserSideBar';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import AlbumItem from './items/AlbumItem';
 import Modal from 'react-bootstrap/Modal';
 import SongDropzone from './dropzone/SongDropzone';
+import AlbumPhotoDropzone from './dropzone/AlbumPhotoDropzone';
 
 function ArtistUploadPage() {
+
+    // Files
+    const [mediaFiles, setMediaFiles] = useState([]);
+    const [albumPhoto, setAlbumPhoto] = useState(null);
+    const [albumTitle, setAlbumTitle] = useState('');
+    const [albumDescription, setAlbumDescription] = useState('');
+
 
     const [username, setUsername] = useState(null);
     const [role, setRole] = useState(null);
@@ -39,47 +48,45 @@ function ArtistUploadPage() {
 
 
     useEffect(() => {
-        if (songUploadSuccess === 'true') {
-            toast.success('Song uploaded successfully!');
-            localStorage.removeItem('songUploadSuccess');
-        }
+        // if (songUploadSuccess === 'true') {
+        //     toast.success('Song uploaded successfully!');
+        //     localStorage.removeItem('songUploadSuccess');
+        // }
 
-        fetch('http://127.0.0.1:8000/api/albums', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`
-            },
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                setAlbums(data);
-                if (data.length > 0) {
-                    setSelectedAlbum(data[0].id);
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        // fetch('http://127.0.0.1:8000/api/albums', {
+        //     method: 'GET',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`
+        //     },
+        // })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         console.log(data)
+        //         setAlbums(data);
+        //         if (data.length > 0) {
+        //             setSelectedAlbum(data[0].id);
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         console.error('Error:', error);
+        //     });
     }, []);
 
-    const submitHandler = (event) => {
-        event.preventDefault();
-
+    const submitHandler = () => {
         const formData = new FormData();
-        formData.append('display_name', songName);
-        formData.append('song', selectedSong);
-        formData.append('image', selectedImage);
-        if (createNewAlbum) {
-            formData.append('new_album_name', newAlbumName);
-            formData.append('new_album_description', newAlbumDescription);
-            formData.append('new_album_photo', newAlbumPhoto);
-        } else {
-            formData.append('album_id', selectedAlbum);
-        }
+        formData.append('album_name', albumTitle);
+        formData.append('album_description', albumDescription);
+        formData.append('album_photo', albumPhoto);
 
-        fetch('http://127.0.0.1:8000/api/upload-song', {
+        mediaFiles.forEach((file, index) => {
+            formData.append(`songs[${index}]`, file);
+            formData.append(`displayNames[${index}]`, file.displayName);
+        });
+
+        console.log(mediaFiles);
+
+        fetch('http://127.0.0.1:8000/api/create-album/upload-songs', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`,
@@ -89,26 +96,27 @@ function ArtistUploadPage() {
         })
             .then(response => response.json())
             .then(data => {
+                toast.success('Song uploaded successfully!');
                 console.log(data);
-                // Form clearing
-                setSongName('');
-                setSelectedSong(null);
-                setSelectedImage(null);
-                setImageUrl(null);
-                setNewAlbumName('');
-                setNewAlbumDescription('');
-                setNewAlbumPhoto(null);
-                setNewAlbumPhotoUrl(null);
-                if (!createNewAlbum) {
-                    setSelectedAlbum(albums[0].id);
-                }
-                localStorage.setItem('songUploadSuccess', 'true');
-                window.location.reload();
+                setShow(false);
             })
             .catch((error) => {
                 console.error('Error:', error);
-                // handle error
+                toast.error('Error uploading song: ' + error);
             });
+    };
+
+    // Dropzone
+    const handleAlbumCoverDrop = (acceptedFiles) => {
+        setAlbumPhoto(acceptedFiles[0]);
+        console.log(acceptedFiles[0].name);
+    };
+
+    const handleMediaDrop = (acceptedFiles) => {
+        setMediaFiles(acceptedFiles);
+        acceptedFiles.forEach(file => {
+            console.log(file.name);
+        });
     };
 
     // Player Related
@@ -125,32 +133,42 @@ function ArtistUploadPage() {
                 <Modal.Body className="artist-upload-modal">
                     <Row className='mb-3'>
                         <Col className='d-flex'>
-                            <div>
-                                <Image
-                                    rounded
-                                    src={"https://via.placeholder.com/150"}
-                                    style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '2%' }}
-                                />
+                            <div style={{ width: '150px', height: '150px' }}>
+                                <AlbumPhotoDropzone onDrop={handleAlbumCoverDrop} uploadText='Upload or Drop Album Photo here' />
                             </div>
                             <Col className='px-3'>
-                                <Row>
-                                    Album name
-                                </Row>
-                                <Row>
-                                    Album Description
-                                </Row>
+                                <Form>
+                                    <Form.Group controlId="formAlbumName">
+                                        <Form.Label>Album name</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Enter album name"
+                                            value={albumTitle}
+                                            onChange={e => setAlbumTitle(e.target.value)}
+                                        />
+                                    </Form.Group>
+                                    <Form.Group controlId="formAlbumDescription">
+                                        <Form.Label>Album Description</Form.Label>
+                                        <Form.Control
+                                            as="textarea"
+                                            placeholder="Enter album description"
+                                            value={albumDescription}
+                                            onChange={e => setAlbumDescription(e.target.value)}
+                                        />
+                                    </Form.Group>
+                                </Form>
                             </Col>
                         </Col>
                     </Row>
                     <Row>
                         <Col className='vh-30 overflow-auto'>
-                            <SongDropzone uploadText='Upload or Drop Songs here' iconClass='fa fa-upload upload-icon' uploadTextClass='upload-text'/>
+                            <SongDropzone onDrop={handleMediaDrop} uploadText='Upload or Drop Songs here' iconClass='fa fa-upload upload-icon' uploadTextClass='upload-text' />
                         </Col>
                     </Row>
                 </Modal.Body>
                 <Modal.Footer className="artist-upload-modal">
-                    <Button variant="secondary" onClick={handleClose}>
-                        Ok
+                    <Button variant="danger" onClick={submitHandler}>
+                        Upload
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -172,7 +190,7 @@ function ArtistUploadPage() {
                                         </Col>
                                         <Col className='d-flex justify-content-end'>
                                             <Button variant='danger' className='upload-button' onClick={handleShow}>
-                                                <i class="fa fa-plus-square px-2" aria-hidden="true" />
+                                                <i className="fa fa-plus-square px-2" aria-hidden="true" />
                                                 CREATE
                                             </Button>
                                         </Col>
@@ -189,76 +207,7 @@ function ArtistUploadPage() {
                                                     Date
                                                 </Col>
                                             </Row>
-                                            <AlbumItem />z
-                                            {/* <Form onSubmit={submitHandler}>
-                                            <Stack direction='vertical' gap={4} className='song-container'>
-                                                <Form.Group controlId="formSongName">
-                                                    <Form.Label>Song Name</Form.Label>
-                                                    <Form.Control className='input' type="text" placeholder="Enter song name" value={songName} onChange={e => setSongName(e.target.value)} />
-                                                </Form.Group>
-                                                <Form.Group controlId="formAlbum">
-                                                    <Form.Label>Album</Form.Label>
-                                                    <Form.Control as="select" value={selectedAlbum} onChange={e => {
-                                                        setSelectedAlbum(e.target.value);
-                                                        if (e.target.value === 'new') {
-                                                            setCreateNewAlbum(true);
-                                                        } else {
-                                                            setCreateNewAlbum(false);
-                                                        }
-                                                    }}>
-                                                        {albums.map(album => (
-                                                            <option key={album.album_id} value={album.album_id}>{album.album_name}</option>
-                                                        ))}
-                                                        <option value="new">--- CREATE NEW ALBUM ---</option>
-                                                    </Form.Control>
-                                                </Form.Group>
-                                                {createNewAlbum && (
-                                                    <>
-                                                        <Form.Group controlId="formNewAlbumName">
-                                                            <Form.Label>New Album Name</Form.Label>
-                                                            <Form.Control type="text" placeholder="Enter new album name" value={newAlbumName} onChange={e => setNewAlbumName(e.target.value)} />
-                                                        </Form.Group>
-                                                        <Form.Group controlId="formNewAlbumDescription">
-                                                            <Form.Label>New Album Description</Form.Label>
-                                                            <Form.Control type="text" placeholder="Enter new album description" value={newAlbumDescription} onChange={e => setNewAlbumDescription(e.target.value)} />
-                                                        </Form.Group>
-                                                        <Form.Group controlId="formNewAlbumPhoto">
-                                                            <Form.Label>New Album Photo</Form.Label>
-                                                            <Row className='d-flex flex-grow-1 p-3 '>
-                                                                {newAlbumPhotoUrl && <Image src={newAlbumPhotoUrl} alt="Uploaded" className='upload-file-container p-3' style={{ width: '200px', height: '100%' }} />}
-                                                            </Row>
-                                                            <Form.Control type="file" onChange={e => {
-                                                                setNewAlbumPhoto(e.target.files[0]);
-                                                                setNewAlbumPhotoUrl(URL.createObjectURL(e.target.files[0]));
-                                                            }} />
-                                                        </Form.Group>
-                                                    </>
-                                                )}
-
-                                                <Form.Group controlId="formSongFile">
-                                                    <Form.Label>Song File</Form.Label>
-                                                    <Form.Control type="file" accept=".mp3,.wav,.ogg" onChange={e => {
-                                                        setSelectedSong(e.target.files[0]);
-                                                        console.log(e.target.files[0]);
-                                                    }} />
-                                                </Form.Group>
-
-                                                <Form.Group controlId="formImageFile">
-                                                    <Form.Label>Image File</Form.Label>
-                                                    <Row className='d-flex flex-grow-1 p-3 '>
-                                                        {imageUrl && <Image src={imageUrl} alt="Uploaded" className='upload-file-container p-3' style={{ width: '200px', height: '100%' }} />}
-                                                    </Row>
-                                                    <Form.Control type="file" accept=".jpeg,.jpg,.png,.gif" onChange={e => {
-                                                        setSelectedImage(e.target.files[0]);
-                                                        setImageUrl(URL.createObjectURL(e.target.files[0]));
-                                                        console.log(e.target.files[0]);
-                                                    }} />
-                                                </Form.Group>
-                                                <Button className="custom-danger-button" variant="danger" type="submit">
-                                                    Submit
-                                                </Button>
-                                            </Stack>
-                                        </Form> */}
+                                            <AlbumItem />
                                         </Col>
                                     </Row>
                                 </Stack>

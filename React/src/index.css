@@ -1019,6 +1019,11 @@ body {
   border-bottom: #fff 1px solid;
   background: #232323;
 }
+.dropzone {
+  border-top: #fff 1px solid;
+  border-bottom: #fff 1px solid;
+  /* background: #ffffff; */
+}
 
 .song-upload {
   background: #2c2c2c;

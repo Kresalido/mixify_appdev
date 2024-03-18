@@ -5,7 +5,6 @@ import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { colourOptions } from '../data';
 
 const animatedComponents = makeAnimated();
 
@@ -45,7 +44,7 @@ function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, 
     };
 
     const handleBlur = (file) => {
-        file.displayName = fileName;  // Update display name
+        file.displayName = fileName.slice(0, 20); 
         setFiles([...files]);
         setEditing(null);
     };
@@ -57,9 +56,15 @@ function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, 
         }
     };
 
+    const options = [
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' }
+    ]
+
     const filesView = files.map((file, index) => (
         <React.Fragment key={`${file.path}-${index}`}>
-            <Row className="mb-2 py-2 files-view" onClick={(e) => e.stopPropagation()}>
+            <Row className="mb-2 py-3 files-view" onClick={(e) => e.stopPropagation()}>
                 <Col className='d-flex flex-column justify-content-start'>
                     <Row className='d-flex flex-nowrap song-upload p-2'>
                         <Col className='d-flex justify-content-start align-items-center'>
@@ -68,20 +73,37 @@ function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, 
                                     value={fileName}
                                     onChange={handleFileNameChange}
                                     onBlur={() => handleBlur(file, index)}
-                                    onKeyDown={(event) => handleKeyDown(event, file, index)} 
+                                    onKeyDown={(event) => handleKeyDown(event, file, index)}
                                 />
                             ) : (
                                 <h5 onDoubleClick={() => handleDoubleClick(file, index)}>{file.displayName}</h5>
                             )}
                         </Col>
+                        <Col>
+                            <Select isMulti options={options} placeholder='Select Genre...' styles={{
+                                placeholder: (provided) => ({
+                                    ...provided,
+                                    color: '#fff', // Change this to your desired color
+                                }),
+                                control: (provided) => ({
+                                    ...provided,
+                                    backgroundColor: '#4a4a4a',
+                                    color: '#4a4a4a',
+                                }),
+                                option: (provided) => ({
+                                    ...provided,
+                                    backgroundColor: '#4a4a4a', // Change this to your desired color
+                                }),
+                            }} />
+                        </Col>
                         <Col xs={1}>
                             <Button variant='danger' className='round-btn' onClick={removeFile(file)}>
-                                <div className='fa fa-times'/>
+                                <div className='fa fa-times' />
                             </Button>
                         </Col>
                     </Row>
                     <Row>
-                        <AudioPlayer src={file.preview} layout="horizontal-reverse"  customAdditionalControls={[]} className='song-upload-player'/>
+                        <AudioPlayer src={file.preview} layout="horizontal-reverse" customAdditionalControls={[]} className='song-upload-player' />
                     </Row>
                 </Col>
             </Row>
@@ -101,7 +123,7 @@ function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, 
 
     return (
         <Container>
-            <Row {...getRootProps({ className: 'dropzone song-dropzone vh-25', style })}>
+            <Row {...getRootProps({ className: 'song-dropzone vh-25', style })}>
                 <input {...getInputProps()} />
                 {files.length === 0 ? (
                     <Col className='d-flex align-items-center justify-content-center flex-column'>
