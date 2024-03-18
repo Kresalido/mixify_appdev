@@ -196,7 +196,7 @@ function ArtistUploadPage() {
                                         </Col>
                                     </Row>
                                     <Row className='user-white-text'>
-                                        <Col className='p-5'>
+                                        <Col className='px-5'>
                                             <Row>
                                                 <Col xs={2} className='d-flex'>
                                                     Album

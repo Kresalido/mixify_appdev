@@ -83,12 +83,19 @@ function ArtistPage() {
                                         Latest Release
                                     </p>
                                 </Row>
-                                <Row className='user-white-text justify-content-start p-4'>
+                                {/* <Row className='user-white-text justify-content-start p-4 mb-5'>
                                     {songs.map(song => (
                                         <Col xs={2} className='song-container'>
                                             <SongItem key={song.id} song={song} currentSong={currentSong} setCurrentSong={setCurrentSong} setSongDetails={setSongDetails} playerRef={playerRef} />
                                         </Col>
                                     ))}
+                                </Row> */}
+                                <Row className='user-white-text justify-content-start p-4 mb-10 overflow-x-auto'>
+                                    <Stack direction='horizontal' gap={3}className='song-container mb-4'>
+                                        {songs.map(song => (
+                                            <SongItem key={song.id} song={song} currentSong={currentSong} setCurrentSong={setCurrentSong} setSongDetails={setSongDetails} playerRef={playerRef} />
+                                        ))}
+                                    </Stack>
                                 </Row>
 
                                 {/* <Stack direction='vertical' gap={2} className='p-3'>

@@ -23,7 +23,7 @@ function AlbumItem() {
                     <Col xs={2} className='d-flex'>
                         <Image
                             rounded
-                            src={"https://via.placeholder.com/100"}
+                            src={`http://127.0.0.1:8000/storage/album_images/${album.cover_photo}`}
                             style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '2%' }}
                         />
                     </Col>
@@ -31,7 +31,7 @@ function AlbumItem() {
                         {album.album_name}
                     </Col>
                     <Col className='d-flex align-items-center'>
-                        January 1, 2024
+                        {new Date(album.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                     </Col>
                 </Row>
             ))

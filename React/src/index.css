@@ -842,7 +842,7 @@ body {
   white-space: nowrap;
   /* height: 250px; */
   /* display: contents; */
-  line-height: 3;
+  line-height: 2;
   /* Adjust the line spacing as needed */
 }
 
@@ -934,10 +934,35 @@ body {
 .song-container .item .artist-image {
   width: 120px;
   height: 100px;
-  /* aspect-ratio: 1/1; */
   object-fit: cover;
 }
 
+.song-item {
+  background: #222222;
+  border-radius: 2%;
+  transition: 0.2s;
+}
+
+.song-item:hover {
+  background: #313131;
+  border-radius: 2%;
+  cursor: pointer;
+}
+
+.song-container-name {
+  color: #D9D9D9;
+  font-size: 15px;
+  font-weight: 800;
+  text-wrap: ellipsis;
+  overflow: hidden;
+}
+
+.song-container-artist {
+  color: #D9D9D9;
+  font-size: 11px;
+}
+
+/* FIX THIS IN THE FUTURE */
 .p-3 {
   padding: 0 !important;
 }
@@ -1089,6 +1114,18 @@ body {
   height: 70%;
 }
 
+.vh-10 {
+  height: 10vh;
+}
+
+.vh-15 {
+  height: 15vh;
+}
+
+.vh-20 {
+  height: 20vh;
+}
+
 .vh-25 {
   height: 25vh;
 }
@@ -1099,4 +1136,8 @@ body {
 
 .vh-50 {
   height: 50vh;
+}
+
+.mb-10 {
+  margin-bottom: 10%;
 }

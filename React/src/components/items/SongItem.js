@@ -27,20 +27,21 @@ function SongItem({ song, currentSong, setCurrentSong, setSongDetails, playerRef
     };
 
     return (
-        <Col xs={3} className='d-flex h-100 align-items-center justify-content-center item' onClick={handleClick}>
-            <Row className='p-3'>
-                <img src={`http://127.0.0.1:8000/storage/album_images/${song.album.cover_photo}`} />
-                <div className="play">
-                    <span className="fa">
-                        <Image src={PlayButton} className='icon' />
-                    </span>
+        <div onClick={handleClick}>
+            <div className='song-item' style={{ height: '220px', width: '150px' }}>
+                <div>
+                    <Row className='d-flex justify-content-center p-2'>
+                        <Image src={`http://127.0.0.1:8000/storage/album_images/${song.album.cover_photo}`} className='px-0' style={{ height: '125px', width: '125px', objectFit: 'cover' }} />
+                    </Row>
+                    <Row className='d-flex justify-content-center song-container-name'>
+                        {song.display_name}
+                    </Row>
+                    <Row className='text-center d-flex justify-content-center song-container-artist'>
+                        {song.user.name}
+                    </Row>
                 </div>
-            </Row>
-            <Row className='p-3'>
-                <h4>{song.display_name}</h4>
-                <p>{song.user.name}</p>
-            </Row>
-        </Col>
+            </div>
+        </div>
     );
 }
 
