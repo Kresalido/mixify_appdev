@@ -4,8 +4,8 @@ import 'react-h5-audio-player/lib/styles.css';
 import UserSideBar from './UserSideBar';
 import { toast } from 'react-toastify';
 import AlbumItem from './items/AlbumItem';
-
-
+import Modal from 'react-bootstrap/Modal';
+import MultiStep from "react-multistep";
 
 function ArtistUploadPage() {
 
@@ -30,6 +30,13 @@ function ArtistUploadPage() {
 
     // Toastify
     const songUploadSuccess = localStorage.getItem('songUploadSuccess');
+
+    // Modal
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
 
     useEffect(() => {
         if (songUploadSuccess === 'true') {
@@ -110,43 +117,80 @@ function ArtistUploadPage() {
     // const [songDetails, setSongDetails] = useState({ name: '', author: '', photo: '' });
 
     return (
-        <Container fluid>
-            {/* <div className='circle circle-left' />
+        <>
+            <Modal show={show} size='lg' onHide={handleClose} centered backdrop="static" >
+                <Modal.Header className="artist-upload-modal" closeButton>
+                    <Modal.Title>Create Album</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="artist-upload-modal">
+                    <Row className='vh-50'>
+                        <Col className='d-flex'>
+                            <div>
+                                <Image
+                                    rounded
+                                    src={"https://via.placeholder.com/100"}
+                                    style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '2%' }}
+                                />
+                            </div>
+                            <Col className='px-3'>
+                                <Row>
+                                    Album name
+                                </Row>
+                                <Row>
+                                    Album Description
+                                </Row>
+                            </Col>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            Dropzone
+                        </Col>
+                    </Row>
+                </Modal.Body>
+                <Modal.Footer className="artist-upload-modal">
+                    <Button variant="secondary" onClick={handleClose}>
+                        Ok
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+            <Container fluid>
+                {/* <div className='circle circle-left' />
             <div className='circle circle-right' /> */}
-            <Row className='vh-100'>
-                {/* SIDE BAR */}
-                <UserSideBar />
-                <Col className=' bg-user bg-user-dashboard'>
-                    <Row className=" flex-grow-1 d-flex p-3">
-                        <Col className='custom-scrollbar'>
-                            <Stack direction='vertical' gap={1}>
-                                <Row className='px-5 d-flex'>
-                                </Row>
-                                <Row className='d-flex justify-content-between flex-row align-items-center user-white-text p-5 user-header'>
-                                    <Col>
-                                        Artist Content
-                                    </Col>
-                                    <Col className='d-flex justify-content-end'>
-                                        <Button variant='danger' className='upload-button'>
-                                            <i class="fa fa-plus-square px-2" aria-hidden="true" />
-                                            CREATE
-                                        </Button>
-                                    </Col>
-                                </Row>
-                                <Row className='user-white-text'>
-                                    <Col className='p-5'>
-                                        <Row>
-                                            <Col xs={2} className='d-flex'>
-                                                Album
-                                            </Col>
-                                            <Col className='d-flex align-items-center'>
-                                            </Col>
-                                            <Col className='d-flex align-items-center'>
-                                                Date
-                                            </Col>
-                                        </Row>
-                                        <AlbumItem/>
-                                        {/* <Form onSubmit={submitHandler}>
+                <Row className='vh-100'>
+                    {/* SIDE BAR */}
+                    <UserSideBar />
+                    <Col className=' bg-user bg-user-dashboard'>
+                        <Row className=" flex-grow-1 d-flex p-3">
+                            <Col className='custom-scrollbar'>
+                                <Stack direction='vertical' gap={1}>
+                                    <Row className='px-5 d-flex'>
+                                    </Row>
+                                    <Row className='d-flex justify-content-between flex-row align-items-center user-white-text p-5 user-header'>
+                                        <Col>
+                                            Artist Content
+                                        </Col>
+                                        <Col className='d-flex justify-content-end'>
+                                            <Button variant='danger' className='upload-button' onClick={handleShow}>
+                                                <i class="fa fa-plus-square px-2" aria-hidden="true" />
+                                                CREATE
+                                            </Button>
+                                        </Col>
+                                    </Row>
+                                    <Row className='user-white-text'>
+                                        <Col className='p-5'>
+                                            <Row>
+                                                <Col xs={2} className='d-flex'>
+                                                    Album
+                                                </Col>
+                                                <Col className='d-flex align-items-center'>
+                                                </Col>
+                                                <Col className='d-flex align-items-center'>
+                                                    Date
+                                                </Col>
+                                            </Row>
+                                            <AlbumItem />z
+                                            {/* <Form onSubmit={submitHandler}>
                                             <Stack direction='vertical' gap={4} className='song-container'>
                                                 <Form.Group controlId="formSongName">
                                                     <Form.Label>Song Name</Form.Label>
@@ -215,12 +259,12 @@ function ArtistUploadPage() {
                                                 </Button>
                                             </Stack>
                                         </Form> */}
-                                    </Col>
-                                </Row>
-                            </Stack>
-                        </Col>
-                    </Row>
-                    {/* <div className='user-player position-absolute bottom-0 d-flex'>
+                                        </Col>
+                                    </Row>
+                                </Stack>
+                            </Col>
+                        </Row>
+                        {/* <div className='user-player position-absolute bottom-0 d-flex'>
                         <Col xs={3} className='d-flex align-items-center '>
                             <Row className='h-100 p-4 flex-grow-1'>
                                 <Col xs={4} className=' d-flex align-items-center'>
@@ -243,9 +287,10 @@ function ArtistUploadPage() {
                             Extra options
                         </Col>
                     </div> */}
-                </Col>
-            </Row>
-        </Container>
+                    </Col>
+                </Row>
+            </Container>
+        </>
     );
 }
 

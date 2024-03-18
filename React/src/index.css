@@ -1007,6 +1007,12 @@ body {
   background: #e74c3c;
 }
 
+/* ARTIST UPLOAD MODAL */
+.artist-upload-modal {
+  background: #1b1b1b; 
+  color: #fff;
+}
+
 
 
 
@@ -1045,4 +1051,8 @@ body {
 
 .h-70 {
   height: 70%;
+}
+
+.vh-50 {
+  height: 50vh;
 }

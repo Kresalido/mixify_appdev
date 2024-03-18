@@ -12,6 +12,17 @@ function ArtistPage() {
     const [artist, setArtist] = useState(null);
     const { id } = useParams();
 
+    // MODAL
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
+
 
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api/songs/${id}`) // This checks for user_id
@@ -40,46 +51,47 @@ function ArtistPage() {
     const [songDetails, setSongDetails] = useState({ name: '', author: '', photo: '' });
 
     return (
-        <Container fluid>
-            {/* <div className='circle circle-left' />
+        <>
+            <Container fluid>
+                {/* <div className='circle circle-left' />
             <div className='circle circle-right' /> */}
-            <Row className='vh-100'>
-                <UserSideBar />
-                <Col className='flex-grow-1 bg-user bg-user-dashboard'>
-                    <Row className=" flex-grow-1 d-flex p-3">
-                        <Col className='custom-scrollbar d-block'>
-                            <Row className='flex-grow-1 align-items-center user-white-text p-5 user-header bg-artist'>
-                                <Col>
-                                    {artist === null ? (
-                                        <p>
-                                            Loading...
-                                        </p>
-                                    ) : (
-                                        <>
-                                            {artist}
-                                        </>
-                                    )}
-                                    <Row className='h-10'>
-                                        <Col xs={1}>
-                                            <Button variant='danger' className='absolute'>Follow</Button>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                            </Row>
-                            <Row className='px-3 mt-2 user-white-text'>
-                                <p className='user-header-2'>
-                                    Latest Release
-                                </p>
-                            </Row>
-                            <Row className='user-white-text justify-content-start p-4'>
-                                {songs.map(song => (
-                                    <Col xs={2} className='song-container'>
-                                        <SongItem key={song.id} song={song} currentSong={currentSong} setCurrentSong={setCurrentSong} setSongDetails={setSongDetails} playerRef={playerRef} />
+                <Row className='vh-100'>
+                    <UserSideBar />
+                    <Col className='flex-grow-1 bg-user bg-user-dashboard'>
+                        <Row className=" flex-grow-1 d-flex p-3">
+                            <Col className='custom-scrollbar d-block'>
+                                <Row className='flex-grow-1 align-items-center user-white-text p-5 user-header bg-artist'>
+                                    <Col>
+                                        {artist === null ? (
+                                            <p>
+                                                Loading...
+                                            </p>
+                                        ) : (
+                                            <>
+                                                {artist}
+                                            </>
+                                        )}
+                                        <Row className='h-10'>
+                                            <Col xs={1}>
+                                                <Button variant='danger' className='absolute'>Follow</Button>
+                                            </Col>
+                                        </Row>
                                     </Col>
-                                ))}
-                            </Row>
+                                </Row>
+                                <Row className='px-3 mt-2 user-white-text'>
+                                    <p className='user-header-2'>
+                                        Latest Release
+                                    </p>
+                                </Row>
+                                <Row className='user-white-text justify-content-start p-4'>
+                                    {songs.map(song => (
+                                        <Col xs={2} className='song-container'>
+                                            <SongItem key={song.id} song={song} currentSong={currentSong} setCurrentSong={setCurrentSong} setSongDetails={setSongDetails} playerRef={playerRef} />
+                                        </Col>
+                                    ))}
+                                </Row>
 
-                            {/* <Stack direction='vertical' gap={2} className='p-3'>
+                                {/* <Stack direction='vertical' gap={2} className='p-3'>
                                 <Row className='user-white-text'>
                                     <p className='user-header-2'>
                                         Latest Release
@@ -115,34 +127,35 @@ function ArtistPage() {
                                     </Stack>
                                 </Row>
                             </Stack> */}
-                        </Col>
-                    </Row>
-                    <div className='user-player position-absolute bottom-0 d-flex'>
-                        <Col xs={3} className='d-flex align-items-center '>
-                            <Row className='h-100 px-4 flex-grow-1'>
-                                <Col className=' d-flex justify-content-end align-items-center'>
-                                    {songDetails.photo && <Image src={songDetails.photo} className='song-cover-image' />}
-                                </Col>
-                                <Col className='h-100 align-items-center song-details'>
-                                    <Row className='h-50 align-items-end song-name'>
-                                        {songDetails.name}
-                                    </Row>
-                                    <Row className='h-50'>
-                                        {songDetails.author}
-                                    </Row>
-                                </Col>
-                            </Row>
-                        </Col>
-                        <Col xs={6} className=''>
-                            <AudioPlayer ref={playerRef} src={currentSong} autoPlay onPlay={e => console.log("onPlay")} className='mixify-player h-100' />
-                        </Col>
-                        <Col xs={3}>
-                            Extra options
-                        </Col>
-                    </div>
-                </Col>
-            </Row>
-        </Container>
+                            </Col>
+                        </Row>
+                        <div className='user-player position-absolute bottom-0 d-flex'>
+                            <Col xs={3} className='d-flex align-items-center '>
+                                <Row className='h-100 px-4 flex-grow-1'>
+                                    <Col className=' d-flex justify-content-end align-items-center'>
+                                        {songDetails.photo && <Image src={songDetails.photo} className='song-cover-image' />}
+                                    </Col>
+                                    <Col className='h-100 align-items-center song-details'>
+                                        <Row className='h-50 align-items-end song-name'>
+                                            {songDetails.name}
+                                        </Row>
+                                        <Row className='h-50'>
+                                            {songDetails.author}
+                                        </Row>
+                                    </Col>
+                                </Row>
+                            </Col>
+                            <Col xs={6} className=''>
+                                <AudioPlayer ref={playerRef} src={currentSong} autoPlay onPlay={e => console.log("onPlay")} className='mixify-player h-100' />
+                            </Col>
+                            <Col xs={3}>
+                                Extra options
+                            </Col>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
+        </>
     );
 }
 
