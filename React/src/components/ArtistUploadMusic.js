@@ -3,6 +3,7 @@ import { Container, Row, Stack, Col, Image, Form, Button } from 'react-bootstrap
 import 'react-h5-audio-player/lib/styles.css';
 import UserSideBar from './UserSideBar';
 import { toast } from 'react-toastify';
+import AlbumItem from './items/AlbumItem';
 
 
 
@@ -110,12 +111,12 @@ function ArtistUploadPage() {
 
     return (
         <Container fluid>
-            <div className='circle circle-left' />
-            <div className='circle circle-right' />
+            {/* <div className='circle circle-left' />
+            <div className='circle circle-right' /> */}
             <Row className='vh-100'>
                 {/* SIDE BAR */}
                 <UserSideBar />
-                <Col className='flex-grow-1 bg-user bg-user-dashboard'>
+                <Col className=' bg-user bg-user-dashboard'>
                     <Row className=" flex-grow-1 d-flex p-3">
                         <Col className='custom-scrollbar'>
                             <Stack direction='vertical' gap={1}>
@@ -133,18 +134,24 @@ function ArtistUploadPage() {
                                     </Col>
                                 </Row>
                                 <Row className='user-white-text'>
-                                    <Col xs={5} className='p-5'>
-                                        <Form onSubmit={submitHandler}>
+                                    <Col className='p-5'>
+                                        <Row>
+                                            <Col xs={2} className='d-flex'>
+                                                Album
+                                            </Col>
+                                            <Col className='d-flex align-items-center'>
+                                            </Col>
+                                            <Col className='d-flex align-items-center'>
+                                                Date
+                                            </Col>
+                                        </Row>
+                                        <AlbumItem/>
+                                        {/* <Form onSubmit={submitHandler}>
                                             <Stack direction='vertical' gap={4} className='song-container'>
                                                 <Form.Group controlId="formSongName">
                                                     <Form.Label>Song Name</Form.Label>
                                                     <Form.Control className='input' type="text" placeholder="Enter song name" value={songName} onChange={e => setSongName(e.target.value)} />
                                                 </Form.Group>
-                                                {/* 
-                                                <Form.Group controlId="formDescription">
-                                                    <Form.Label>Description</Form.Label>
-                                                    <Form.Control type="text" placeholder="Enter description" value={description} onChange={e => setDescription(e.target.value)} />
-                                                </Form.Group> */}
                                                 <Form.Group controlId="formAlbum">
                                                     <Form.Label>Album</Form.Label>
                                                     <Form.Control as="select" value={selectedAlbum} onChange={e => {
@@ -207,7 +214,7 @@ function ArtistUploadPage() {
                                                     Submit
                                                 </Button>
                                             </Stack>
-                                        </Form>
+                                        </Form> */}
                                     </Col>
                                 </Row>
                             </Stack>
