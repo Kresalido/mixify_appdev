@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Stack, Col, Image, Form, Button } from 'react-bootstrap';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
@@ -11,11 +11,13 @@ import ArtistSongList from './items/ArtistSongList';
 import ArtistAlbumItem from './items/ArtistAlbumItem';
 import pfp from '../pfp-placeholder.jpg';
 
-function ArtistPage() {
+function AlbumPage() {
     const [songs, setSongs] = useState([]);
     const [artist, setArtist] = useState(null);
     const [album, setAlbum] = useState([]);
     const { id, album_id } = useParams();
+
+    const navigate = useNavigate();
 
     // MODAL
     const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -28,6 +30,9 @@ function ArtistPage() {
         setIsOpen(false);
     }
 
+    const handleClick = () => {
+        navigate(-1)
+    }
 
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api/album/${album_id}/songs`)
@@ -75,6 +80,9 @@ function ArtistPage() {
                         <Row className=" flex-grow-1 d-flex p-3">
                             <Col className='custom-scrollbar d-block'>
                                 <Row className='flex-grow-1 align-items-center user-white-text p-5 user-header bg-artist'>
+                                    <div onClick={handleClick} className='position-absolute album-back-btn'>
+                                        <i className="fa fa-chevron-left" />
+                                    </div>
                                     <Col>
                                         <Image src={`http://127.0.0.1:8000/storage/album_images/${album.cover_photo}`} className='mx-3' style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
                                         {artist === null ? (
@@ -163,4 +171,4 @@ function ArtistPage() {
     );
 }
 
-export default ArtistPage;
+export default AlbumPage;
