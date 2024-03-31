@@ -9,6 +9,7 @@ import musicTest from '.././music/sameground.mp3';
 import kitchiePhoto from '.././img/Kitchie_album.jpg'
 import UserSideBar from './UserSideBar';
 import ArtistItem from './items/ArtistItem'
+import Spinner from 'react-bootstrap/Spinner';
 
 function Home() {
     const [artists, setArtists] = useState([]);
@@ -62,17 +63,25 @@ function Home() {
                                     New Artists
                                 </p>
                                 <Row className='song-container justify-content-start'>
-                                    {artists.map(artist => (
-                                        <Col xs={2} className='p-3' key={artist.id}>
-                                            <ArtistItem picture={artist.profile_pic_name} name={artist.name} id={artist.id} />
-                                        </Col>
-                                    ))}
+                                    {artists === null ? (
+                                        <Spinner animation="border" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </Spinner>
+                                    ) : (
+                                        artists.map(artist => (
+                                            <Col xs={2} className='p-3' key={artist.id}>
+                                                <ArtistItem picture={artist.profile_pic_name} name={artist.name} id={artist.id} />
+                                            </Col>
+                                        ))
+                                    )}
                                 </Row>
                             </Row>
                             <Row className='d-flex justify-content-start mb-5'>
                                 <p className='user-white-text'>
                                     New Uploads
                                 </p>
+
+
                                 <Row className='song-container justify-content-start'>
                                     <Col xs={2}>
                                         <Col className='d-flex h-100 align-items-center justify-content-center item'

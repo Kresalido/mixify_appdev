@@ -12,6 +12,7 @@ import Home from './components/UserHomePage'
 import ArtistUploadMusic from './components/ArtistUploadMusic'
 import Artist from './components/ArtistPage'
 import ArtistSignup from './components/artist.signup.component';
+import AlbumPage from './components/AlbumPage'
 
 function RedirectToLogin() {
   const navigate = useNavigate();
@@ -41,6 +42,7 @@ function App() {
           <Route path="/artist-upload" element={<ArtistUploadMusic/>} />
           <Route path="/artist/:id" element={<Artist />} />
           <Route path="/artist-dashboard" element={<ArtistDashboard/>} />
+          <Route path="/artist/:id/:album_id" element={<AlbumPage/>} />
         </Routes>
       </div>
     </Router>

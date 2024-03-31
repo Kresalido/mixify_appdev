@@ -26,6 +26,24 @@ class ArtistController extends Controller
         return response()->json($artists);
     }
 
+    public function getAlbum($album_id)
+    {
+        $album = Album::find($album_id);
+
+        return response()->json($album);
+    }
+
+    public function getAlbumSongs($album_id)
+    {
+        $album = Album::find($album_id);
+        if ($album) {
+            $songs = $album->songs()->with(['user', 'album'])->get();
+            return response()->json($songs);
+        } else {
+            return response()->json(['error' => 'Album not found'], 404);
+        }
+    }
+
     public function getAlbums(Request $request)
     {
         $user = auth()->user();
@@ -34,6 +52,17 @@ class ArtistController extends Controller
         return response()->json($albums);
     }
     
+    public function getArtistAlbums($id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            $albums = $user->albums()->with(['songs', 'user'])->get();
+            return response()->json($albums);
+        } else {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+    }
+
     public function getArtistSongs($id)
     {
         $user = User::find($id);

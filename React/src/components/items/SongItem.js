@@ -1,5 +1,5 @@
 import { Container, Row, Stack, Col, Image, Form } from 'react-bootstrap';
-import PlayButton from '../.././play-solid.svg';
+import backendUrl from '../../config';
 
 
 function SongItem({ song, currentSong, setCurrentSong, setSongDetails, playerRef }) {
@@ -9,13 +9,18 @@ function SongItem({ song, currentSong, setCurrentSong, setSongDetails, playerRef
             playerRef.current.audio.current.play();
         } else {
             console.log(song.hashed_name);
-            let songUrl = `http://127.0.0.1:8000/storage/songs/${song.hashed_name}`;
-            setCurrentSong(songUrl);
-            setSongDetails({
-                name: song.display_name,
-                author: song.user.name,
-                photo: `http://127.0.0.1:8000/storage/album_images/${song.album.cover_photo}`
-            });
+            const songUrl = `${backendUrl}/api/play/${song.hashed_name}`;
+            fetch(songUrl)
+                .then(response => response.blob())
+                .then(blob => {
+                    const audioblob = URL.createObjectURL(blob);
+                    setCurrentSong(audioblob)
+                    setSongDetails({
+                        name: song.display_name,
+                        author: song.user.name,
+                        photo: `http://127.0.0.1:8000/storage/album_images/${song.album.cover_photo}`
+                    })
+                });
         }
 
         playerRef.current.audio.current.currentTime = 0;
@@ -28,15 +33,19 @@ function SongItem({ song, currentSong, setCurrentSong, setSongDetails, playerRef
 
     return (
         <div onClick={handleClick}>
-            <div className='song-item' style={{ height: '220px', width: '150px' }}>
+            <div className='song-item'>
                 <div>
                     <Row className='d-flex justify-content-center p-2'>
                         <Image src={`http://127.0.0.1:8000/storage/album_images/${song.album.cover_photo}`} className='px-0' style={{ height: '125px', width: '125px', objectFit: 'cover' }} />
                     </Row>
-                    <Row className='d-flex justify-content-center song-container-name'>
-                        {song.display_name}
+                    <Row className='d-flex mx-2'>
+                        <h5 className='song-container-name'>
+                            {song.display_name}
+                        </h5>
                     </Row>
-                    <Row className='text-center d-flex justify-content-center song-container-artist'>
+                </div>
+                <div>
+                    <Row className='text-center d-flex justify-content-center song-container-artist mb-2'>
                         {song.user.name}
                     </Row>
                 </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\ArtistRequestController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\SongController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,10 +34,14 @@ Route::get('users/{id}', [UserController::class, 'getUser']);
 Route::put('users/{id}', [UserController::class, 'updateUser']);
 Route::delete('users/{id}', [UserController::class, 'deleteUser']);
 
+Route::get('album/{id}', [ArtistController::class, 'getAlbum']);
+Route::get('album/{id}/songs', [ArtistController::class, 'getAlbumSongs']);
 Route::get('albums', [ArtistController::class, 'getAlbums']);
 Route::get('artist/{id}', [ArtistController::class, 'getArtist']);
+Route::get('albums/{id}', [ArtistController::class, 'getArtistAlbums']);
 Route::get('artists', [ArtistController::class, 'getArtists']);
-Route::get('/songs/{id}', [ArtistController::class, 'getArtistSongs']);
+Route::get('songs/{id}', [ArtistController::class, 'getArtistSongs']);
+Route::get('play/{filename}', [SongController::class, 'getSong']);
 Route::post('upload-song', [ArtistController::class, 'uploadSong']);
 Route::post('create-album/upload-songs', [ArtistController::class, 'createAlbumAndUploadSongs']);
 Route::delete('songs/{id}', [ArtistController::class, 'deleteSong']);

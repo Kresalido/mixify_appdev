@@ -1,5 +1,5 @@
 import { Container, Row, Stack, Col, Image, Form } from 'react-bootstrap';
-
+import pfp from '../../pfp-placeholder.jpg';
 
 function ArtistItem({ picture, name, id }) {
     return (
@@ -9,7 +9,7 @@ function ArtistItem({ picture, name, id }) {
             }}
         >
             <Row className='p-3'>
-                <Image src={`http://127.0.0.1:8000/storage/profile_pics/${picture}`} className='artist-image d-flex justify-content-center flex-grow-1' roundedCircle />
+                <Image src={picture ? `http://127.0.0.1:8000/storage/profile_pics/${picture}` : pfp} className='artist-image d-flex justify-content-center flex-grow-1' roundedCircle />
                 <div className="play">
                 </div>
             </Row>

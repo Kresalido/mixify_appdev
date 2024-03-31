@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Stack, Col, Image, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import pfp from '.././img/user-pfp.jpg';
+import pfp from '../pfp-placeholder.jpg';
 
 
 function UserSideBar() {
@@ -29,9 +29,10 @@ function UserSideBar() {
                 localStorage.setItem('name', data.name);
                 localStorage.setItem('role', data.role);
             }
-            
+
             if (data.profile_pic_name) {
                 setProfilePicUrl(`http://127.0.0.1:8000/storage/profile_pics/${data.profile_pic_name}`);
+                // setProfilePicUrl(`../pfp-placeholder.jpg`);
                 console.log(profilePicUrl)
             }
         })
@@ -48,7 +49,7 @@ function UserSideBar() {
         <div className='bg-user-sidebar'>
             <Row className='h-20 d-flex justify-content-center align-items-center'>
                 <div className='d-flex'>
-                    <Image src={profilePicUrl} roundedCircle className='user-pfp' />
+                    <Image src={profilePicUrl ? profilePicUrl : pfp} roundedCircle className='user-pfp' />
                     <div className='d-flex justify-content-center align-items-center p-3 user-name'>
                         {storedName}
                     </div>
@@ -87,7 +88,7 @@ function UserSideBar() {
                 </Stack>
             </Row>
             <Row className='h-20 d-flex align-items-end admin-sidebar-main'>
-            <Link to={'/'} onClick={handleLogout}> Logout</Link>
+                <Link to={'/'} onClick={handleLogout}> Logout</Link>
             </Row>
         </div>
     )

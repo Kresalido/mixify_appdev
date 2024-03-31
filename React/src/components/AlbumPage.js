@@ -14,8 +14,8 @@ import pfp from '../pfp-placeholder.jpg';
 function ArtistPage() {
     const [songs, setSongs] = useState([]);
     const [artist, setArtist] = useState(null);
-    const [albums, setAlbums] = useState([]);
-    const { id } = useParams();
+    const [album, setAlbum] = useState([]);
+    const { id, album_id } = useParams();
 
     // MODAL
     const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -30,10 +30,10 @@ function ArtistPage() {
 
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/api/songs/${id}`)
+        axios.get(`http://127.0.0.1:8000/api/album/${album_id}/songs`)
             .then(response => {
                 setSongs(response.data);
-                console.log("SONG DATA", response.data);
+                console.log("song data", response.data);
             })
             .catch(error => {
                 console.error('There was an error!', error);
@@ -48,9 +48,9 @@ function ArtistPage() {
                 console.error('There was an error!', error);
             });
 
-        axios.get(`http://127.0.0.1:8000/api/albums/${id}`)
+        axios.get(`http://127.0.0.1:8000/api/album/${album_id}`)
             .then(response => {
-                setAlbums(response.data);
+                setAlbum(response.data);
                 console.log(response.data);
             })
             .catch(error => {
@@ -76,14 +76,14 @@ function ArtistPage() {
                             <Col className='custom-scrollbar d-block'>
                                 <Row className='flex-grow-1 align-items-center user-white-text p-5 user-header bg-artist'>
                                     <Col>
-                                        <Image src={pfp} roundedCircle className='user-pfp mx-3' />
+                                        <Image src={`http://127.0.0.1:8000/storage/album_images/${album.cover_photo}`} className='mx-3' style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
                                         {artist === null ? (
                                             <Spinner animation="border" role="status">
                                                 <span className="visually-hidden">Loading...</span>
                                             </Spinner>
                                         ) : (
                                             <>
-                                                {artist}
+                                                {album.album_name}
                                             </>
                                         )}
                                         <Row className='h-10'>
@@ -94,24 +94,30 @@ function ArtistPage() {
                                     </Col>
                                 </Row>
                                 <Row className='px-5 mt-2 user-white-text'>
-                                    <p className='user-header-2'>
-                                        Albums
-                                    </p>
                                 </Row>
                                 <Row className='user-white-text justify-content-center px-5'>
                                     <Stack direction='horizontal' gap={3} className='song-container overflow-x-auto overflow-hidden'>
-                                        {albums.map(album => (
+                                        {/* {albums.map(album => (
                                             <ArtistAlbumItem key={album.album_id} album={album} />
-                                        ))}
+                                        ))} */}
                                     </Stack>
                                 </Row>
                                 <Row className='px-5 mt-2 user-white-text'>
-                                    <p className='user-header-2'>
-                                        Artist Songs
-                                    </p>
+                                    <Col className='d-flex align-items-center' xs={1}>
+                                        #
+                                    </Col>
+                                    <Col className='d-flex align-items-center'>
+                                        Title
+                                    </Col>
+                                    <Col className='d-flex align-items-center justify-content-center'>
+                                        Date Published
+                                    </Col>
+                                    <Col className='d-flex align-items-center justify-content-center'>
+                                        Listens
+                                    </Col>
                                 </Row>
                                 <Row className='px-5 mb-5'>
-                                    <ArtistSongList showImage={true} songs={songs} currentSong={currentSong} setCurrentSong={setCurrentSong} setSongDetails={setSongDetails} playerRef={playerRef} />
+                                    <ArtistSongList songs={songs} currentSong={currentSong} setCurrentSong={setCurrentSong} setSongDetails={setSongDetails} playerRef={playerRef} />
                                 </Row>
                                 <Row className='mb-5'>
                                 </Row>
