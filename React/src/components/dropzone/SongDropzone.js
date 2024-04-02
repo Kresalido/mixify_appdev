@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Container, Row, Col, Button, FormControl } from 'react-bootstrap';
 import AudioPlayer from 'react-h5-audio-player';
@@ -8,22 +8,92 @@ import makeAnimated from 'react-select/animated';
 
 const animatedComponents = makeAnimated();
 
-function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, acceptStyle, onDrop }) {
+function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, acceptStyle, onGenreChange, onDrop }) {
     const [files, setFiles] = useState([]);
     const [editing, setEditing] = useState(null);
     const [fileName, setFileName] = useState('');
+    const [selectedGenres, setSelectedGenres] = useState({});
+    const [playingFile, setPlayingFile] = useState(null);
+    const playerRefs = useRef({});
+
+    const styles = {
+        valueContainer: (base) => ({
+            ...base,
+            maxHeight: 50,
+            overflowY: "auto",
+            scrollbarWidth: "thin",
+            scrollbarColor: "#888 #333",
+            "::webkit-scrollbar": {
+                width: "8px"
+            },
+            "::webkit-scrollbar-thumb": {
+                background: "#888"
+            },
+            "::webkit-scrollbar-thumb:hover": {
+                background: "#555"
+            }
+        }),
+
+        multiValue: (base, state) => {
+            return state.data.isFixed ? { ...base, backgroundColor: "gray" } : base;
+        },
+        multiValueLabel: (base, state) => {
+            return state.data.isFixed
+                ? { ...base, fontWeight: "bold", color: "white", paddingRight: 6 }
+                : base;
+        },
+        multiValueRemove: (base, state) => {
+            return state.data.isFixed ? { ...base, display: "none" } : base;
+        },
+        control: base => ({
+            ...base,
+            backgroundColor: '#333',
+            color: 'white'
+        }),
+        menu: base => ({
+            ...base,
+            backgroundColor: '#333',
+            color: 'white',
+            scrollbarWidth: "thin",
+            scrollbarColor: "#888 #333",
+            "::webkit-scrollbar": {
+                width: "8px"
+            },
+            "::webkit-scrollbar-thumb": {
+                background: "#888"
+            },
+            "::webkit-scrollbar-thumb:hover": {
+                background: "#555"
+            }
+        }),
+        option: (provided, state) => ({
+            ...provided,
+            color: state.isSelected ? 'black' : 'white',
+            backgroundColor: state.isSelected ? 'gray' : '#333',
+            "&:hover": {
+                backgroundColor: '#555'
+            }
+        }),
+        input: (provided, state) => ({
+            ...provided,
+            color: 'white',
+        }),
+    };
 
     const { getRootProps, getInputProps, isDragActive, isDragAccept } = useDropzone({
         accept: {
             'audio/mp3': ['.mp3'],
         },
         onDrop: acceptedFiles => {
-            setFiles(prev => [...prev, ...acceptedFiles.map(file => Object.assign(file, {
+            const newFiles = [...files, ...acceptedFiles.map(file => Object.assign(file, {
                 preview: URL.createObjectURL(file),
                 formattedSize: (file.size / 1048576).toFixed(2),
-                displayName: file.name.split('.').slice(0, -1).join('.')  // Add display name
-            }))]);
-            onDrop(acceptedFiles);
+                displayName: file.name.split('.').slice(0, -1).join('.'),
+                genres: []
+            }))];
+            setFiles(newFiles);
+            onDrop(newFiles);
+
         }
     });
 
@@ -34,18 +104,28 @@ function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, 
         setFiles(newFiles);
     };
 
-    const handleDoubleClick = (file, index) => {
-        setEditing(index);
-        setFileName(file.displayName);  // Edit display name
+    const handleGenreChange = (file) => (selectedOptions) => {
+        setSelectedGenres(prev => {
+            const newGenres = { ...prev, [file.path]: selectedOptions };
+            //console.log(newGenres);  // Log the new genres
+            onGenreChange(newGenres);
+            return newGenres;
+        });
+
+        // Update the genres in the file
+        const newFiles = files.map(f => f.path === file.path ? { ...f, genres: selectedOptions } : f);
+        setFiles(newFiles);
+        localStorage.setItem('files', JSON.stringify(newFiles));
     };
 
-    const handleFileNameChange = (event) => {
-        setFileName(event.target.value);
+    const handleFileNameChange = (e, index) => {
+        const newDisplayName = e.target.value;
+        let newFiles = [...files];
+        newFiles[index].displayName = newDisplayName;
+        setFiles(newFiles);
     };
 
-    const handleBlur = (file) => {
-        file.displayName = fileName.slice(0, 20); 
-        setFiles([...files]);
+    const handleBlur = () => {
         setEditing(null);
     };
 
@@ -57,10 +137,23 @@ function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, 
     };
 
     const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
+        { value: 'acoustic', label: 'Acoustic' },
+        { value: 'pop', label: 'Pop' },
+        { value: 'rock', label: 'Rock' }
     ]
+
+    const filesAddMore = (
+        <Row className="mb-2 files-view" style={{ cursor: 'pointer', color: 'gray' }}>
+            <Col className='d-flex flex-column justify-content-start'>
+                <Row className='d-flex flex-nowrap'>
+                    <Col xs={12} className='d-flex justify-content-center align-items-center'>
+                        <i className="fa fa-plus-circle px-2" aria-hidden="true" />
+                        Click here or drag more songs to add more.
+                    </Col>
+                </Row>
+            </Col>
+        </Row>
+    );
 
     const filesView = files.map((file, index) => (
         <React.Fragment key={`${file.path}-${index}`}>
@@ -68,7 +161,14 @@ function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, 
                 <Col className='d-flex flex-column justify-content-start'>
                     <Row className='d-flex flex-nowrap song-upload p-2'>
                         <Col className='d-flex justify-content-start align-items-center'>
-                            {editing === index ? (
+                            <FormControl
+                                value={file.displayName}
+                                onChange={(event) => handleFileNameChange(event, index)}
+                                onBlur={handleBlur}
+                                className='input-style'
+                                placeholder="Song name"
+                            />
+                            {/* {editing === index ? (
                                 <FormControl
                                     value={fileName}
                                     onChange={handleFileNameChange}
@@ -77,24 +177,34 @@ function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, 
                                 />
                             ) : (
                                 <h5 onDoubleClick={() => handleDoubleClick(file, index)}>{file.displayName}</h5>
-                            )}
+                            )} */}
                         </Col>
                         <Col>
-                            <Select isMulti options={options} placeholder='Select Genre...' styles={{
-                                placeholder: (provided) => ({
-                                    ...provided,
-                                    color: '#fff', // Change this to your desired color
-                                }),
-                                control: (provided) => ({
-                                    ...provided,
-                                    backgroundColor: '#4a4a4a',
-                                    color: '#4a4a4a',
-                                }),
-                                option: (provided) => ({
-                                    ...provided,
-                                    backgroundColor: '#4a4a4a', // Change this to your desired color
-                                }),
-                            }} />
+                            <Select
+                                isMulti
+                                maxMenuHeight={100}
+                                options={options}
+                                placeholder='Select Genre...'
+                                closeMenuOnSelect={false}
+                                value={file.genres}
+                                onChange={handleGenreChange(file)}
+                                // styles={{
+                                //     placeholder: (provided) => ({
+                                //         ...provided,
+                                //         color: '#fff', // Change this to your desired color
+                                //     }),
+                                //     control: (provided) => ({
+                                //         ...provided,
+                                //         backgroundColor: '#4a4a4a',
+                                //         color: '#4a4a4a',
+                                //     }),
+                                //     option: (provided) => ({
+                                //         ...provided,
+                                //         backgroundColor: '#4a4a4a', // Change this to your desired color
+                                //     })
+                                // }}
+                                styles={styles}
+                            />
                         </Col>
                         <Col xs={1}>
                             <Button variant='danger' className='round-btn' onClick={removeFile(file)}>
@@ -103,7 +213,14 @@ function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, 
                         </Col>
                     </Row>
                     <Row>
-                        <AudioPlayer src={file.preview} layout="horizontal-reverse" customAdditionalControls={[]} className='song-upload-player' />
+                        <AudioPlayer src={file.preview} layout="horizontal-reverse" customAdditionalControls={[]} showJumpControls={false} className='song-upload-player'
+                            ref={c => playerRefs.current[file.path] = c}
+                            onPlay={() => {
+                                if (playingFile && playingFile !== file.path && playerRefs.current[playingFile]) {
+                                    playerRefs.current[playingFile].audio.current.pause();
+                                }
+                                setPlayingFile(file.path);
+                            }} />
                     </Row>
                 </Col>
             </Row>
@@ -138,6 +255,7 @@ function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, 
                     <Col className='p-3'>
                         <Row className='justify-content-center align-items-center d-flex flex-grow-1'>
                             {filesView}
+                            {filesAddMore}
                         </Row>
                     </Col>
                 )}
@@ -146,8 +264,8 @@ function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, 
     );
 }
 
-const SongDropzone = ({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, acceptStyle, onDrop }) => (
-    <Basic uploadText={uploadText} uploadTextClass={uploadTextClass} iconClass={iconClass} iconSize={iconSize} activeStyle={activeStyle} acceptStyle={acceptStyle} onDrop={onDrop} />
+const SongDropzone = ({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, acceptStyle, onGenreChange, onDrop }) => (
+    <Basic uploadText={uploadText} uploadTextClass={uploadTextClass} iconClass={iconClass} iconSize={iconSize} activeStyle={activeStyle} acceptStyle={acceptStyle} onGenreChange={onGenreChange} onDrop={onDrop} />
 );
 
 export default SongDropzone;

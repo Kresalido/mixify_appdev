@@ -13,6 +13,7 @@ function ArtistUploadPage() {
 
     // Files
     const [mediaFiles, setMediaFiles] = useState([]);
+    const [selectedGenres, setSelectedGenres] = useState({});
     const [albumPhoto, setAlbumPhoto] = useState(null);
     const [albumTitle, setAlbumTitle] = useState('');
     const [albumDescription, setAlbumDescription] = useState('');
@@ -46,6 +47,24 @@ function ArtistUploadPage() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    // LOADING
+    const [loading, setLoading] = useState(false);
+
+    const upload_failed = (message) => {
+        toast.error(message, {
+            // position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "dark",
+            onClose: () => {
+                localStorage.setItem('justRegistered', 'false');
+            }
+        });
+    }
 
     useEffect(() => {
         // if (songUploadSuccess === 'true') {
@@ -73,7 +92,36 @@ function ArtistUploadPage() {
         //     });
     }, []);
 
+    const clearData = () => {
+        setMediaFiles([]);
+        setAlbumPhoto(null);
+        setAlbumDescription('');
+        setAlbumTitle('');
+        setSelectedGenres([]);
+    }
+
     const submitHandler = () => {
+
+        setLoading(true);
+
+        if (!albumTitle) {
+            upload_failed('Album title is missing.');
+            return;
+        }
+        if (!albumDescription) {
+            upload_failed('Album description is missing.');
+            return;
+        }
+        if (!albumPhoto) {
+            upload_failed('Album photo is missing.');
+            return;
+        }
+
+        if (mediaFiles.length == 0) {
+            upload_failed('Please upload atleast 1 song.');
+            return;
+        }
+
         const formData = new FormData();
         formData.append('album_name', albumTitle);
         formData.append('album_description', albumDescription);
@@ -82,6 +130,14 @@ function ArtistUploadPage() {
         mediaFiles.forEach((file, index) => {
             formData.append(`songs[${index}]`, file);
             formData.append(`displayNames[${index}]`, file.displayName);
+            const genres = selectedGenres[file.path] || [];
+            if (genres.length === 0) {
+                upload_failed(`The song ${file.name} does not have a genre.`);
+                return;
+            }
+            genres.forEach((genre, genreIndex) => {
+                formData.append(`genres[${index}][${genreIndex}]`, genre.value);
+            });
         });
 
         console.log(mediaFiles);
@@ -96,11 +152,18 @@ function ArtistUploadPage() {
         })
             .then(response => response.json())
             .then(data => {
+                // Re-enable the button
+                setLoading(false);
+
                 toast.success('Song uploaded successfully!');
                 console.log(data);
+                clearData();
                 setShow(false);
             })
             .catch((error) => {
+                // Re-enable the button
+                setLoading(false);
+
                 console.error('Error:', error);
                 toast.error('Error uploading song: ' + error);
             });
@@ -119,10 +182,10 @@ function ArtistUploadPage() {
         });
     };
 
-    // Player Related
-    // const [currentSong, setCurrentSong] = useState(null);
-    // const playerRef = useRef();
-    // const [songDetails, setSongDetails] = useState({ name: '', author: '', photo: '' });
+    const handleGenreChange = (selectedGenres) => {
+        setSelectedGenres(selectedGenres);
+    };
+
 
     return (
         <>
@@ -162,13 +225,13 @@ function ArtistUploadPage() {
                     </Row>
                     <Row>
                         <Col className='vh-30 overflow-auto'>
-                            <SongDropzone onDrop={handleMediaDrop} uploadText='Upload or Drop Songs here' iconClass='fa fa-upload upload-icon' uploadTextClass='upload-text' />
+                            <SongDropzone onDrop={handleMediaDrop} onGenreChange={handleGenreChange} uploadText='Upload or Drop Songs here' iconClass='fa fa-upload upload-icon' uploadTextClass='upload-text' />
                         </Col>
                     </Row>
                 </Modal.Body>
                 <Modal.Footer className="artist-upload-modal">
-                    <Button variant="danger" onClick={submitHandler}>
-                        Upload
+                    <Button variant="danger" onClick={submitHandler} disabled={loading}>
+                        {loading ? 'Uploading...' : 'Upload'}
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -213,29 +276,6 @@ function ArtistUploadPage() {
                                 </Stack>
                             </Col>
                         </Row>
-                        {/* <div className='user-player position-absolute bottom-0 d-flex'>
-                        <Col xs={3} className='d-flex align-items-center '>
-                            <Row className='h-100 p-4 flex-grow-1'>
-                                <Col xs={4} className=' d-flex align-items-center'>
-                                    {songDetails.photo && <Image src={songDetails.photo} className='song-cover-image' />}
-                                </Col>
-                                <Col xs={8} className='p-3 h-100 align-items-center song-details'>
-                                    <Row className='h-60 align-items-end song-name'>
-                                        {songDetails.name}
-                                    </Row>
-                                    <Row className='h-40'>
-                                        {songDetails.author}
-                                    </Row>
-                                </Col>
-                            </Row>
-                        </Col>
-                        <Col xs={6} className=''>
-                            <AudioPlayer ref={playerRef} src={currentSong} autoPlay onPlay={e => console.log("onPlay")} className='mixify-player h-100' />
-                        </Col>
-                        <Col xs={3}>
-                            Extra options
-                        </Col>
-                    </div> */}
                     </Col>
                 </Row>
             </Container>

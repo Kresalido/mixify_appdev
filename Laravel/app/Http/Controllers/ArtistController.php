@@ -178,6 +178,7 @@ class ArtistController extends Controller
 
         return response()->json($song);
     }
+    
 
     public function createAlbumAndUploadSongs(Request $request)
     {
@@ -187,8 +188,9 @@ class ArtistController extends Controller
             'album_photo' => 'required|file|mimes:jpeg,png,jpg,gif',
             'songs' => 'required|array',
             'songs.*' => 'file|mimes:mp3,wav,ogg|max:40000',
-            'displayNames' => 'required|array', // validate the displayNames
-            'displayNames.*' => 'required|string', // each displayName should be a string
+            'displayNames' => 'required|array', 
+            'displayNames.*' => 'required|string',
+            'genres' => 'required|array',
         ]);
     
         $currentTime = time();
