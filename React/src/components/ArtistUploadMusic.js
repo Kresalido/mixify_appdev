@@ -101,24 +101,34 @@ function ArtistUploadPage() {
     }
 
     const submitHandler = () => {
-
         setLoading(true);
 
         if (!albumTitle) {
             upload_failed('Album title is missing.');
+            setLoading(false);
             return;
         }
         if (!albumDescription) {
             upload_failed('Album description is missing.');
+            setLoading(false);
             return;
         }
         if (!albumPhoto) {
             upload_failed('Album photo is missing.');
+            setLoading(false);
+            return;
+        }
+        if (mediaFiles.length === 0) {
+            upload_failed('Please upload at least 1 song.');
+            setLoading(false);
             return;
         }
 
-        if (mediaFiles.length == 0) {
-            upload_failed('Please upload atleast 1 song.');
+        const songsWithEmptyGenres = mediaFiles.filter(file => !selectedGenres[file.path] || selectedGenres[file.path].length === 0);
+        if (songsWithEmptyGenres.length > 0) {
+            const songNames = songsWithEmptyGenres.map(file => file.name).join(', ');
+            upload_failed(`The following songs do not have genres: ${songNames}`);
+            setLoading(false);
             return;
         }
 
@@ -130,17 +140,11 @@ function ArtistUploadPage() {
         mediaFiles.forEach((file, index) => {
             formData.append(`songs[${index}]`, file);
             formData.append(`displayNames[${index}]`, file.displayName);
-            const genres = selectedGenres[file.path] || [];
-            if (genres.length === 0) {
-                upload_failed(`The song ${file.name} does not have a genre.`);
-                return;
-            }
+            const genres = selectedGenres[file.path];
             genres.forEach((genre, genreIndex) => {
                 formData.append(`genres[${index}][${genreIndex}]`, genre.value);
             });
         });
-
-        console.log(mediaFiles);
 
         fetch('http://127.0.0.1:8000/api/create-album/upload-songs', {
             method: 'POST',
@@ -152,22 +156,19 @@ function ArtistUploadPage() {
         })
             .then(response => response.json())
             .then(data => {
-                // Re-enable the button
                 setLoading(false);
-
                 toast.success('Song uploaded successfully!');
                 console.log(data);
                 clearData();
                 setShow(false);
             })
             .catch((error) => {
-                // Re-enable the button
                 setLoading(false);
-
                 console.error('Error:', error);
                 toast.error('Error uploading song: ' + error);
             });
     };
+
 
     // Dropzone
     const handleAlbumCoverDrop = (acceptedFiles) => {
@@ -189,7 +190,7 @@ function ArtistUploadPage() {
 
     return (
         <>
-            <Modal show={show} size='lg' onHide={handleClose} centered backdrop="static" >
+            <Modal show={show} size='lg' onHide={!loading ? handleClose : null} centered backdrop="static">
                 <Modal.Header className="artist-upload-modal" closeButton>
                     <Modal.Title>Create Album</Modal.Title>
                 </Modal.Header>
@@ -225,7 +226,7 @@ function ArtistUploadPage() {
                     </Row>
                     <Row>
                         <Col className='vh-30 overflow-auto'>
-                            <SongDropzone onDrop={handleMediaDrop} onGenreChange={handleGenreChange} uploadText='Upload or Drop Songs here' iconClass='fa fa-upload upload-icon' uploadTextClass='upload-text' />
+                            <SongDropzone onDrop={handleMediaDrop} onGenreChange={handleGenreChange} isLoading={loading} uploadText='Upload or Drop Songs here' iconClass='fa fa-upload upload-icon' uploadTextClass='upload-text' />
                         </Col>
                     </Row>
                 </Modal.Body>

@@ -191,6 +191,7 @@ class ArtistController extends Controller
             'displayNames' => 'required|array', 
             'displayNames.*' => 'required|string',
             'genres' => 'required|array',
+            'genres.*' => 'required'
         ]);
     
         $currentTime = time();

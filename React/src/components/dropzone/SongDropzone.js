@@ -8,7 +8,7 @@ import makeAnimated from 'react-select/animated';
 
 const animatedComponents = makeAnimated();
 
-function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, acceptStyle, onGenreChange, onDrop }) {
+function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, acceptStyle, isLoading, onGenreChange, onDrop }) {
     const [files, setFiles] = useState([]);
     const [editing, setEditing] = useState(null);
     const [fileName, setFileName] = useState('');
@@ -168,16 +168,6 @@ function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, 
                                 className='input-style'
                                 placeholder="Song name"
                             />
-                            {/* {editing === index ? (
-                                <FormControl
-                                    value={fileName}
-                                    onChange={handleFileNameChange}
-                                    onBlur={() => handleBlur(file, index)}
-                                    onKeyDown={(event) => handleKeyDown(event, file, index)}
-                                />
-                            ) : (
-                                <h5 onDoubleClick={() => handleDoubleClick(file, index)}>{file.displayName}</h5>
-                            )} */}
                         </Col>
                         <Col>
                             <Select
@@ -188,26 +178,11 @@ function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, 
                                 closeMenuOnSelect={false}
                                 value={file.genres}
                                 onChange={handleGenreChange(file)}
-                                // styles={{
-                                //     placeholder: (provided) => ({
-                                //         ...provided,
-                                //         color: '#fff', // Change this to your desired color
-                                //     }),
-                                //     control: (provided) => ({
-                                //         ...provided,
-                                //         backgroundColor: '#4a4a4a',
-                                //         color: '#4a4a4a',
-                                //     }),
-                                //     option: (provided) => ({
-                                //         ...provided,
-                                //         backgroundColor: '#4a4a4a', // Change this to your desired color
-                                //     })
-                                // }}
                                 styles={styles}
                             />
                         </Col>
                         <Col xs={1}>
-                            <Button variant='danger' className='round-btn' onClick={removeFile(file)}>
+                            <Button variant='danger' className='round-btn' onClick={isLoading ? null : (removeFile(file)) }>
                                 <div className='fa fa-times' />
                             </Button>
                         </Col>
@@ -264,8 +239,8 @@ function Basic({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, 
     );
 }
 
-const SongDropzone = ({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, acceptStyle, onGenreChange, onDrop }) => (
-    <Basic uploadText={uploadText} uploadTextClass={uploadTextClass} iconClass={iconClass} iconSize={iconSize} activeStyle={activeStyle} acceptStyle={acceptStyle} onGenreChange={onGenreChange} onDrop={onDrop} />
+const SongDropzone = ({ uploadText, uploadTextClass, iconClass, iconSize, activeStyle, acceptStyle, isLoading, onGenreChange, onDrop }) => (
+    <Basic uploadText={uploadText} uploadTextClass={uploadTextClass} iconClass={iconClass} iconSize={iconSize} activeStyle={activeStyle} acceptStyle={acceptStyle} isLoading={isLoading} onGenreChange={onGenreChange} onDrop={onDrop} />
 );
 
 export default SongDropzone;
