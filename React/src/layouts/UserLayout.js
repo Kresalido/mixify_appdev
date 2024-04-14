@@ -25,12 +25,16 @@ const UserLayout = () => {
                 },
             })
                 .then(response => {
-                    // setToken(token);
+                    setToken(token);
+                    if(localStorage.getItem('name') === 'Guest') {
+                        localStorage.clear();
+                    }
                 })
                 .catch(error => {
                     console.error('Error fetching role:', error);
                     localStorage.removeItem('jwt_token');
                     setToken(null);
+                    navigate('/sign-in');
                 })
         } else {
             console.log('Token does not exist');

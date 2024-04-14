@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\SongController;
+use App\Http\Controllers\PlaylistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,16 @@ Route::put('albums/{id}', [ArtistController::class, 'editAlbum']);
 Route::put('songs/{id}', [ArtistController::class, 'editSong']);
 
 Route::get('play/{filename}', [SongController::class, 'getSong']);
+Route::get('/songs', [SongController::class, 'getSongs']);
+
+// playlists
+Route::get('playlists', [PlaylistController::class, 'getPlaylists']);
+Route::get('playlist/{id}', [PlaylistController::class, 'getPlaylist']);
+Route::get('playlist/{id}/songs', [PlaylistController::class, 'getPlaylistSongs']);
+Route::post('playlist/create', [PlaylistController::class, 'createPlaylist']);
+Route::post('playlist/{playlist}/{song}/add', [PlaylistController::class, 'addSongToPlaylist']);
+Route::delete('playlist/{playlist}/{song}/remove', [PlaylistController::class, 'removeSongFromPlaylist']);
+Route::delete('playlist/{id}/delete', [PlaylistController::class, 'deletePlaylist']);
 
 Route::group([
 

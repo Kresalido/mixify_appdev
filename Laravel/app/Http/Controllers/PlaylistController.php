@@ -33,7 +33,7 @@ class PlaylistController extends Controller
             return response()->json(['message' => 'Playlist not found'], 404);
         }
     
-        return response()->json($playlist);
+        return response()->json($playlist->load('creator'));
     }
     
     public function getPlaylists()
@@ -57,7 +57,7 @@ class PlaylistController extends Controller
             $playlist->name = $request->name;
         } else {
             $count = Playlist::where('creator_id', auth()->id())->count();
-            $playlist->name = 'Playlist #' . ($count + 1);
+            $playlist->name = 'My Playlist #' . ($count + 1);
         }
         
         $playlist->creator_id = auth()->id();
@@ -66,7 +66,7 @@ class PlaylistController extends Controller
         return response()->json(['message' => 'Playlist created successfully','id' => $playlist->id]);
     }
 
-    public function destroy($id)
+    public function deletePlaylist($id)
     {
         $playlist = Playlist::find($id);
     

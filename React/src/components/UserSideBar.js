@@ -14,6 +14,7 @@ function UserSideBar() {
     const storedRole = localStorage.getItem('role');
 
     const [profilePicUrl, setProfilePicUrl] = useState(null);
+    const [token, setToken] = useState(null);
     const navigate = useNavigate();
 
     fetch('http://127.0.0.1:8000/api/auth/me', {
@@ -30,8 +31,9 @@ function UserSideBar() {
                 setRole(data.role);
                 localStorage.setItem('name', data.name);
                 localStorage.setItem('role', data.role);
+                console.log('fetched');
             }
-
+            
             if (data.profile_pic_name) {
                 setProfilePicUrl(`http://127.0.0.1:8000/storage/profile_pics/${data.profile_pic_name}`);
                 // setProfilePicUrl(`../pfp-placeholder.jpg`);
@@ -43,10 +45,13 @@ function UserSideBar() {
         });
 
     const handleLogout = () => {
-        console.log('this ran')
         localStorage.clear();
-        window.location.reload();
+        navigate('/sign-in')
     };
+
+    useEffect(() => {
+
+    },[])
 
 
 
