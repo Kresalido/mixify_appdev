@@ -49,6 +49,7 @@ Route::put('albums/{id}', [ArtistController::class, 'editAlbum']);
 Route::put('songs/{id}', [ArtistController::class, 'editSong']);
 
 Route::get('play/{filename}', [SongController::class, 'getSong']);
+Route::get('/song/{id}/details', [SongController::class, 'getSongDetails']);
 Route::get('/songs', [SongController::class, 'getSongs']);
 
 // playlists

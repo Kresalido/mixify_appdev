@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Stack, Col, Image, Form, Button, Dropdown } from 'react-bootstrap';
 import axios from 'axios';
@@ -11,6 +11,9 @@ import { InputSwitch } from 'primereact/inputswitch';
 import { Column } from 'primereact/column';
 import 'primeflex/primeflex.css';
 import backendUrl from '../../config';
+
+//Context
+import MusicContext from '../../context/MusicContext';
 
 
 const imageTemplate = (photoUrl) => {
@@ -59,11 +62,11 @@ function PlaylistTable() {
                     Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
                 }
             })
-            .then(response => {
-                console.log(response.data);
-                setSongs(songs.filter(song => song.id !== songId));
-                window.location.reload();
-            });
+                .then(response => {
+                    console.log(response.data);
+                    setSongs(songs.filter(song => song.id !== songId));
+                    window.location.reload();
+                });
         } catch (error) {
             console.error('There was an error!', error);
         }
@@ -75,10 +78,20 @@ function PlaylistTable() {
     const [metaKey, setMetaKey] = useState(true);
     const playerRef = useRef();
 
+    const { setQueue, setCurrentSongIndex } = useContext(MusicContext);
+
     return (
         <div className='custom-table'>
             <DataTable value={songs} className='custom-table p-datatable' rowHover selectionMode="single"
-                onSelectionChange={(e) => { setCurrentSong(e.value); console.log(e.value); }}
+                onSelectionChange={(e) => {
+                    if (e.value) {
+                        setCurrentSong(e.value);
+                        console.log(e.value);
+                        const songId = [e.value]
+                        setQueue(songId);
+                        setCurrentSongIndex(0);
+                    }
+                }}
                 selection={currentSong}
                 dataKey="id"
                 stripedRows
@@ -92,7 +105,7 @@ function PlaylistTable() {
                                 <div>
                                     {rowData.display_name}
                                 </div>
-                                <div className='playlist-details playlist-clickable' onClick={() => {navigate(`/artist/${rowData.user.id}`)}}>
+                                <div className='playlist-details playlist-clickable d-inline' onClick={() => { navigate(`/artist/${rowData.user.id}`) }}>
                                     {rowData.user.name}
                                 </div>
                             </div>
@@ -103,7 +116,7 @@ function PlaylistTable() {
                     return (
                         <>
                             <div>
-                                <div className='text-gray playlist-clickable' onClick={() => navigate(`/artist/${rowData.user.id}/${rowData.album.album_id}`)}>
+                                <div className='text-gray playlist-clickable d-inline' onClick={() => navigate(`/artist/${rowData.user.id}/${rowData.album.album_id}`)}>
                                     {rowData.album.album_name}
                                 </div>
                             </div>

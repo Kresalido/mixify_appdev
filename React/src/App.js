@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'; // Import ToastContainer
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,42 +18,46 @@ import PlaylistPage from './components/PlaylistPage'
 
 import UserLayout from './layouts/UserLayout';
 
-function RedirectToLogin() {
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate('/log-in');
-  }, [navigate]);
-
-  return null;
-}
-
+// Context
+import MusicContext from './context/MusicContext';
 
 function App() {
+
+  const [songs, setSongs] = useState([]);
+  const [updateSongs, setUpdateSongs] = useState(false);
+
+  const [currentSong, setCurrentSong] = useState(null);
+  const [queue, setQueue] = useState([]);
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+
+
   return (
     <Router>
       <div className="App">
         <ToastContainer />
-        <Routes>
-          <Route path="/" element={<UserLayout />} >
-            <Route index element={<Home />} />
-            <Route path="/artist-upload" element={<ArtistUploadMusic />} />
-            <Route path="/artist/:id" element={<Artist />} />
-            <Route path="/artist-dashboard" element={<ArtistDashboard />} />
-            <Route path="/artist/:id/:album_id" element={<AlbumPage />} />
-            <Route path="/playlist/:id" element={<PlaylistPage />} />
-            <Route path="/library" element={<LibraryPage />} />
-          </Route>
-          {/* <Route path="/" element={<RedirectToLogin />} /> */}
-          {/* <Route path="/home" element={<Home />} /> */}
-          <Route path="/sign-in" element={<Login />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/sign-up/artist" element={<ArtistSignup />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/admin" element={<Admin />} />
-        </Routes>
+        <MusicContext.Provider value={{ songs, setSongs, updateSongs, setUpdateSongs, currentSong, setCurrentSong, queue, setQueue, currentSongIndex, setCurrentSongIndex }}>
+          <Routes>
+            <Route path="/" element={<UserLayout />} >
+              <Route index element={<Home />} />
+              <Route path="/artist-upload" element={<ArtistUploadMusic />} />
+              <Route path="/artist/:id" element={<Artist />} />
+              <Route path="/artist-dashboard" element={<ArtistDashboard />} />
+              <Route path="/artist/:id/:album_id" element={<AlbumPage />} />
+              <Route path="/playlist/:id" element={<PlaylistPage />} />
+              <Route path="/library" element={<LibraryPage />} />
+            </Route>
+            {/* <Route path="/" element={<RedirectToLogin />} /> */}
+            {/* <Route path="/home" element={<Home />} /> */}
+            <Route path="/sign-in" element={<Login />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/sign-up/artist" element={<ArtistSignup />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/admin" element={<Admin />} />
+          </Routes>
+        </MusicContext.Provider>
       </div>
-    </Router>
+    </Router >
   )
 }
 export default App

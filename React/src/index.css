@@ -799,8 +799,11 @@ body {
   font-weight: 800;
   white-space: nowrap;
   overflow: hidden;
-  /* text-overflow: ellipsis; */
-  /* width: 10vw; */
+}
+
+.song-name:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .song-list-item {

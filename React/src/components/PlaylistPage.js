@@ -103,11 +103,6 @@ function PlaylistPage() {
     }
 
 
-    // Player Related
-    const [currentSong, setCurrentSong] = useState(null);
-    const [songDetails, setSongDetails] = useState({ name: '', author: '', photo: '' });
-    const [metaKey, setMetaKey] = useState(true);
-    const playerRef = useRef();
 
     return (
         <>

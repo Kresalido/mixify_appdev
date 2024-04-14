@@ -119,7 +119,7 @@ function AddToPlaylistTable() {
                                     <div>
                                         {rowData.display_name}
                                     </div>
-                                    <div className='playlist-details playlist-clickable' onClick={() => {navigate(`/artist/${rowData.user.id}`)}}>
+                                    <div className='playlist-details playlist-clickable d-inline' onClick={() => {navigate(`/artist/${rowData.user.id}`)}}>
                                         {rowData.user.name}
                                     </div>
                                 </div>
@@ -128,7 +128,7 @@ function AddToPlaylistTable() {
                     }} />
                     <Column style={{ width: '30%' }} body={(rowData) => {
                         return (
-                            <div className='text-gray playlist-clickable' onClick={() => navigate(`/artist/${rowData.user.id}/${rowData.album.album_id}`)}>
+                            <div className='text-gray playlist-clickable d-inline' onClick={() => navigate(`/artist/${rowData.user.id}/${rowData.album.album_id}`)}>
                                 {rowData.album.album_name}
                             </div>
                         );
