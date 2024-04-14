@@ -14,6 +14,8 @@ import Artist from './components/ArtistPage'
 import ArtistSignup from './components/artist.signup.component';
 import AlbumPage from './components/AlbumPage'
 
+import UserLayout from './layouts/UserLayout';
+
 function RedirectToLogin() {
   const navigate = useNavigate();
   useEffect(() => {
@@ -30,19 +32,21 @@ function App() {
       <div className="App">
         <ToastContainer />
         <Routes>
-          <Route path="/" element={<RedirectToLogin />} />
-          <Route exact path="/log-in" element={<Login />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<UserLayout />} >
+            <Route index element={<Home />} />
+            <Route path="/artist-upload" element={<ArtistUploadMusic />} />
+            <Route path="/artist/:id" element={<Artist />} />
+            <Route path="/artist-dashboard" element={<ArtistDashboard />} />
+            <Route path="/artist/:id/:album_id" element={<AlbumPage />} />
+          </Route>
+          {/* <Route path="/" element={<RedirectToLogin />} /> */}
+          {/* <Route path="/home" element={<Home />} /> */}
           <Route path="/sign-in" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/sign-up/artist" element={<ArtistSignup />} />
           <Route path="/logout" element={<Logout />} />
-          <Route path="/admin" element={<Admin/>} />
-          <Route path="/sign-up/artist" element={<ArtistSignup/>} />
-          <Route path="/artist-upload" element={<ArtistUploadMusic/>} />
-          <Route path="/artist/:id" element={<Artist />} />
-          <Route path="/artist-dashboard" element={<ArtistDashboard/>} />
-          <Route path="/artist/:id/:album_id" element={<AlbumPage/>} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </div>
     </Router>

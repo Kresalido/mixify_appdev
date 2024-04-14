@@ -81,7 +81,7 @@ class SignUp extends Component {
           toast.success("Registration successful");
           // Find a better way to redirect to the login page
           localStorage.setItem('justRegistered', true);
-          window.location.href = '/log-in';
+          window.location.href = '/sign-in';
         } else {
           this.setState({ isButtonDisabled: false });
         }

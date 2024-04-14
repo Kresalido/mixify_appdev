@@ -240,8 +240,6 @@ function ArtistUploadPage() {
                 {/* <div className='circle circle-left' />
             <div className='circle circle-right' /> */}
                 <Row className='vh-100'>
-                    {/* SIDE BAR */}
-                    <UserSideBar />
                     <Col className=' bg-user bg-user-dashboard'>
                         <Row className=" flex-grow-1 d-flex p-3">
                             <Col className='custom-scrollbar'>

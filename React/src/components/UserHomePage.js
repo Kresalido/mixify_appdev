@@ -41,7 +41,6 @@ function Home() {
             {/* <div className='circle circle-left' />
             <div className='circle circle-right' /> */}
             <Row className='vh-100'>
-                <UserSideBar />
                 <Col className='d-flexflex-grow-1 bg-user bg-user-dashboard'>
                     <Row className=" flex-grow-1 d-flex p-3 custom-scrollbar">
                         <Col className='p-5'>
@@ -217,29 +216,6 @@ function Home() {
                             </Row>
                         </Col>
                     </Row>
-                    <div className='user-player position-absolute bottom-0 d-flex'>
-                        <Col xs={3} className='d-flex align-items-center '>
-                            <Row className='h-100 px-4 flex-grow-1'>
-                                <Col className=' d-flex justify-content-end align-items-center'>
-                                    {songDetails.photo && <Image src={songDetails.photo} className='song-cover-image' />}
-                                </Col>
-                                <Col className='h-100 align-items-center song-details'>
-                                    <Row className='h-50 align-items-end song-name'>
-                                        {songDetails.name}
-                                    </Row>
-                                    <Row className='h-50'>
-                                        {songDetails.author}
-                                    </Row>
-                                </Col>
-                            </Row>
-                        </Col>
-                        <Col xs={6} className=''>
-                            <AudioPlayer ref={playerRef} src={currentSong} showJumpControls={false} showSkipControls={true} autoPlay onPlay={e => console.log("onPlay")} className='mixify-player h-100' />
-                        </Col>
-                        <Col xs={3}>
-                            Extra options
-                        </Col>
-                    </div>
                 </Col>
             </Row>
         </Container>

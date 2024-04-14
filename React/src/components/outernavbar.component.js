@@ -16,10 +16,8 @@ export default class Outernavbar extends Component {
           <Link to={'/sign-up'}> Sign up</Link>
         </Col>
         <Col>
-          <Link to={'/'}> Log in</Link>
+          <Link to={'/sign-in'}> Log in</Link>
         </Col>
-        {/* <Stack direction='horizontal' gap={4}>
-        </Stack> */}
       </Row>
     );
   }

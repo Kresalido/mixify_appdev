@@ -70,7 +70,6 @@ function ArtistPage() {
                 {/* <div className='circle circle-left' />
                 <div className='circle circle-right' /> */}
                 <Row className='vh-100'>
-                    <UserSideBar />
                     <Col className='flex-grow-1 bg-user bg-user-dashboard'>
                         <Row className=" flex-grow-1 d-flex p-3">
                             <Col className='custom-scrollbar d-block'>
@@ -87,9 +86,6 @@ function ArtistPage() {
                                             </>
                                         )}
                                         <Row className='h-10'>
-                                            {/* <Col xs={1}>
-                                                <Button variant='danger' className='absolute'>Follow</Button>
-                                            </Col> */}
                                         </Row>
                                     </Col>
                                 </Row>
@@ -122,34 +118,7 @@ function ArtistPage() {
                             </Col>
                         </Row>
 
-                        <div className='user-player position-absolute bottom-0 d-flex'>
 
-                            <div className='d-flex align-items-center w-25'>
-                                <div className='d-flex p-5'>
-                                    <div>
-                                        {songDetails.photo && <Image src={songDetails.photo} className='song-cover-image' />}
-                                    </div>
-                                    <div className='d-flex align-items-center mx-2'>
-                                        <div className='song-details d-flex flex-column'>
-                                            <h4 className='song-name'>
-                                                {songDetails.name}
-                                            </h4>
-                                            <p>
-                                                {songDetails.author}
-                                            </p>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div className='w-50'>
-                                <AudioPlayer ref={playerRef} src={currentSong} autoPlay showJumpControls={false} showSkipControls={true} onPlay={e => console.log("onPlay")} className='mixify-player h-100' />
-                            </div>
-                            <div className='w-25'>
-                                Extra options
-                            </div>
-                        </div>
                     </Col>
                 </Row>
             </Container>

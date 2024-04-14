@@ -58,22 +58,25 @@ function UserSideBar() {
             <Row className='h-60 user-sidebar-main'>
                 <Stack direction='vertical' gap={2}>
                     <div className='px-4 user-sidebar-item d-flex'>
-                        <Link to={'/home'} className='links'> Home</Link>
+                        <Link to={'/'} className='links'> Home</Link>
                     </div>
                     <div className='px-4 user-sidebar-item d-flex'>
-                        <Link to={'/admin'} className='links'> Browse</Link>
+                        <Link className='links'> Browse</Link>
                     </div>
                     <div className='px-4 user-sidebar-item d-flex'>
-                        <Link to={'/admin'} className='links'> Settings</Link>
+                        <Link className='links'> Settings</Link>
                     </div>
                     <div className='px-4 user-sidebar-item d-flex'>
-                        <Link to={'/admin'} className='links'> Songs</Link>
+                        <Link className='links'> Songs</Link>
                     </div>
                     <div className='px-4 user-sidebar-item d-flex'>
-                        <Link to={'/admin'} className='links'> Videos</Link>
+                        <Link className='links'> Videos</Link>
                     </div>
                     <div className='px-4 user-sidebar-item d-flex'>
-                        <Link to={'/admin'} className='links'> Podcasts</Link>
+                        <Link className='links'> Podcasts</Link>
+                    </div>
+                    <div className='px-4 user-sidebar-item d-flex'>
+                        <Link className='links'> My Library</Link>
                     </div>
                     {storedRole === 'artist' && (
                         <div className='px-4 sub-header d-flex'>

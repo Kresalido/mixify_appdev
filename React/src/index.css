@@ -766,10 +766,12 @@ body {
 
 .user-player {
   height: 15%;
-  width: 100%;
+  width: 100vw;
   background: #1b1b1b;
   border-top: rgba(255, 255, 255, 0.13) 1px solid;
   min-width: 1000px;
+  z-index: 9;
+  position: fixed;
 }
 
 .user-search-row {
@@ -858,6 +860,7 @@ body {
   white-space: nowrap;
   line-height: 2;
   scrollbar-width: thin;
+  width: 80vw;
 }
 
 
@@ -958,7 +961,7 @@ body {
   width: 150px;
   display: flex;
   flex-direction: column;
-  justify-content:space-around;
+  justify-content: space-around;
 }
 
 .song-item:hover {
@@ -973,7 +976,7 @@ body {
   font-size: 15px;
   font-weight: 800;
   text-overflow: ellipsis;
-  text-wrap:balance ;
+  text-wrap: balance;
   text-align: center;
   height: 50px;
   overflow: hidden;
@@ -1026,6 +1029,10 @@ body {
 .upload-file-container {
   border: 1px solid #D9D9D9;
   align-items: center;
+}
+
+.user-sidebar-main {
+  min-width: 200px;
 }
 
 .user-sidebar-main .sub-header {
@@ -1153,6 +1160,34 @@ body {
 
 .h-70 {
   height: 70%;
+}
+
+.w-5 {
+  width: 5%;
+}
+
+.w-10 {
+  width: 10%;
+}
+
+.w-15 {
+  width: 15%;
+}
+
+.w-20 {
+  width: 20%;
+}
+
+.w-30 {
+  width: 30%;
+}
+
+.w-35 {
+  width: 35%;
+}
+
+.w-40 {
+  width: 40%;
 }
 
 .vh-10 {
