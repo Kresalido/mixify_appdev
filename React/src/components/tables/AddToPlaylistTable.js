@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Stack, Col, Image, Form, Button, Dropdown } from 'react-bootstrap';
 import axios from 'axios';
@@ -12,9 +12,12 @@ import { Column } from 'primereact/column';
 import 'primeflex/primeflex.css';
 import backendUrl from '../../config';
 
+// pagination
 import { Paginator } from 'primereact/paginator';
 import { InputText } from 'primereact/inputtext';
 
+// context
+import MusicContext from '../../context/MusicContext';
 
 const imageTemplate = (photoUrl) => {
     return photoUrl ? (
@@ -98,6 +101,9 @@ function AddToPlaylistTable() {
     const filteredSongs = songs.filter(song => song.display_name.toLowerCase().includes(searchTerm.toLowerCase()));
 
 
+    const { setQueue, setCurrentSongIndex } = useContext(MusicContext);
+
+
     return (
         <>
             <div className='text-nowrap'>
@@ -106,7 +112,16 @@ function AddToPlaylistTable() {
             <div className='custom-table'>
                 <InputText value={searchTerm} onChange={onSearchChange} placeholder="Search" />
                 <DataTable value={filteredSongs} className='custom-table p-datatable' rowHover selectionMode="single"
-                    onSelectionChange={(e) => { setCurrentSong(e.value); console.log(e.value); }}
+                    onSelectionChange={(e) => {
+                        if (e.value) {
+                            setCurrentSong(e.value);
+                            console.log(e.value);
+                            const songId = [e.value]
+                            setQueue(songId);
+                            setCurrentSongIndex(0);
+                        }
+                    }}
+
                     selection={currentSong}
                     dataKey="id"
                     stripedRows
@@ -119,7 +134,7 @@ function AddToPlaylistTable() {
                                     <div>
                                         {rowData.display_name}
                                     </div>
-                                    <div className='playlist-details playlist-clickable d-inline' onClick={() => {navigate(`/artist/${rowData.user.id}`)}}>
+                                    <div className='playlist-details playlist-clickable d-inline' onClick={(e) => { e.stopPropagation(); navigate(`/artist/${rowData.user.id}`) }}>
                                         {rowData.user.name}
                                     </div>
                                 </div>
@@ -128,7 +143,7 @@ function AddToPlaylistTable() {
                     }} />
                     <Column style={{ width: '30%' }} body={(rowData) => {
                         return (
-                            <div className='text-gray playlist-clickable d-inline' onClick={() => navigate(`/artist/${rowData.user.id}/${rowData.album.album_id}`)}>
+                            <div className='text-gray playlist-clickable d-inline' onClick={(e) => { e.stopPropagation(); navigate(`/artist/${rowData.user.id}/${rowData.album.album_id}`) }}>
                                 {rowData.album.album_name}
                             </div>
                         );

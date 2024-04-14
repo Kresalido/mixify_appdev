@@ -26,6 +26,7 @@ function AlbumItem() {
     return (
         <>
             <Col className="d-flex flex-wrap">
+                {/* {playlists.length === 0 && <div className="text-center w-100">No playlists found</div>} */}
                 {playlists.map(playlist => (
                     <div key={playlist.id} onClick={() => navigate(`/playlist/${playlist.id}`)} className='py-2'>
                         <div className='playlist-item d-flex flex-column mx-2'>

@@ -87,12 +87,13 @@ function PlaylistTable() {
                     if (e.value) {
                         setCurrentSong(e.value);
                         console.log(e.value);
-                        const songId = [e.value]
-                        setQueue(songId);
+                        const songIndex = songs.findIndex(song => song.id === e.value.id);
+                        const songQueue = songs.slice(songIndex);
+                        setQueue(songQueue);
                         setCurrentSongIndex(0);
                     }
                 }}
-                selection={currentSong}
+                // selection={currentSong}
                 dataKey="id"
                 stripedRows
             >
@@ -105,7 +106,7 @@ function PlaylistTable() {
                                 <div>
                                     {rowData.display_name}
                                 </div>
-                                <div className='playlist-details playlist-clickable d-inline' onClick={() => { navigate(`/artist/${rowData.user.id}`) }}>
+                                <div className='playlist-details playlist-clickable d-inline' onClick={(e) => { e.stopPropagation(); navigate(`/artist/${rowData.user.id}`) }}>
                                     {rowData.user.name}
                                 </div>
                             </div>
@@ -116,7 +117,7 @@ function PlaylistTable() {
                     return (
                         <>
                             <div>
-                                <div className='text-gray playlist-clickable d-inline' onClick={() => navigate(`/artist/${rowData.user.id}/${rowData.album.album_id}`)}>
+                                <div className='text-gray playlist-clickable d-inline' onClick={(e) => { e.stopPropagation(); navigate(`/artist/${rowData.user.id}/${rowData.album.album_id}`) }}>
                                     {rowData.album.album_name}
                                 </div>
                             </div>

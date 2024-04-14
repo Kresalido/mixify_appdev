@@ -90,7 +90,9 @@ const MusicPlayer = () => {
                 </div>
             </div>
             <div className='w-35'>
-                <AudioPlayer ref={playerRef} src={currentSong} autoPlay showJumpControls={false} showSkipControls={true} onPlay={e => console.log("onPlay")} className='mixify-player h-100' />
+                <AudioPlayer ref={playerRef} src={currentSong} autoPlay showJumpControls={false} showSkipControls={true} onPlay={e => console.log("onPlay")} className='mixify-player h-100' 
+                    onClickNext={handleNextSong} onClickPrevious={handlePreviousSong}
+                />
             </div>
             <div className=''>
                 Extra options
