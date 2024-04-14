@@ -13,6 +13,7 @@ import ArtistUploadMusic from './components/ArtistUploadMusic'
 import Artist from './components/ArtistPage'
 import ArtistSignup from './components/artist.signup.component';
 import AlbumPage from './components/AlbumPage'
+import LibraryPage from './components/LibraryPage'
 
 import UserLayout from './layouts/UserLayout';
 
@@ -38,6 +39,7 @@ function App() {
             <Route path="/artist/:id" element={<Artist />} />
             <Route path="/artist-dashboard" element={<ArtistDashboard />} />
             <Route path="/artist/:id/:album_id" element={<AlbumPage />} />
+            <Route path="/library" element={<LibraryPage />} />
           </Route>
           {/* <Route path="/" element={<RedirectToLogin />} /> */}
           {/* <Route path="/home" element={<Home />} /> */}

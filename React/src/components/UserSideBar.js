@@ -60,7 +60,7 @@ function UserSideBar() {
                     </div>
                 </div>
             </Row>
-            <Row className='h-60 user-sidebar-main'>
+            <Row className='h-60 user-sidebar-main text-nowrap'>
                 <Stack direction='vertical' gap={2}>
                     <div className='px-4 user-sidebar-item d-flex'>
                         <Link to={'/'} className='links'> Home</Link>
@@ -81,7 +81,7 @@ function UserSideBar() {
                         <Link className='links'> Podcasts</Link>
                     </div>
                     <div className='px-4 user-sidebar-item d-flex'>
-                        <Link className='links'> My Library</Link>
+                        <Link to={'/library'} className='links'> My Library</Link>
                     </div>
                     {storedRole === 'artist' && (
                         <div className='px-4 sub-header d-flex'>

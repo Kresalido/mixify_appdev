@@ -18,10 +18,16 @@ class SongController extends Controller
         return response()->json($genres);
     }
 
-    public function getSongs(Request $request)
+    public function getSongDetails($id)
+    {
+        $song = Song::find($id);
+        return response()->json($song->load('album','user'));
+    }
+
+    public function getSongs()
     {
         $songs = Song::all();
-        return response()->json($songs);
+        return response()->json($songs->load('album','user'));
     }
 
     public function getSong($filename)

@@ -41,12 +41,13 @@ Route::get('artist/{id}', [ArtistController::class, 'getArtist']);
 Route::get('albums/{id}', [ArtistController::class, 'getArtistAlbums']);
 Route::get('artists', [ArtistController::class, 'getArtists']);
 Route::get('songs/{id}', [ArtistController::class, 'getArtistSongs']);
-Route::get('play/{filename}', [SongController::class, 'getSong']);
 Route::post('upload-song', [ArtistController::class, 'uploadSong']);
 Route::post('create-album/upload-songs', [ArtistController::class, 'createAlbumAndUploadSongs']);
 Route::delete('songs/{id}', [ArtistController::class, 'deleteSong']);
 Route::put('albums/{id}', [ArtistController::class, 'editAlbum']);
 Route::put('songs/{id}', [ArtistController::class, 'editSong']);
+
+Route::get('play/{filename}', [SongController::class, 'getSong']);
 
 Route::group([
 
