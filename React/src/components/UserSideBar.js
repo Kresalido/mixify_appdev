@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Stack, Col, Image, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container, Row, Stack, Col, Image, Form, Button } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import pfp from '../pfp-placeholder.jpg';
-
+import axios from 'axios';
+import backendUrl from '../config';
 
 function UserSideBar() {
 
@@ -13,6 +14,7 @@ function UserSideBar() {
     const storedRole = localStorage.getItem('role');
 
     const [profilePicUrl, setProfilePicUrl] = useState(null);
+    const navigate = useNavigate();
 
     fetch('http://127.0.0.1:8000/api/auth/me', {
         method: 'GET',
@@ -41,8 +43,11 @@ function UserSideBar() {
         });
 
     const handleLogout = () => {
+        console.log('this ran')
         localStorage.clear();
+        window.location.reload();
     };
+
 
 
     return (
@@ -91,7 +96,7 @@ function UserSideBar() {
                 </Stack>
             </Row>
             <Row className='h-20 d-flex align-items-end admin-sidebar-main'>
-                <Link to={'/'} onClick={handleLogout}> Logout</Link>
+                <Link onClick={ () => handleLogout()}> Logout</Link>
             </Row>
         </div>
     )

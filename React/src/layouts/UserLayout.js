@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Container } from 'react-bootstrap';
 import { Outlet, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -11,6 +11,32 @@ import UserSideBar from '../components/UserSideBar';
 import MusicPlayer from '../components/MusicPlayer';
 
 const UserLayout = () => {
+
+    const navigate = useNavigate();
+    const [token, setToken] = useState(null);
+
+    useEffect(() => {
+        const token = localStorage.getItem('jwt_token');
+
+        if (token) {
+            axios.get(`${backendUrl}/api/auth/me`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then(response => {
+                    // setToken(token);
+                })
+                .catch(error => {
+                    console.error('Error fetching role:', error);
+                    localStorage.removeItem('jwt_token');
+                    setToken(null);
+                })
+        } else {
+            console.log('Token does not exist');
+            navigate('/sign-in');
+        }
+    }, [token]);
 
     return (
         <Container fluid className='d-flex g-0'>
