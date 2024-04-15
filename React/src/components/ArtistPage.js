@@ -10,6 +10,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import ArtistSongList from './items/ArtistSongList';
 import ArtistAlbumItem from './items/ArtistAlbumItem';
 import pfp from '../pfp-placeholder.jpg';
+import ArtistSongsTable from './tables/ArtistSongsTable';
 
 function ArtistPage() {
     const [songs, setSongs] = useState([]);
@@ -103,11 +104,12 @@ function ArtistPage() {
                                 </Row>
                                 <Row className='px-5 mt-2 user-white-text'>
                                     <p className='user-header-2'>
-                                        Artist Songs
+                                        Popular
                                     </p>
                                 </Row>
-                                <Row className='px-5 mb-5'>
-                                    <ArtistSongList showImage={true} songs={songs} currentSong={currentSong} setCurrentSong={setCurrentSong} setSongDetails={setSongDetails} playerRef={playerRef} />
+                                <Row className='px-5 mb-5 text-white'>
+                                    <ArtistSongsTable />
+                                    {/* <ArtistSongList showImage={true} songs={songs} currentSong={currentSong} setCurrentSong={setCurrentSong} setSongDetails={setSongDetails} playerRef={playerRef} /> */}
                                 </Row>
                                 <Row className='mb-5'>
                                 </Row>

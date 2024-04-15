@@ -1164,7 +1164,21 @@ body {
   margin-top: 10px;
 }
 
+/* ARTIST ITEM */
+.artist-image {
+  width: 5vw;
+  height: 5vw;
+  object-fit: cover;
+  border-radius: 2%;
+  min-width: 100px;
+  min-height: 100px;
+}
 
+.artist-item {
+  padding: 10px;
+  background-color: #1e1e1e;
+  border: 1px solid #212121;
+}
 
 /* CUSTOM TABLE */
 .custom-table .p-datatable-wrapper {
@@ -1182,6 +1196,10 @@ body {
 
 .custom-table .p-highlight {
   background-color: #f8f8f83d !important;
+}
+
+.artist-table .p-selectable-row:hover {
+  background-color: #f8f8f818;
 }
 
 

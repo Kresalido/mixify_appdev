@@ -62,7 +62,7 @@ function SongList({ songs, currentSong, setCurrentSong, setSongDetails, playerRe
                         {new Date(song.album.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                     </Col>
                     <Col className='d-flex align-items-center justify-content-center'>
-                        {(Math.floor(Math.random() * (30000 - 300 + 1)) + 300).toLocaleString()}
+                        {song.listens_count}
                     </Col>
                 </Row>
             ))
