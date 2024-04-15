@@ -11,6 +11,24 @@ use Illuminate\Http\Request;
 
 class ArtistController extends Controller
 {
+    public function getArtistCount()
+    {
+        $artistCount = User::where('role', 'artist')->count();
+
+        return response()->json(['artistCount' => $artistCount]);
+    }
+    
+    public function getAlbumOfSong($songId)
+    {
+        $song = Song::find($songId);
+
+        if ($song) {
+            $album = $song->album;
+            return response()->json($album);
+        } else {
+            return response()->json(['error' => 'Song not found'], 404);
+        }
+    }
     
     public function getArtist($id)
     {

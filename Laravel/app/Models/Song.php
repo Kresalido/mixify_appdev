@@ -20,4 +20,9 @@ class Song extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function listens()
+    {
+        return $this->hasMany(Listen::class);
+    }
 }

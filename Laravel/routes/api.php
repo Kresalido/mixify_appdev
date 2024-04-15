@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\ListenController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +53,12 @@ Route::put('songs/{id}', [ArtistController::class, 'editSong']);
 Route::get('play/{filename}', [SongController::class, 'getSong']);
 Route::get('/song/{id}/details', [SongController::class, 'getSongDetails']);
 Route::get('/songs', [SongController::class, 'getSongs']);
+
+// listen
+Route::post('listen/{song}', [ListenController::class, 'listen']);
+Route::get('most-listened-artist/{limit}', [ListenController::class, 'mostListenedArtist']);
+Route::get('most-listened-song/{limit}', [ListenController::class, 'mostListenedSong']);
+Route::get('most-listened-song-of-artist/{artistId}/{limit}', [ListenController::class, 'mostListenedSongOfArtist']);
 
 // playlists
 Route::get('playlists', [PlaylistController::class, 'getPlaylists']);

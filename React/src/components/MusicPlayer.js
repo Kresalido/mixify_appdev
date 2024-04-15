@@ -28,12 +28,14 @@ const MusicPlayer = () => {
     const handleNextSong = () => {
         if (currentSongIndex < queue.length - 1) {
             setCurrentSongIndex(currentSongIndex + 1);
+            resetSongListened();
         }
     }
 
     const handlePreviousSong = () => {
         if (currentSongIndex > 0) {
             setCurrentSongIndex(currentSongIndex - 1);
+            resetSongListened();
         }
     }
 
@@ -54,7 +56,7 @@ const MusicPlayer = () => {
             axios.get(`${backendUrl}/api/song/${songID}/details`)
                 .then(response => {
                     handleSongDetails(response.data);
-                    console.log('Song details:', response.data)
+                    // console.log('Song details:', response.data)
                     const songUrl = `${backendUrl}/api/play/${response.data.hashed_name}`;
                     fetch(songUrl)
                         .then(response => response.blob())
@@ -67,6 +69,40 @@ const MusicPlayer = () => {
             console.error('Failed to fetch song:', error);
         }
     };
+
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const handlePlay = () => {
+        setIsPlaying(true);
+    };
+
+    const handlePause = () => {
+        setIsPlaying(false);
+    };
+
+    const [songListened, setSongListened] = useState(false);
+    const [songListenedCount, setSongListenedCount] = useState(0);
+
+    const handleSongListened = () => {
+        if (!songListened) {
+            axios.post(`${backendUrl}/api/listen/${queue[currentSongIndex].id}`, {}, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('jwt_token')}`,
+                },
+            
+            })
+                .then(response => {
+                    console.log('Song listened', response.data);
+                    setSongListened(true);
+                });
+        }
+    }
+
+    const resetSongListened = () => {
+        setSongListened(false);
+        setSongListenedCount(0);
+    }
+
 
     return (
         <div className='user-player bottom-0 d-flex'>
@@ -90,9 +126,29 @@ const MusicPlayer = () => {
                 </div>
             </div>
             <div className='w-35'>
-                <AudioPlayer ref={playerRef} src={currentSong} autoPlay showJumpControls={false} showSkipControls={true} onPlay={e => console.log("onPlay")} className='mixify-player h-100' 
-                    onClickNext={handleNextSong} onClickPrevious={handlePreviousSong}
-                />
+            <AudioPlayer
+                        src={currentSong}
+                        onPlay={handlePlay}
+                        onPause={handlePause}
+                        onEnded={handleNextSong}
+                        showDownloadProgress={false}
+                        showSkipControls={true}
+                        showJumpControls={false}
+                        autoPlay
+                        className='mixify-player h-100' 
+                        onClickNext={handleNextSong}
+                        onClickPrevious={handlePreviousSong}
+                        listenInterval={5000}
+                        onListen={() => {
+                            if (isPlaying) {
+                                setSongListenedCount(songListenedCount + 1);
+
+                                if (songListenedCount >= 1) {
+                                    handleSongListened();
+                                }
+                            }
+                        }}
+                    />
             </div>
             <div className=''>
                 Extra options

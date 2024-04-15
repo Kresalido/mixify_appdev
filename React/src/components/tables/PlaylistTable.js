@@ -88,9 +88,8 @@ function PlaylistTable() {
                         setCurrentSong(e.value);
                         console.log(e.value);
                         const songIndex = songs.findIndex(song => song.id === e.value.id);
-                        const songQueue = songs.slice(songIndex);
-                        setQueue(songQueue);
-                        setCurrentSongIndex(0);
+                        setQueue(songs);
+                        setCurrentSongIndex(songIndex); // GET INDEX
                     }
                 }}
                 // selection={currentSong}

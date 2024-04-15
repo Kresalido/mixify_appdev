@@ -126,8 +126,6 @@ function PlaylistPage() {
                 </Modal.Footer>
             </Modal>
             <Container className='g-0' fluid >
-                {/* <div className='circle circle-left' />
-                <div className='circle circle-right' /> */}
                 <Row className='vh-100'>
                     <Col className='flex-grow-1 bg-user bg-user-dashboard'>
                         <Row className=" flex-grow-1 d-flex p-3">
