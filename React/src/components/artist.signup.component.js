@@ -40,7 +40,7 @@ function ArtistSignup() {
                 confirmPassword: confirmPassword
             });
 
-            console.log(response.data);
+            // console.log(response.data);
             toast.success('Registration Successful! Please login to continue.');
         } catch (error) {
             console.error('There was an error!', error);

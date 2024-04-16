@@ -38,7 +38,7 @@ function AlbumPage() {
         axios.get(`http://127.0.0.1:8000/api/album/${album_id}/songs`)
             .then(response => {
                 setSongs(response.data);
-                console.log("song data", response.data);
+                // console.log("song data", response.data);
             })
             .catch(error => {
                 console.error('There was an error!', error);
@@ -47,7 +47,7 @@ function AlbumPage() {
         axios.get(`http://127.0.0.1:8000/api/artist/${id}`)
             .then(response => {
                 setArtist(response.data.name);
-                console.log(response.data);
+                // console.log(response.data);
             })
             .catch(error => {
                 console.error('There was an error!', error);
@@ -56,7 +56,7 @@ function AlbumPage() {
         axios.get(`http://127.0.0.1:8000/api/album/${album_id}`)
             .then(response => {
                 setAlbum(response.data);
-                console.log(response.data);
+                // console.log(response.data);
             })
             .catch(error => {
                 console.error('There was an error!', error);
@@ -158,7 +158,7 @@ function AlbumPage() {
                                 </div>
                             </div>
                             <div className='w-50'>
-                                <AudioPlayer ref={playerRef} src={currentSong} autoPlay showJumpControls={false} showSkipControls={true} onPlay={e => console.log("onPlay")} className='mixify-player h-100' />
+                                <AudioPlayer ref={playerRef} src={currentSong} autoPlay showJumpControls={false} showSkipControls={true} className='mixify-player h-100' />
                             </div>
                             <div className='w-25'>
                                 Extra options

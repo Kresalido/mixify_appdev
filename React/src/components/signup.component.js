@@ -76,7 +76,7 @@ class SignUp extends Component {
     axios
       .post('http://127.0.0.1:8000/api/register-listener', formData) // change to docker
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.status === 201) {
           toast.success("Registration successful");
           // Find a better way to redirect to the login page
@@ -97,7 +97,7 @@ class SignUp extends Component {
             });
           }
         }
-        console.log(error)
+        // console.log(error)
         this.setState({ isButtonDisabled: false });
       });
 

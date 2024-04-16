@@ -33,7 +33,7 @@ function UserSideBar() {
             if (data.profile_pic_name) {
                 setProfilePicUrl(`http://127.0.0.1:8000/storage/profile_pics/${data.profile_pic_name}`);
                 // setProfilePicUrl(`../pfp-placeholder.jpg`);
-                console.log(profilePicUrl)
+                // console.log(profilePicUrl)
             }
         })
         .catch((error) => {

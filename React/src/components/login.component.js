@@ -54,7 +54,7 @@ export default class Login extends Component {
       .post('http://127.0.0.1:8000/api/login', userObject) // change to docker
       .then((res) => {
         if (res.status === 200) {
-          console.log(res);
+          // console.log(res);
           toast.success("Login successful!");
           localStorage.setItem('jwt_token', res.data.access_token);
           // Check if the user is an admin
@@ -68,7 +68,7 @@ export default class Login extends Component {
         }
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         toast.error('Wrong email or password');
         this.setState({ isButtonDisabled: false });
       });

@@ -234,7 +234,7 @@ function Home() {
                             </Row>
                         </Col>
                         <Col xs={6} className=''>
-                            <AudioPlayer ref={playerRef} src={currentSong} showJumpControls={false} showSkipControls={true} autoPlay onPlay={e => console.log("onPlay")} className='mixify-player h-100' />
+                            <AudioPlayer ref={playerRef} src={currentSong} showJumpControls={false} showSkipControls={true} autoPlay className='mixify-player h-100' />
                         </Col>
                         <Col xs={3}>
                             Extra options

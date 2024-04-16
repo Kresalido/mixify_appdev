@@ -8,7 +8,7 @@ function SongItem({ song, currentSong, setCurrentSong, setSongDetails, playerRef
             playerRef.current.audio.current.currentTime = 0;
             playerRef.current.audio.current.play();
         } else {
-            console.log(song.hashed_name);
+            // console.log(song.hashed_name);
             const songUrl = `${backendUrl}/api/play/${song.hashed_name}`;
             fetch(songUrl)
                 .then(response => response.blob())

@@ -81,7 +81,7 @@ function ArtistUploadPage() {
         // })
         //     .then(response => response.json())
         //     .then(data => {
-        //         console.log(data)
+        //         // console.log(data)
         //         setAlbums(data);
         //         if (data.length > 0) {
         //             setSelectedAlbum(data[0].id);
@@ -124,6 +124,14 @@ function ArtistUploadPage() {
             return;
         }
 
+        for (let file of mediaFiles) {
+            if (!file.displayName) {
+                upload_failed('Song title is missing.');
+                setLoading(false);
+                return;
+            }
+        }
+
         const songsWithEmptyGenres = mediaFiles.filter(file => !selectedGenres[file.path] || selectedGenres[file.path].length === 0);
         if (songsWithEmptyGenres.length > 0) {
             const songNames = songsWithEmptyGenres.map(file => file.name).join(', ');
@@ -158,7 +166,7 @@ function ArtistUploadPage() {
             .then(data => {
                 setLoading(false);
                 toast.success('Song uploaded successfully!');
-                console.log(data);
+                // console.log(data);
                 clearData();
                 setShow(false);
             })
@@ -173,13 +181,13 @@ function ArtistUploadPage() {
     // Dropzone
     const handleAlbumCoverDrop = (acceptedFiles) => {
         setAlbumPhoto(acceptedFiles[0]);
-        console.log(acceptedFiles[0].name);
+        // console.log(acceptedFiles[0].name);
     };
 
     const handleMediaDrop = (acceptedFiles) => {
         setMediaFiles(acceptedFiles);
         acceptedFiles.forEach(file => {
-            console.log(file.name);
+            // console.log(file.name);
         });
     };
 
