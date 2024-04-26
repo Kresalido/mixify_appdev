@@ -38,7 +38,7 @@ function PlaylistTable() {
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api/playlist/${id}/songs`)
             .then(response => {
-                setSongs(response.data.songs);
+                setSongs(response.data.songs.data);
                 console.log("song data", response.data);
             })
             .catch(error => {
@@ -105,7 +105,7 @@ function PlaylistTable() {
                                 <div>
                                     {rowData.display_name}
                                 </div>
-                                <div className='playlist-details playlist-clickable d-inline' onClick={(e) => { e.stopPropagation(); navigate(`/artist/${rowData.user.id}`) }}>
+                                <div className='playlist-details playlist-clickable d-inline text-truncate' onClick={(e) => { e.stopPropagation(); navigate(`/artist/${rowData.user.id}`) }}>
                                     {rowData.user.name}
                                 </div>
                             </div>

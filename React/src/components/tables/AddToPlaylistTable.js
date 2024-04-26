@@ -30,10 +30,8 @@ const imageTemplate = (photoUrl) => {
 function AddToPlaylistTable() {
     const [songs, setSongs] = useState([]);
     const [playlistSongs, setPlaylistSongs] = useState([]);
-    const [album, setAlbum] = useState([]);
-    const { id, album_id } = useParams();
+    const { id } = useParams();
 
-    const [addSongsState, setAddSongsState] = useState(false);
 
     const navigate = useNavigate();
 
