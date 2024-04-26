@@ -1186,6 +1186,15 @@ body {
   padding: 10px
 }
 
+.custom-table .p-highlight {
+  color: #fff !important;
+}
+
+.custom-table .p-link {
+  color: #fff !important;
+  margin: 0 10px;
+}
+
 .custom-table .p-datatable {
   background-color: #ffffff02 !important;
 }

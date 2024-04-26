@@ -111,7 +111,10 @@ function AddToPlaylistTable() {
             </div>
             <div className='custom-table'>
                 <InputText value={searchTerm} onChange={onSearchChange} placeholder="Search" />
-                <DataTable value={filteredSongs} className='custom-table p-datatable' rowHover selectionMode="single"
+                <DataTable value={filteredSongs} className='custom-table p-datatable' rowHover
+                    selectionMode="single"
+                    paginator
+                    rows={5}
                     onSelectionChange={(e) => {
                         if (e.value) {
                             setCurrentSong(e.value);
@@ -156,7 +159,6 @@ function AddToPlaylistTable() {
                         );
                     }} style={{ width: '10%' }} />
                 </DataTable>
-                <Paginator className="text-white" first={first} rows={rows} totalRecords={filteredSongs.length} onPageChange={onPageChange} />
             </div>
         </>
 
