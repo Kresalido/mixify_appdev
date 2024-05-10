@@ -30,15 +30,68 @@ function PlaylistTable() {
     const [album, setAlbum] = useState([]);
     const { id, album_id } = useParams();
 
+    // Loading
+    const loader = useRef(null);
+    const [page, setPage] = useState(1);
+    const loadingRef = useRef(null);
+
     const [addSongsState, setAddSongsState] = useState(false);
+    const [songsFetched, setSongsFetched] = useState(0);
+
 
     const navigate = useNavigate();
 
+    const observerRef = useRef(null);
+
+    const handleObserver = (entities) => {
+        const target = entities[0];
+        if (target.isIntersecting) {
+            setPage((prevPage) => prevPage + 1);
+            if (observerRef.current) {
+                observerRef.current.disconnect();
+                console.log('Disconnected');
+            }
+        }
+    }
+
+    const observer = () => {
+        console.log('Observer called')
+        var options = {
+            root: null,
+            rootMargin: "20px",
+            threshold: 1.0
+        };
+
+        if (loader.current) {
+            observerRef.current = new IntersectionObserver(handleObserver, options);
+            observerRef.current.observe(loader.current);
+        }
+
+        return () => {
+            if (observerRef.current) {
+                observerRef.current.disconnect();
+            }
+        };
+    }
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/api/playlist/${id}/songs`)
+        if (localStorage.getItem('playlist_id') !== id) {
+            setSongs([]);
+            localStorage.setItem('playlist_id', id);
+        } else {
+            localStorage.setItem('playlist_id', id);
+        }
+
+        fetchSongs();
+        observer();
+    }, [page, id]);
+
+
+    const fetchSongs = () => {
+        axios.get(`http://127.0.0.1:8000/api/playlist/${id}/songs?page=${page}`)
             .then(response => {
-                setSongs(response.data.songs.data);
+                setSongs(prevSongs => [...prevSongs, ...response.data.songs.data]);
+                setSongsFetched(response.data.songs.data.length);
                 console.log("song data", response.data);
             })
             .catch(error => {
@@ -53,7 +106,7 @@ function PlaylistTable() {
             .catch(error => {
                 console.error('There was an error!', error);
             });
-    }, []);
+    }
 
     const removeSong = async (songId) => {
         try {
@@ -83,6 +136,7 @@ function PlaylistTable() {
     return (
         <div className='custom-table'>
             <DataTable value={songs} className='custom-table p-datatable' rowHover selectionMode="single"
+                emptyMessage="No songs found. Add songs to the playlist"
                 onSelectionChange={(e) => {
                     if (e.value) {
                         setCurrentSong(e.value);
@@ -146,6 +200,15 @@ function PlaylistTable() {
                     );
                 }} style={{ width: '10%' }} />
             </DataTable>
+            {songs && songs.length === 0 ? (
+                <div className='text-white d-flex justify-content-center'>
+                    {/* Add songs to the Playlist */}
+                </div>
+            ) : (
+                <div ref={loader} className='text-white d-flex justify-content-center'>
+                    Loading more songs...
+                </div>
+            )}
         </div>
 
     );

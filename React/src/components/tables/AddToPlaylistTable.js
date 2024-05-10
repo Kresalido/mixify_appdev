@@ -44,7 +44,8 @@ function AddToPlaylistTable() {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
                 });
-                const playlistSongs = playlistResponse.data.songs;
+                const playlistSongs = playlistResponse.data.songs.data;
+                console.log(playlistResponse.data.songs.data);
                 setPlaylistSongs(playlistSongs);
 
                 const songsResponse = await axios.get(`http://127.0.0.1:8000/api/songs`, {
