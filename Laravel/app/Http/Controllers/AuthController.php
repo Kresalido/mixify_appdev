@@ -77,7 +77,7 @@ class AuthController extends Controller
             'verification.verify', now()->addMinutes(60), ['id' => $user->id]
         );
 
-        // Mail::to($user->email)->send(new VerificationEmail($verificationUrl,$user->name));
+        Mail::to($user->email)->send(new VerificationEmail($verificationUrl,$user->name));
 
         
         return response()->json(['message' => 'User registered successfully'], 201);
@@ -116,7 +116,7 @@ class AuthController extends Controller
             'verification.verify', now()->addMinutes(60), ['id' => $user->id]
         );
 
-        // Mail::to($user->email)->send(new VerificationEmail($verificationUrl,$user->name)); 
+        Mail::to($user->email)->send(new VerificationEmail($verificationUrl,$user->name)); 
         
         return response()->json(['message' => 'User registered successfully'], 201);
     }
@@ -128,7 +128,7 @@ class AuthController extends Controller
             'verification.verify', now()->addMinutes(60), ['id' => $user->id]
         );
 
-        // Mail::to($user->email)->send(new VerificationEmail($verificationUrl,$user->name));
+        Mail::to($user->email)->send(new VerificationEmail($verificationUrl,$user->name));
 
         return response()->json(['message' => 'Email sent successfully'], 201);
     }
