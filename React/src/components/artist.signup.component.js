@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, redirect } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 import { Col, Container, Row, Form, Stack, FormControl, Button, InputGroup } from "react-bootstrap";
 import Outernavbar from "./outernavbar.component";
 import axios from "axios";
@@ -29,6 +29,8 @@ function ArtistSignup() {
         setConfirmPassword(event.target.value);
     };
 
+    const navigate = useNavigate();
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -42,6 +44,7 @@ function ArtistSignup() {
 
             console.log(response.data);
             toast.success('Registration Successful! Please login to continue.');
+            navigate('/sign-in')
         } catch (error) {
             console.error('There was an error!', error);
             toast.error(`Registration Failed: ${error.response.data.message}`);

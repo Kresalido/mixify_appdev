@@ -32,12 +32,13 @@ const UserLayout = () => {
                 })
                 .catch(error => {
                     console.error('Error fetching role:', error);
-                    localStorage.removeItem('jwt_token');
+                    localStorage.clear();
                     setToken(null);
                     navigate('/sign-in');
                 })
         } else {
             console.log('Token does not exist');
+            localStorage.clear();
             navigate('/sign-in');
         }
     }, [token]);
