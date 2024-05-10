@@ -132,7 +132,7 @@ function AdminDashboard() {
                                     </Row>
                                     <Row >
                                         <h2 className='d-flex justify-content-center'>
-                                            Active Monthly Users
+                                            Active Monthly Userd
                                         </h2>
                                     </Row>
                                 </Col>

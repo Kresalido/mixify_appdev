@@ -31,15 +31,15 @@ class DatabaseSeeder extends Seeder
                 'album_name' => $faker->sentence(1),
                 'album_description' => $faker->sentence(2),
                 'user_id' => $user->id,
-                'cover_photo' => 'fb4dcfa229d0d07683dccd6d4b27f8c2b3671e58119779c6a3b6cf54831f623c.png', // Change cover photo
+                'cover_photo' => '0c24cc5fb4fd12c6388b17f3c333fae5ed6cac6ad191e4820749209fd1008898.png', // Change cover photo
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
             
-            for ($j = 0; $j < 400; $j++)
+            for ($j = 0; $j < 1000; $j++)
             $song = $album->songs()->create([
                 'display_name' => $faker->sentence(1),
-                'hashed_name' => 'd2a4c32b1072c6b6f6dbc26e715a1dfa388de1a0d2fd7d32b5ff3229ccae4c60.mp3', // Change song
+                'hashed_name' => 'e45cdfe3a62b96aaa968efad794eb505fb413ed91007d56dc30104d2bf25dd31.mp3', // Change song
                 'album_id' => $album->album_id,
                 'user_id' => $user->id,
                 'created_at' => now(),

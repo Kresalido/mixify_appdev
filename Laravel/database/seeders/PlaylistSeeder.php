@@ -21,7 +21,7 @@ class PlaylistSeeder extends Seeder
 
         $playlist = Playlist::create([
             'name' => $faker->sentence(1),
-            'creator_id' => 2, // specify what user to create the playlist
+            'creator_id' => 13, // specify what user to create the playlist
             'created_at' => now(),
             'updated_at' => now(),
         ]);

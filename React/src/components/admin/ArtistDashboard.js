@@ -9,35 +9,35 @@ const ArtistDashboard = () => {
   const [accounts, setAccounts] = useState([  // Define accounts state
     {
       id: 1,
-      name: 'elle',
+      name: 'shshsh',
       registration: 'July 9, 2022',
       usertype: 'listener',
       status: 'banned'
     },
     {
       id: 2,
-      name: 'nico',
+      name: 'wowow',
       registration: 'July 24, 2022',
       usertype: 'listener',
       status: 'pending verification'
     },
     {
       id: 3,
-      name: 'lesh',
+      name: 'hahaha',
       registration: 'July 1, 2022',
       usertype: 'artist',
       status: 'active'
     },
     {
       id: 4,
-      name: 'ja9',
+      name: 'lorem',
       registration: 'July 20, 2022',
       usertype: 'artist',
       status: 'active'
     },
     {
       id: 5,
-      name: 'cla',
+      name: 'ipsum',
       registration: 'July 20, 2022',
       usertype: 'listener',
       status: 'active'
