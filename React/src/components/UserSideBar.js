@@ -46,7 +46,7 @@ function UserSideBar() {
 
     const handleLogout = () => {
         localStorage.clear();
-        navigate('/sign-in')
+        // navigate('/sign-in')
     };
 
     useEffect(() => {
@@ -101,7 +101,7 @@ function UserSideBar() {
                 </Stack>
             </Row>
             <Row className='h-20 d-flex align-items-end admin-sidebar-main'>
-                <Link onClick={ () => handleLogout()}> Logout</Link>
+                <Link to={'sign-in'} onClick={ () => handleLogout()}> Logout</Link>
             </Row>
         </div>
     )
